@@ -1,0 +1,20 @@
+[
+{
+  "modid": "UTIL",
+  "name": "Utilities",
+  "description": "A bunch of random stuff",
+  "version": "Dev",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [
+    "RossRKK"
+  ],
+  "credits": "By RossRKK, Thanks to Pahimar!",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]

@@ -1,0 +1,94 @@
+<?xml version="1.0" ?> 
+<project name="Utilities" basedir="../" default="release">  <!-- Put your mod name here -->
+<!-- Universal build.xml Version 5.0.0pre2 by Wliu.  (See updates.txt on Github for changelog) -->
+
+	<!-- Properties -->
+	<property name="master.dir"		value=".."/> <!--Where your mod directory is -->
+	<property name="source.dir"		value="Utilities"/> <!-- Where your mod directory is located (aka where .git is) -->
+	<property name="download.dir"	value="..\api"/> <!-- Where you want to put the .zip of Forge-->
+	<property name="forgeunzip.dir"	value="..\${master.dir}"/> <!-- The unzipping directory of Forge -->
+	<property name="forge.dir"		value="..\mcp"/> <!-- The main directory of Forge -->
+	<property name="mcp.dir"		value="${master.dir}\mcp"/> <!-- The main directory of MCP -->
+	<property name="mcpreobf.dir"	value="${mcp.dir}\reobf\minecraft"/>
+	<property name="mcpsrc.dir"		value="${mcp.dir}\src\minecraft"/>
+	<property name="release.dir"	value="..\Releases"/> <!-- Where you want Ant to output the compiled mod -->
+
+	<property name="mod.common.dir"	value="${source.dir}\common"/> <!-- Must have, used for compiling -->
+	<property name="resources.dir"	value="${source.dir}\resources"/> <!-- Must have, used for compiling -->
+	<property name="common.in.dir"	value="${mcpsrc.dir}\com"/> <!-- Used for cleanup -->
+	<property name="lang.dir"		value="Utilities\lang"/>  <!-- Optional, delete if you don't have one -->
+	<property name="mod.name"		value="Utilities"/>
+	
+	<property name="mc.version"		value="1.5.1"/>
+	<property name="mod.version"	value="Development"/>
+	<property name="forge.version"	value="7.7.1.651"/>
+	
+	
+	<!-- Copy the files -->
+	<target name="copy">
+		<echo>Copying ${mod.name}'s files... (1/4)
+		</echo>
+		<copy todir="${mcpsrc.dir}">
+			<fileset dir="${mod.common.dir}"/>
+			<fileset dir="Equivalent-Exchange-3"/>
+		</copy>
+		<replace dir="${mcpsrc.dir}" token="@VERSION@" value="${mod.version}"/>
+	</target>
+	
+	<!-- Compile the files -->
+	<target name="recompile">
+		<echo>Compiling... (2/4)
+		</echo>
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="Windows" failonerror="true">
+			<arg line="/c recompile.bat"/>
+		</exec>
+		<exec dir="${mcp.dir}" executable="bash" osfamily="Unix" failonerror="true">
+			<arg line="recompile.sh"/>
+		</exec>
+		
+		<!-- Check for MCP compile failures -->
+		<fail message="Oh no!  MCP failed to compile!">
+			<condition>
+				<resourcecontains resource="${mcp.dir}\logs\client_compile.log" substring="error:"/>
+			</condition>
+		</fail>
+		
+		<delete dir="${common.in.dir}"/>
+		<delete file="${mcpsrc.dir}\mcmod.info"/>
+	</target>
+	
+	<!-- Reobfuscate the files -->
+	<target name="reobfuscate">
+		<echo>Reobfuscating... (3/4)
+		</echo>
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="Windows" failonerror="true">
+			<arg line="/c reobfuscate.bat"/>
+		</exec>
+		<exec dir="${mcp.dir}" executable="bash" osfamily="Unix" failonerror="true">
+			<arg line="reobfuscate.sh"/>
+		</exec>
+	</target>
+	
+	<!-- Default target to run, does everything for you -->
+	<target name="release">
+		<echo>Compiling ${mod.name}!</echo>
+		
+		<!-- Prep for the release -->
+		<antcall target="copy"/>
+		<antcall target="recompile"/>		
+		<antcall target="reobfuscate"/>
+		
+		<!-- Build the jar -->
+		<echo>
+Last step!  Building the jar! (4/4)
+		</echo>
+		<mkdir dir="${release.dir}"/>
+		<delete dir="${mcpreobf.dir}\com\pahimar"/>
+		<jar destfile="${release.dir}\${mod.name} ${mod.version}.jar">
+			<fileset dir="${mcpsrc.dir}" includes="mcmod.info"/>
+			<fileset dir="${mcpreobf.dir}"/>
+			<fileset dir="${resources.dir}"/>
+			<fileset dir="${lang.dir}"/>
+		</jar>
+	</target>
+</project>
