@@ -3,13 +3,13 @@
   "modid": "UTIL",
   "name": "Utilities",
   "description": "A bunch of random stuff",
-  "version": "Dev",
+  "version": "Development 1",
   "url": "",
   "updateUrl": "",
   "authorList": [
     "RossRKK"
   ],
-  "credits": "By RossRKK, Thanks to Pahimar!",
+  "credits": "By RossRKK, Thanks to Pahimar and VSWE!",
   "logoFile": "",
   "screenshots": [
   ],

@@ -2,21 +2,20 @@ package com.github.rossrkk.utilities.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.lib.Strings;
 
 
-public class CobbleHolder extends Item {
+public class CobbleHolder extends UtilItem {
 
     public CobbleHolder(int id) {
         super(id);
         maxStackSize = 1;
         this.setUnlocalizedName(Strings.COBBLE_HOLDER_NAME);
         this.setCreativeTab(CreativeTabs.tabTools);
-        setNoRepair();
+        this.setNoRepair();
     }
     
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
