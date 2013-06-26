@@ -18,22 +18,22 @@ public class CobbleHolder extends UtilItem {
         this.setNoRepair();
     }
     
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         
         
         int cobbleHeld = 0;
         boolean cobbleAbsorbed = false;
         if (cobbleAbsorbed) {
             for (int i = 0; i < 36; i++) {
-                if (par3EntityPlayer.inventory.getStackInSlot(i).itemID == 4) {
-                cobbleHeld= cobbleHeld + par3EntityPlayer.inventory.getStackInSlot(i).stackSize;
+                if (player.inventory.getStackInSlot(i).itemID == 4) {
+                cobbleHeld= cobbleHeld + player.inventory.getStackInSlot(i).stackSize;
                 }
             }
-            par3EntityPlayer.inventory.clearInventory(4, -1);
+            player.inventory.clearInventory(4, -1);
         } else {
             
         }
-        return par1ItemStack;
+        return itemStack;
         
     }
 
