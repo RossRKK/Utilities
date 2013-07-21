@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -17,13 +18,12 @@ public class CobbleHolder extends UtilItem {
         this.setUnlocalizedName(Strings.COBBLE_HOLDER_NAME);
         this.setCreativeTab(CreativeTabs.tabTools);
         this.setNoRepair();
+        this.setMaxDamage(2304);
+        this.setNoRepair();
     }
 
     public ItemStack onItemRightClick(ItemStack itemStack, World world,
             EntityPlayer player) {
-
-        // how much cobble has been absorbed
-        int cobbleHeld = 0;
         
         //the inventory being searched
         ItemStack[] inventory = player.inventory.mainInventory;
@@ -31,26 +31,37 @@ public class CobbleHolder extends UtilItem {
         // if cobble has been absorbed
         boolean cobbleAbsorbed = false;
         
-        if (!cobbleAbsorbed) {
+        if (!player.isSneaking() && (itemStack.getItemDamage() < getMaxDamage())) {
             // loop through each stack in the inventory and check if it's
             // cobble
             for (int i = 1; i < 36; i++) {
             	try{
+            		
 	                if(inventory[i].itemID == 4) {
 	                    // add the size of the itemstack to cobbleheld
-	                    cobbleHeld = cobbleHeld
-	                            + player.inventory.getStackInSlot(i).stackSize;
-	                    player.inventory.getStackInSlot(i).stackSize = 0;
+	                    itemStack.setItemDamage(itemStack.getItemDamage() + inventory[i].stackSize);
 	                }
-            	} catch (NullPointerException e) {/*Swallowed*/}
-                // clear the inventory of cobble
-                player.inventory.clearInventory(4, -1);
-                cobbleAbsorbed = true;
+            	} catch (NullPointerException e){/*Swallowed*/}
+            	
             }
+            // clear the inventory of cobble
+            player.inventory.clearInventory(4, -1);
         } else {
-
+        	
+        	//loop while there are items remaining to give
+        	while (itemStack.getItemDamage() > 0){
+        		//if there is more than a stack to give, give a stack
+            	if (itemStack.getItemDamage() >= 64){
+                	player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, 64));
+                	//remove a stack from the total left to give
+                	this.setDamage(itemStack, getDamage(itemStack) - 64);
+            	} else {
+            		//if there is less than a stack to give give what's left
+            		player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, getMaxDamage() - itemStack.getItemDamage()));
+            		this.setDamage(itemStack, getMaxDamage());
+            	}
+        	}
         }
-        System.out.println(cobbleHeld);
         return itemStack;
     }
 

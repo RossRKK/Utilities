@@ -1,5 +1,6 @@
 package com.github.rossrkk.utilities;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,7 +23,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class Utilities {
 
     // create item instances
+	
+	//holders
     public static Item cobbleHolder;
+    public static Item dirtHolder;
 
     // omni tools
     public static Item omnitoolDiamond;
@@ -34,8 +38,9 @@ public class Utilities {
     @PreInit
     public void ModsToLoad(FMLPreInitializationEvent event) {
         // Initialise all the items
+    	
         cobbleHolder = new CobbleHolder(IDs.COBBLE_HOLDER_ID);
-
+        
         // Omnitools
         omnitoolDiamond = new ItemOmniTool(IDs.OMNI_TOOL_ID,
                 EnumToolMaterial.EMERALD);
