@@ -17,40 +17,52 @@ public class CopperTransmute {
                 tin(stone);
                 silver(stone);
             }
-        } catch (Exception e) {/*Swallowed*/}
+        } catch (Exception e) {/* Swallowed */
+        }
 
     }
 
-    public static void tin(ItemStack transmutationStone){
-        try{
+    public static void tin(ItemStack transmutationStone) {
+        try {
             ArrayList<ItemStack> tinOres = OreDictionary.getOres("ingotTin");
             ItemStack tinItemStack = tinOres.get(0);
             tinItemStack.stackSize = 3;
             Item tinItem = tinItemStack.getItem();
-            RecipeHelper.addRecipe(tinItemStack, transmutationStone, Item.ingotIron, Item.ingotIron, Item.ingotIron);
-            RecipeHelper.addRecipe(new ItemStack(Item.ingotIron, 1), transmutationStone, tinItem);
-        }catch (Exception e) {/*Swallowed*/}
+            RecipeHelper.addRecipe(tinItemStack, transmutationStone,
+                    Item.ingotIron, Item.ingotIron, Item.ingotIron);
+            RecipeHelper.addRecipe(new ItemStack(Item.ingotIron, 1),
+                    transmutationStone, tinItem);
+        } catch (Exception e) {/* Swallowed */
+        }
     }
-    
-    public static void silver(ItemStack transmutationStone){
-        try{
-            ArrayList<ItemStack> silverOres = OreDictionary.getOres("ingotSilver");
+
+    public static void silver(ItemStack transmutationStone) {
+        try {
+            ArrayList<ItemStack> silverOres = OreDictionary
+                    .getOres("ingotSilver");
             ItemStack silverItemStack = silverOres.get(0);
             silverItemStack.stackSize = 2;
             Item silverItem = silverItemStack.getItem();
-            RecipeHelper.addRecipe(silverItemStack, transmutationStone, Item.ingotGold, Item.ingotGold);
-            RecipeHelper.addRecipe(new ItemStack(Item.ingotGold, 1), transmutationStone, silverItem);
-        }catch (Exception e) {/*Swallowed*/}
+            RecipeHelper.addRecipe(silverItemStack, transmutationStone,
+                    Item.ingotGold, Item.ingotGold);
+            RecipeHelper.addRecipe(new ItemStack(Item.ingotGold, 1),
+                    transmutationStone, silverItem);
+        } catch (Exception e) {/* Swallowed */
+        }
     }
-    
+
     public static void copper(ItemStack transmutationStone) {
         try {
-            ArrayList<ItemStack> copperOres = OreDictionary.getOres("ingotCopper");
+            ArrayList<ItemStack> copperOres = OreDictionary
+                    .getOres("ingotCopper");
             ItemStack copperItemStack = copperOres.get(0);
             copperItemStack.stackSize = 2;
             Item copperItem = copperItemStack.getItem();
-            RecipeHelper.addRecipe(copperItemStack, transmutationStone, Item.ingotIron, Item.ingotIron);
-            RecipeHelper.addRecipe(new ItemStack(Item.ingotIron, 1), transmutationStone, copperItem);
-        } catch (Exception e) {/* Swallowed */}
+            RecipeHelper.addRecipe(copperItemStack, transmutationStone,
+                    Item.ingotIron, Item.ingotIron);
+            RecipeHelper.addRecipe(new ItemStack(Item.ingotIron, 1),
+                    transmutationStone, copperItem);
+        } catch (Exception e) {/* Swallowed */
+        }
     }
 }
