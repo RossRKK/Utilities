@@ -49,18 +49,21 @@ public class CobbleHolder extends UtilItem {
         } else {
         	
         	//loop while there are items remaining to give
-        	while (itemStack.getItemDamage() > 0){
+        	//while (itemStack.getItemDamage() > 0){
+        	
         		//if there is more than a stack to give, give a stack
             	if (itemStack.getItemDamage() >= 64){
-                	player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, 64));
-                	//remove a stack from the total left to give
-                	this.setDamage(itemStack, getDamage(itemStack) - 64);
+                	if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, 64))) {
+	                	//remove a stack from the total left to give
+	                	this.setDamage(itemStack, getDamage(itemStack) - 64);
+	                	}
             	} else {
             		//if there is less than a stack to give give what's left
-            		player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, getMaxDamage() - itemStack.getItemDamage()));
-            		this.setDamage(itemStack, getMaxDamage());
+            		if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, getMaxDamage() - itemStack.getItemDamage()))) {
+            			this.setDamage(itemStack, getMaxDamage());
+            		}
             	}
-        	}
+        	//}
         }
         return itemStack;
     }
