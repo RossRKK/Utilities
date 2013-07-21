@@ -8,7 +8,6 @@ import com.github.rossrkk.utilities.item.ItemOmniTool;
 import com.github.rossrkk.utilities.lib.IDs;
 import com.github.rossrkk.utilities.lib.Reference;
 import com.github.rossrkk.utilities.lib.Strings;
-import com.github.rossrkk.utilities.recipes.CopperTransmute;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -58,7 +57,6 @@ public class Utilities {
     @PostInit
     public void modsLoaded(FMLPostInitializationEvent event) {
         // load EE3 Modules
-        CopperTransmute.init();
     }
 
     // register items in game
