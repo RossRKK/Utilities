@@ -67,13 +67,12 @@
 		<exec dir="${mcp.dir}" executable="bash" osfamily="Unix" failonerror="true">
 			<arg line="reobfuscate.sh"/>
 		</exec>
+		<delete dir="${mcpreobf.dir}\com\pahimar"/>
 	</target>
 	
 	<!-- Cleans up -->
 	<target name = "cleanup">
 		<echo>Cleaning Up</echo>
-		
-	      <delete dir="${mcpreobf.dir}\com\pahimar"/>
 	        <delete dir="${mcpsrc.dir}\ee3_common"/>
 	        <delete dir="${mcpsrc.dir}\resources"/>
 		
@@ -92,12 +91,13 @@
 		<echo>
 Last step!  Building the jar! (4/4)
 		</echo>
-		<antcall target="cleanup"/>
+		<antcall target = "cleanup"/>
 		<mkdir dir="${release.dir}"/>
 		<jar destfile="${release.dir}\${mod.name} ${mod.version}.jar">
-			<fileset dir="${mcpsrc.dir}/com" includes="mcmod.info"/>
+			<fileset dir="${mod.common.dir}" includes="mcmod.info"/>
 			<fileset dir="${mcpreobf.dir}"/>
 			<fileset dir="${lang.dir}"/>
+			<fileset dir="${mod.common.dir}\assets"/>
 		</jar>
 	</target>
 </project>
