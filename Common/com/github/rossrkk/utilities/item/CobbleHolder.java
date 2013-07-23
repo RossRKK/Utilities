@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.lib.Strings;
 
-public class CobbleHolder extends UtilItem {
+public class CobbleHolder extends Item {
 
     public CobbleHolder(int id) {
         super(id);

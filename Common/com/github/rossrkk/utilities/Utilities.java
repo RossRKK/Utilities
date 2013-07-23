@@ -56,7 +56,8 @@ public class Utilities {
 
     @Init
     public void load(FMLInitializationEvent event) {
-
+    	gameRegisters();
+    	langugeRegisters();
     }
 
     @PostInit
@@ -70,15 +71,15 @@ public class Utilities {
                 Reference.MOD_ID);
 
         // Omnitools
-        GameRegistry.registerItem(omnitoolDiamond, Strings.OMNI_TOOL_NAME,
+        GameRegistry.registerItem(omnitoolDiamond, Strings.OMNI_TOOL_NAME_1,
                 Reference.MOD_ID);
-        GameRegistry.registerItem(omnitoolGold, Strings.OMNI_TOOL_NAME,
+        GameRegistry.registerItem(omnitoolGold, Strings.OMNI_TOOL_NAME_2,
                 Reference.MOD_ID);
-        GameRegistry.registerItem(omnitoolIron, Strings.OMNI_TOOL_NAME,
+        GameRegistry.registerItem(omnitoolIron, Strings.OMNI_TOOL_NAME_3,
                 Reference.MOD_ID);
-        GameRegistry.registerItem(omnitoolStone, Strings.OMNI_TOOL_NAME,
+        GameRegistry.registerItem(omnitoolStone, Strings.OMNI_TOOL_NAME_4,
                 Reference.MOD_ID);
-        GameRegistry.registerItem(omnitoolWood, Strings.OMNI_TOOL_NAME,
+        GameRegistry.registerItem(omnitoolWood, Strings.OMNI_TOOL_NAME_5,
                 Reference.MOD_ID);
 
         // Crafting Recipes
@@ -115,5 +116,9 @@ public class Utilities {
         LanguageRegistry.addName(omnitoolIron, "Omni Tool");
         LanguageRegistry.addName(omnitoolStone, "Omni Tool");
         LanguageRegistry.addName(omnitoolWood, "Omni Tool");
+    }
+    
+    public static void textureRegisters() {
+    	
     }
 }

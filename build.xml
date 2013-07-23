@@ -7,8 +7,8 @@
 	<property name="source.dir"		value="Utilities"/> <!-- Where your mod directory is located (aka where .git is) -->
 	<property name="download.dir"	value="..\api"/> <!-- Where you want to put the .zip of Forge-->
 	<property name="forgeunzip.dir"	value="..\${master.dir}"/> <!-- The unzipping directory of Forge -->
-	<property name="forge.dir"		value="..\forge"/> <!-- The main directory of Forge -->
-	<property name="mcp.dir"		value="${master.dir}\mcp"/> <!-- The main directory of MCP -->
+	<property name="forge.dir"		value="${master.dir}\forge"/> <!-- The main directory of Forge -->
+	<property name="mcp.dir"		value="${master.dir}\forge\mcp"/> <!-- The main directory of MCP -->
 	<property name="mcpreobf.dir"	value="${mcp.dir}\reobf\minecraft"/>
 	<property name="mcpsrc.dir"		value="${mcp.dir}\src\minecraft"/>
 	<property name="release.dir"	value="..\releases"/> <!-- Where you want Ant to output the compiled mod -->
@@ -30,7 +30,7 @@
 		</echo>
 		<copy todir="${mcpsrc.dir}">
 			<fileset dir="${mod.common.dir}"/>
-			<fileset dir="Equivalent-Exchange-3"/>
+			<fileset dir="Equivalent-Exchange-3/ee3_common"/>
 		</copy>
 		<replace dir="${mcpsrc.dir}" token="@VERSION@" value="${mod.version}"/>
 	</target>
@@ -69,6 +69,16 @@
 		</exec>
 	</target>
 	
+	<!-- Cleans up and decompiles and updates MCP -->
+	<target name = "cleanup">
+		<echo>Cleaning Up</echo>
+		
+	      <delete dir="${mcpreobf.dir}\com\pahimar"/>
+	        <delete dir="${mcpsrc.dir}\ee3_common"/>
+	        <delete dir="${mcpsrc.dir}\resources"/>
+		
+	</target>
+	
 	<!-- Default target to run, does everything for you -->
 	<target name="release">
 		<echo>Compiling ${mod.name}!</echo>
@@ -82,12 +92,10 @@
 		<echo>
 Last step!  Building the jar! (4/4)
 		</echo>
+		<antcall target="cleanup"/>
 		<mkdir dir="${release.dir}"/>
-		<delete dir="${mcpreobf.dir}\com\pahimar"/>
-		<delete dir="${mcpsrc.dir}\ee3_common"/>
-		<delete dir="${mcpsrc.dir}resource"/>
 		<jar destfile="${release.dir}\${mod.name} ${mod.version}.jar">
-			<fileset dir="${mcpsrc.dir}" includes="mcmod.info"/>
+			<fileset dir="${mcpsrc.dir}/com" includes="mcmod.info"/>
 			<fileset dir="${mcpreobf.dir}"/>
 			<fileset dir="${resources.dir}"/>
 			<fileset dir="${lang.dir}"/>
