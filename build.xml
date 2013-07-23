@@ -97,7 +97,7 @@ Last step!  Building the jar! (4/4)
 			<fileset dir="${mod.common.dir}" includes="mcmod.info"/>
 			<fileset dir="${mcpreobf.dir}"/>
 			<fileset dir="${lang.dir}"/>
-			<fileset dir="${mod.common.dir}\assets"/>
+			<fileset dir="${source.dir}\Resource"/>
 		</jar>
 	</target>
 </project>

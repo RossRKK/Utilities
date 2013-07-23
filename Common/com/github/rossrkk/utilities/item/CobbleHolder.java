@@ -64,7 +64,7 @@ public class CobbleHolder extends Item {
             	} else {
             		//if there is less than a stack to give give what's left
             		if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, getMaxDamage() - itemStack.getItemDamage()))) {
-            			this.setDamage(itemStack, getMaxDamage());
+            			this.setDamage(itemStack, 0);
             		}
             	}
         	//}
