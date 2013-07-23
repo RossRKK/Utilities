@@ -1,7 +1,12 @@
 package com.github.rossrkk.utilities.item;
 
+import com.github.rossrkk.utilities.lib.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
@@ -9,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
-public class ItemOmniTool extends ItemTool {
+public class ItemOmniToolDiamond extends ItemTool {
     public EnumToolMaterial material;
 
     /** an array of the blocks this omnitool is effective against */
@@ -27,11 +32,12 @@ public class ItemOmniTool extends ItemTool {
             Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin,
             Block.pumpkinLantern };
 
-    public ItemOmniTool(int par1, EnumToolMaterial par2EnumToolMaterial) {
+    public ItemOmniToolDiamond(int par1, EnumToolMaterial par2EnumToolMaterial) {
         super(par1, 2, par2EnumToolMaterial, blocksEffectiveAgainst);
         this.setCreativeTab(CreativeTabs.tabTools);
         this.material = par2EnumToolMaterial;
         this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
+        this.setUnlocalizedName(Strings.OMNI_TOOL_DIAMOND_NAME);
     }
 
     /**
@@ -117,4 +123,10 @@ public class ItemOmniTool extends ItemTool {
             }
         }
     }
+    
+    @Override
+   	@SideOnly(Side.CLIENT)
+   	public void registerIcons(IconRegister register) {
+   		itemIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.OMNI_TOOL_DIAMOND_NAME);
+   	}
 }

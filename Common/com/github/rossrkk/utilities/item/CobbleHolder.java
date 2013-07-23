@@ -1,6 +1,7 @@
 package com.github.rossrkk.utilities.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,6 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.lib.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class CobbleHolder extends Item {
 
@@ -67,5 +71,11 @@ public class CobbleHolder extends Item {
         }
         return itemStack;
     }
+    
+    @Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister register) {
+		itemIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.COBBLE_HOLDER_NAME);
+	}
 
 }

@@ -1,14 +1,21 @@
 package com.github.rossrkk.utilities;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
+
 import com.github.rossrkk.utilities.item.CobbleHolder;
-import com.github.rossrkk.utilities.item.ItemOmniTool;
+import com.github.rossrkk.utilities.item.ItemOmniToolDiamond;
+import com.github.rossrkk.utilities.item.ItemOmniToolGold;
+import com.github.rossrkk.utilities.item.ItemOmniToolIron;
+import com.github.rossrkk.utilities.item.ItemOmniToolStone;
+import com.github.rossrkk.utilities.item.ItemOmniToolWood;
 import com.github.rossrkk.utilities.lib.IDs;
 import com.github.rossrkk.utilities.lib.Reference;
 import com.github.rossrkk.utilities.lib.Strings;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -37,20 +44,23 @@ public class Utilities {
 
     @PreInit
     public void ModsToLoad(FMLPreInitializationEvent event) {
+    	
+    	ConfigLoader.init(event.getSuggestedConfigurationFile());
+    	
         // Initialise all the items
     	
-        cobbleHolder = new CobbleHolder(IDs.COBBLE_HOLDER_ID);
+        cobbleHolder = new CobbleHolder(IDs.cobbleHolderID);
         
         // Omnitools
-        omnitoolDiamond = new ItemOmniTool(IDs.OMNI_TOOL_ID,
+        omnitoolDiamond = new ItemOmniToolDiamond(IDs.omniToolDiamondID,
                 EnumToolMaterial.EMERALD);
-        omnitoolGold = new ItemOmniTool(IDs.OMNI_TOOL_ID + 1,
+        omnitoolGold = new ItemOmniToolGold(IDs.omniToolGoldID,
                 EnumToolMaterial.GOLD);
-        omnitoolIron = new ItemOmniTool(IDs.OMNI_TOOL_ID + 2,
+        omnitoolIron = new ItemOmniToolIron(IDs.omniToolIronID,
                 EnumToolMaterial.IRON);
-        omnitoolStone = new ItemOmniTool(IDs.OMNI_TOOL_ID + 3,
+        omnitoolStone = new ItemOmniToolStone(IDs.omniToolStoneID,
                 EnumToolMaterial.STONE);
-        omnitoolWood = new ItemOmniTool(IDs.OMNI_TOOL_ID + 4,
+        omnitoolWood = new ItemOmniToolWood(IDs.omniToolWoodID,
                 EnumToolMaterial.WOOD);
     }
 
@@ -58,6 +68,13 @@ public class Utilities {
     public void load(FMLInitializationEvent event) {
     	gameRegisters();
     	langugeRegisters();
+    	
+    	//Generated Chests
+    	ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
+    	ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
+    	ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
+
+
     }
 
     @PostInit
@@ -71,15 +88,15 @@ public class Utilities {
                 Reference.MOD_ID);
 
         // Omnitools
-        GameRegistry.registerItem(omnitoolDiamond, Strings.OMNI_TOOL_NAME_1,
+        GameRegistry.registerItem(omnitoolDiamond, Strings.OMNI_TOOL_DIAMOND_NAME,
                 Reference.MOD_ID);
-        GameRegistry.registerItem(omnitoolGold, Strings.OMNI_TOOL_NAME_2,
+        GameRegistry.registerItem(omnitoolGold, Strings.OMNI_TOOL_GOLD_NAME,
                 Reference.MOD_ID);
-        GameRegistry.registerItem(omnitoolIron, Strings.OMNI_TOOL_NAME_3,
+        GameRegistry.registerItem(omnitoolIron, Strings.OMNI_TOOL_IRON_NAME,
                 Reference.MOD_ID);
-        GameRegistry.registerItem(omnitoolStone, Strings.OMNI_TOOL_NAME_4,
+        GameRegistry.registerItem(omnitoolStone, Strings.OMNI_TOOL_STONE_NAME,
                 Reference.MOD_ID);
-        GameRegistry.registerItem(omnitoolWood, Strings.OMNI_TOOL_NAME_5,
+        GameRegistry.registerItem(omnitoolWood, Strings.OMNI_TOOL_WOOD_NAME,
                 Reference.MOD_ID);
 
         // Crafting Recipes
@@ -111,14 +128,10 @@ public class Utilities {
         LanguageRegistry.addName(cobbleHolder, "Cobble Holder");
 
         // Omnitools
-        LanguageRegistry.addName(omnitoolDiamond, "Omni Tool");
-        LanguageRegistry.addName(omnitoolGold, "Omni Tool");
-        LanguageRegistry.addName(omnitoolIron, "Omni Tool");
-        LanguageRegistry.addName(omnitoolStone, "Omni Tool");
-        LanguageRegistry.addName(omnitoolWood, "Omni Tool");
-    }
-    
-    public static void textureRegisters() {
-    	
+        LanguageRegistry.addName(omnitoolDiamond, "Diamond Omni Tool");
+        LanguageRegistry.addName(omnitoolGold, "Gold Omni Tool");
+        LanguageRegistry.addName(omnitoolIron, "Iron Omni Tool");
+        LanguageRegistry.addName(omnitoolStone, "Stone Omni Tool");
+        LanguageRegistry.addName(omnitoolWood, "Wooden Omni Tool");
     }
 }

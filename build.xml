@@ -69,7 +69,7 @@
 		</exec>
 	</target>
 	
-	<!-- Cleans up and decompiles and updates MCP -->
+	<!-- Cleans up -->
 	<target name = "cleanup">
 		<echo>Cleaning Up</echo>
 		
@@ -97,7 +97,6 @@ Last step!  Building the jar! (4/4)
 		<jar destfile="${release.dir}\${mod.name} ${mod.version}.jar">
 			<fileset dir="${mcpsrc.dir}/com" includes="mcmod.info"/>
 			<fileset dir="${mcpreobf.dir}"/>
-			<fileset dir="${resources.dir}"/>
 			<fileset dir="${lang.dir}"/>
 		</jar>
 	</target>
