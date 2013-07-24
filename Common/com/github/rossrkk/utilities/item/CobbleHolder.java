@@ -52,9 +52,6 @@ public class CobbleHolder extends Item {
             player.inventory.clearInventory(4, -1);
         } else {
         	
-        	//loop while there are items remaining to give
-        	//while (itemStack.getItemDamage() > 0){
-        	
         		//if there is more than a stack to give, give a stack
             	if (itemStack.getItemDamage() >= 64){
                 	if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, 64))) {
@@ -63,11 +60,10 @@ public class CobbleHolder extends Item {
 	                	}
             	} else {
             		//if there is less than a stack to give give what's left
-            		if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, getMaxDamage() - itemStack.getItemDamage()))) {
+            		if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, itemStack.getItemDamage()))) {
             			this.setDamage(itemStack, 0);
             		}
             	}
-        	//}
         }
         return itemStack;
     }
