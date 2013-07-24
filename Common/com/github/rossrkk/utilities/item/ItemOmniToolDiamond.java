@@ -1,5 +1,6 @@
 package com.github.rossrkk.utilities.item;
 
+import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -34,7 +35,7 @@ public class ItemOmniToolDiamond extends ItemTool {
 
     public ItemOmniToolDiamond(int par1, EnumToolMaterial par2EnumToolMaterial) {
         super(par1, 2, par2EnumToolMaterial, blocksEffectiveAgainst);
-        this.setCreativeTab(CreativeTabs.tabTools);
+        this.setCreativeTab(Utilities.utilTab);
         this.material = par2EnumToolMaterial;
         this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
         this.setUnlocalizedName(Strings.OMNI_TOOL_DIAMOND_NAME);

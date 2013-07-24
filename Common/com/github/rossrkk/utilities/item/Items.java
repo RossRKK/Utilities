@@ -45,7 +45,6 @@ public class Items {
 	                EnumToolMaterial.WOOD);
 	        
 	        gameRegisters();
-	        languageRegisters();
 	        
 	        //World generation
 	        	//Generated Chests
@@ -70,17 +69,5 @@ public class Items {
 	                Reference.MOD_ID);
 	        GameRegistry.registerItem(omnitoolWood, Strings.OMNI_TOOL_WOOD_NAME,
 	                Reference.MOD_ID);
-	    }
-	    
-	    
-	    public static void languageRegisters() {
-	        LanguageRegistry.addName(cobbleHolder, "Cobble Holder");
-
-	        // Omnitools
-	        LanguageRegistry.addName(omnitoolDiamond, "Diamond Omni Tool");
-	        LanguageRegistry.addName(omnitoolGold, "Gold Omni Tool");
-	        LanguageRegistry.addName(omnitoolIron, "Iron Omni Tool");
-	        LanguageRegistry.addName(omnitoolStone, "Stone Omni Tool");
-	        LanguageRegistry.addName(omnitoolWood, "Wooden Omni Tool");
 	    }
 }

@@ -27,10 +27,17 @@ public class CraftingManager {
         GameRegistry.addShapelessRecipe(new ItemStack(Items.omnitoolWood, 1),
                 Item.axeWood, Item.pickaxeWood, Item.hoeWood, Item.shovelWood,
                 Item.swordWood);
+        
+        //Cobble Holder Recipe
+        GameRegistry.addShapedRecipe(new ItemStack(Items.cobbleHolder, 1), new Object[]{
+        "SES",
+        "LPL",
+        "BLB", 
+        'S', Item.silk, 'E', Item.emerald,'L', Item.leather, 'P', Item.enderPearl, 'B', Item.blazeRod});
 
         // Smelting Recipes
 
         // rotten flesh --> leather
-        GameRegistry.addSmelting(111, new ItemStack(Item.leather, 1), 1);
+        GameRegistry.addSmelting(Item.rottenFlesh.itemID, new ItemStack(Item.leather, 1), 1);
 	}
 }

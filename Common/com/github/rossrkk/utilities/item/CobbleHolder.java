@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -20,7 +21,7 @@ public class CobbleHolder extends Item {
         super(id);
         maxStackSize = 1;
         this.setUnlocalizedName(Strings.COBBLE_HOLDER_NAME);
-        this.setCreativeTab(CreativeTabs.tabTools);
+        this.setCreativeTab(Utilities.utilTab);
         this.setNoRepair();
         this.setMaxDamage(2304);
         this.setNoRepair();
