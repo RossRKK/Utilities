@@ -1,4 +1,4 @@
-package com.github.rossrkk.utilities;
+package com.github.rossrkk.utilities.util;
 
 import java.io.File;
 
