@@ -17,6 +17,7 @@ public class Items {
 	// create item instances
 	
 		public static Item ingotTuridium;
+		public static Item enderPouch;
 	
 		//holders
 	    public static Item cobbleHolder;
@@ -30,6 +31,8 @@ public class Items {
 	    
 	    public static void init() {
 	    	// Initialise all the items
+	    	
+	    	enderPouch = new ItemEnderPouch(IDs.enderPouchID);
 	    	
 	    	ingotTuridium = new ItemIngotTuridium(IDs.ingotTuridiumID);
 	    	
@@ -53,7 +56,7 @@ public class Items {
 	        //World generation
 	        	//Generated Chests
 	    	ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
-	    	ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
+	    	//ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
 	    	ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
 	    }
 	    
@@ -61,6 +64,8 @@ public class Items {
 	    public static void gameRegisters() {
 	        GameRegistry.registerItem(cobbleHolder, Strings.COBBLE_HOLDER_NAME,
 	                Reference.MOD_ID);
+	        
+	        GameRegistry.registerItem(enderPouch, Strings.ENDER_POUCH_NAME, Reference.MOD_ID);
 	        
 	        GameRegistry.registerItem(ingotTuridium, Strings.INGOT_TURIDIUM_NAME, Reference.MOD_ID);
 
@@ -82,6 +87,8 @@ public class Items {
 	        LanguageRegistry.addName(Items.cobbleHolder, "Cobble Holder");
 	        
 	        LanguageRegistry.addName(ingotTuridium, "Turidium Ingot");
+	        
+	        LanguageRegistry.addName(enderPouch, "Ender Pouch");
 	    	
 	        // Omnitools
 	        LanguageRegistry.addName(Items.omnitoolDiamond, "Diamond Omni Tool");

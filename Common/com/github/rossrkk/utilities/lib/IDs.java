@@ -13,8 +13,12 @@ public class IDs {
     public static final int BLOCK_ORE_TURIDIUM_DEFAULT_ID = 3006;
     public static final int INGOT_TURIDIUM_DEFAULT_ID = 3007;
     
+    public static final int ENDER_POUCH_DEFAULT_ID = 3008;
+
+    
     //ids
     public static int cobbleHolderID;
+	public static int enderPouchID;
     
     public static int ingotTuridiumID;
     public static int blockOreTuridiumID;

@@ -1,14 +1,12 @@
 package com.github.rossrkk.utilities.util;
 
-import java.util.List;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import com.github.rossrkk.utilities.item.Items;
 import com.github.rossrkk.utilities.lib.IDs;
 
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftingManager {
@@ -39,6 +37,13 @@ public class CraftingManager {
         "LPL",
         "BLB", 
         'S', Item.silk, 'E', Item.emerald,'L', Item.leather, 'P', Item.enderPearl, 'B', Item.blazeRod});
+        
+        //Ender pouch recipe
+        GameRegistry.addShapedRecipe(new ItemStack(Items.enderPouch, 1), new Object[]{
+            " E ",
+            "LCL",
+            " L ", 
+            'E', Items.ingotTuridium,'L', Item.leather, 'C', Block.enderChest});
 
         // Smelting Recipes
         

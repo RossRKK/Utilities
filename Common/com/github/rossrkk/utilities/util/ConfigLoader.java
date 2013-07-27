@@ -16,6 +16,8 @@ public class ConfigLoader {
 		
 		IDs.cobbleHolderID = config.getItem(Strings.COBBLE_HOLDER_KEY, IDs.COBBLE_HOLDER_DEFAULT_ID).getInt() - 256;
 		
+		IDs.enderPouchID = config.getItem(Strings.ENDER_POUCH_KEY, IDs.ENDER_POUCH_DEFAULT_ID).getInt() - 256;
+		
 		IDs.omniToolDiamondID = config.getItem(Strings.OMNI_TOOL_DIAMOND_KEY, IDs.OMNI_TOOL_DIAMOND_DEFAULT_ID).getInt() - 256;		
 		IDs.omniToolDiamondID = config.getItem(Strings.OMNI_TOOL_DIAMOND_KEY, IDs.OMNI_TOOL_DIAMOND_DEFAULT_ID).getInt() - 256;
 		IDs.omniToolGoldID = config.getItem(Strings.OMNI_TOOL_GOLD_KEY, IDs.OMNI_TOOL_GOLD_DEFAULT_ID).getInt() - 256;

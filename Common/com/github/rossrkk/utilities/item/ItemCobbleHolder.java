@@ -27,6 +27,7 @@ public class ItemCobbleHolder extends Item {
         this.setNoRepair();
     }
 
+    @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world,
             EntityPlayer player) {
         
