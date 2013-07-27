@@ -16,9 +16,10 @@ import net.minecraftforge.common.ChestGenHooks;
 public class Items {
 	// create item instances
 	
+		public static Item ingotTuridium;
+	
 		//holders
 	    public static Item cobbleHolder;
-	    public static Item dirtHolder;
 
 	    // omni tools
 	    public static Item omnitoolDiamond;
@@ -30,7 +31,9 @@ public class Items {
 	    public static void init() {
 	    	// Initialise all the items
 	    	
-	        cobbleHolder = new CobbleHolder(IDs.cobbleHolderID);
+	    	ingotTuridium = new ItemIngotTuridium(IDs.ingotTuridiumID);
+	    	
+	        cobbleHolder = new ItemCobbleHolder(IDs.cobbleHolderID);
 	        
 	        // Omnitools
 	        omnitoolDiamond = new ItemOmniToolDiamond(IDs.omniToolDiamondID,
@@ -45,6 +48,7 @@ public class Items {
 	                EnumToolMaterial.WOOD);
 	        
 	        gameRegisters();
+	        languageRegisters();
 	        
 	        //World generation
 	        	//Generated Chests
@@ -57,6 +61,8 @@ public class Items {
 	    public static void gameRegisters() {
 	        GameRegistry.registerItem(cobbleHolder, Strings.COBBLE_HOLDER_NAME,
 	                Reference.MOD_ID);
+	        
+	        GameRegistry.registerItem(ingotTuridium, Strings.INGOT_TURIDIUM_NAME, Reference.MOD_ID);
 
 	        // Omnitools
 	        GameRegistry.registerItem(omnitoolDiamond, Strings.OMNI_TOOL_DIAMOND_NAME,
@@ -69,5 +75,19 @@ public class Items {
 	                Reference.MOD_ID);
 	        GameRegistry.registerItem(omnitoolWood, Strings.OMNI_TOOL_WOOD_NAME,
 	                Reference.MOD_ID);
+	    }
+	    
+	    public static void languageRegisters() {
+
+	        LanguageRegistry.addName(Items.cobbleHolder, "Cobble Holder");
+	        
+	        LanguageRegistry.addName(ingotTuridium, "Turidium Ingot");
+	    	
+	        // Omnitools
+	        LanguageRegistry.addName(Items.omnitoolDiamond, "Diamond Omni Tool");
+	        LanguageRegistry.addName(Items.omnitoolGold, "Gold Omni Tool");
+	        LanguageRegistry.addName(Items.omnitoolIron, "Iron Omni Tool");
+	        LanguageRegistry.addName(Items.omnitoolStone, "Stone Omni Tool");
+	        LanguageRegistry.addName(Items.omnitoolWood, "Wooden Omni Tool");
 	    }
 }

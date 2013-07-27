@@ -8,10 +8,16 @@ public class IDs {
     public static final int OMNI_TOOL_GOLD_DEFAULT_ID = 3002; 
     public static final int OMNI_TOOL_IRON_DEFAULT_ID = 3003; 
     public static final int OMNI_TOOL_STONE_DEFAULT_ID = 3004; 
-    public static final int OMNI_TOOL_WOOD_DEFAULT_ID = 3005; 
+    public static final int OMNI_TOOL_WOOD_DEFAULT_ID = 3005;
+    
+    public static final int BLOCK_ORE_TURIDIUM_DEFAULT_ID = 3006;
+    public static final int INGOT_TURIDIUM_DEFAULT_ID = 3007;
     
     //ids
     public static int cobbleHolderID;
+    
+    public static int ingotTuridiumID;
+    public static int blockOreTuridiumID;
     
     	//omnitools
     public static int omniToolDiamondID;

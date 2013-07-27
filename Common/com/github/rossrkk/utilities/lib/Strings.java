@@ -9,6 +9,9 @@ public class Strings {
     public static final String OMNI_TOOL_STONE_NAME = "omniStone";
     public static final String OMNI_TOOL_WOOD_NAME = "omniWood";
     
+	public static final String BLOCK_ORE_TURIDIUM_NAME = "blockOreTuridium";
+	public static final String INGOT_TURIDIUM_NAME = "ingotTuridium";
+    
     
     public static final String TEXTURE_LOCATION = "utilities";
     
@@ -19,4 +22,6 @@ public class Strings {
     public static final String OMNI_TOOL_IRON_KEY = "omniToolIron";
     public static final String OMNI_TOOL_STONE_KEY = "omniToolStone";
     public static final String OMNI_TOOL_WOOD_KEY = "omniToolWood";
+    public static final String BLOCK_ORE_TERIDIUM_KEY = "blockOreTeridium";
+    public static final String INGOT_TERIDIUM_KEY = "ingotTeridium";
 }

@@ -1,7 +1,12 @@
 package com.github.rossrkk.utilities.util;
 
-import com.github.rossrkk.utilities.item.Items;
+import java.util.List;
 
+import com.github.rossrkk.utilities.item.Items;
+import com.github.rossrkk.utilities.lib.IDs;
+
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -36,8 +41,11 @@ public class CraftingManager {
         'S', Item.silk, 'E', Item.emerald,'L', Item.leather, 'P', Item.enderPearl, 'B', Item.blazeRod});
 
         // Smelting Recipes
+        
+        GameRegistry.addSmelting(IDs.blockOreTuridiumID, new ItemStack(Items.ingotTuridium, 1), 1);
 
         // rotten flesh --> leather
         GameRegistry.addSmelting(Item.rottenFlesh.itemID, new ItemStack(Item.leather, 1), 1);
 	}
+
 }

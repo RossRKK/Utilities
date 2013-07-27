@@ -12,9 +12,12 @@ public class ConfigLoader {
 		Configuration config = new Configuration(file);
 		config.load();
 		
+		IDs.blockOreTuridiumID = config.getBlock(Strings.BLOCK_ORE_TERIDIUM_KEY, IDs.BLOCK_ORE_TURIDIUM_DEFAULT_ID).getInt() - 256;
+		
 		IDs.cobbleHolderID = config.getItem(Strings.COBBLE_HOLDER_KEY, IDs.COBBLE_HOLDER_DEFAULT_ID).getInt() - 256;
 		
-		IDs.omniToolDiamondID = config.getItem(Strings.OMNI_TOOL_DIAMOND_KEY, IDs.OMNI_TOOL_DIAMOND_DEFAULT_ID).getInt() - 256;		IDs.omniToolDiamondID = config.getItem(Strings.OMNI_TOOL_DIAMOND_KEY, IDs.OMNI_TOOL_DIAMOND_DEFAULT_ID).getInt() - 256;
+		IDs.omniToolDiamondID = config.getItem(Strings.OMNI_TOOL_DIAMOND_KEY, IDs.OMNI_TOOL_DIAMOND_DEFAULT_ID).getInt() - 256;		
+		IDs.omniToolDiamondID = config.getItem(Strings.OMNI_TOOL_DIAMOND_KEY, IDs.OMNI_TOOL_DIAMOND_DEFAULT_ID).getInt() - 256;
 		IDs.omniToolGoldID = config.getItem(Strings.OMNI_TOOL_GOLD_KEY, IDs.OMNI_TOOL_GOLD_DEFAULT_ID).getInt() - 256;
 		IDs.omniToolIronID = config.getItem(Strings.OMNI_TOOL_IRON_KEY, IDs.OMNI_TOOL_IRON_DEFAULT_ID).getInt() - 256;
 		IDs.omniToolStoneID = config.getItem(Strings.OMNI_TOOL_STONE_KEY, IDs.OMNI_TOOL_STONE_DEFAULT_ID).getInt() - 256;
