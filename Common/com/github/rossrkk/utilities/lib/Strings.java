@@ -10,6 +10,13 @@ public class Strings {
     public static final String OMNI_TOOL_IRON_NAME= "omniIron";
     public static final String OMNI_TOOL_STONE_NAME = "omniStone";
     public static final String OMNI_TOOL_WOOD_NAME = "omniWood";
+	public static final String OMNI_TOOL_TURIDIUM_NAME = "omniTuridium";
+    
+    public static final String TURIDIUM_PICK_NAME = "turidiumPick";
+    public static final String TURIDIUM_AXE_NAME = "turidiumAxe";
+    public static final String TURIDIUM_SHOVEL_NAME = "turidiumShovel";
+    public static final String TURIDIUM_HOE_NAME = "turidiumHoe";
+    public static final String TURIDIUM_SWORD_NAME = "turidiumSword";
     
 	public static final String BLOCK_ORE_TURIDIUM_NAME = "blockOreTuridium";
 	public static final String INGOT_TURIDIUM_NAME = "ingotTuridium";
@@ -27,5 +34,7 @@ public class Strings {
     public static final String BLOCK_ORE_TERIDIUM_KEY = "blockOreTuridium";
     public static final String INGOT_TERIDIUM_KEY = "ingotTuridium";
     public static final String ENDER_POUCH_KEY = "enderPouch";
+
+	public static final String OMNI_TOOL_TURIDIUM_KEY = "omnitoolTuridium";
     
 }
