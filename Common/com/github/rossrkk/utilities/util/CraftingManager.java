@@ -30,7 +30,7 @@ public class CraftingManager {
         GameRegistry.addShapelessRecipe(new ItemStack(Items.omnitoolWood, 1),
                 Item.axeWood, Item.pickaxeWood, Item.hoeWood, Item.shovelWood,
                 Item.swordWood);
-        GameRegistry.addShapelessRecipe(new ItemStack(Items.omnitoolWood, 1),
+        GameRegistry.addShapelessRecipe(new ItemStack(Items.omnitoolTuridium, 1),
                 Items.turidiumAxe, Items.turidiumPick, Items.turidiumHoe, Items.turidiumShovel,
                 Items.turidiumSword);
         
