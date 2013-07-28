@@ -20,7 +20,7 @@ public class GenerationHandeler implements IWorldGenerator {
 	
 	public GenerationHandeler() {
 		GameRegistry.registerWorldGenerator(this);
-		turidiumGen = new WorldGenMinable(IDs.blockOreTuridiumID, 16);
+		turidiumGen = new WorldGenMinable(IDs.blockOreTuridiumID, 8);
 	}
 	
 	//thanks vswe http://courses.vswe.se/?course=3&lecture=28&full=1
