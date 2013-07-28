@@ -84,17 +84,17 @@ public class Items {
 	    
 	    public static void languageRegisters() {
 
-	        LanguageRegistry.addName(Items.cobbleHolder, "Cobble Holder");
+	        LanguageRegistry.addName(cobbleHolder, "Cobble Holder");
 	        
 	        LanguageRegistry.addName(ingotTuridium, "Turidium Ingot");
 	        
 	        LanguageRegistry.addName(enderPouch, "Ender Pouch");
 	    	
 	        // Omnitools
-	        LanguageRegistry.addName(Items.omnitoolDiamond, "Diamond Omni Tool");
-	        LanguageRegistry.addName(Items.omnitoolGold, "Gold Omni Tool");
-	        LanguageRegistry.addName(Items.omnitoolIron, "Iron Omni Tool");
-	        LanguageRegistry.addName(Items.omnitoolStone, "Stone Omni Tool");
-	        LanguageRegistry.addName(Items.omnitoolWood, "Wooden Omni Tool");
+	        LanguageRegistry.addName(omnitoolDiamond, "Diamond Omni Tool");
+	        LanguageRegistry.addName(omnitoolGold, "Gold Omni Tool");
+	        LanguageRegistry.addName(omnitoolIron, "Iron Omni Tool");
+	        LanguageRegistry.addName(omnitoolStone, "Stone Omni Tool");
+	        LanguageRegistry.addName(omnitoolWood, "Wooden Omni Tool");
 	    }
 }
