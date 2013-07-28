@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemEnderPouch extends Item{
+public class ItemEnderPouch extends Item {
 
 	public ItemEnderPouch(int id) {
 		super(id);

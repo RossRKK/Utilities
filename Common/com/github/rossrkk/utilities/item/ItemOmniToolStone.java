@@ -8,7 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
@@ -44,7 +43,8 @@ public class ItemOmniToolStone extends ItemTool {
     /**
      * Returns if the item (tool) can harvest results from the block type.
      */
-    public boolean canHarvestBlock(Block par1Block) {
+    @Override
+	public boolean canHarvestBlock(Block par1Block) {
         return par1Block == Block.obsidian ? this.toolMaterial
                 .getHarvestLevel() == 3
                 : (par1Block != Block.blockDiamond
@@ -68,7 +68,8 @@ public class ItemOmniToolStone extends ItemTool {
      * Returns the strength of the stack against a given block. 1.0F base,
      * (Quality+1)*2 if correct blocktype, 1.5F if sword
      */
-    public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
+    @Override
+	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
         return par2Block != null
                 && (par2Block.blockMaterial == Material.iron
                         || par2Block.blockMaterial == Material.anvil || par2Block.blockMaterial == Material.rock) ? this.efficiencyOnProperMaterial
@@ -78,21 +79,24 @@ public class ItemOmniToolStone extends ItemTool {
     /**
      * Returns True is the item is renderer in full 3D when hold.
      */
-    public boolean isFull3D() {
+    @Override
+	public boolean isFull3D() {
         return true;
     }
 
     /**
      * Return whether this item is repairable in an anvil.
      */
-    public boolean getIsRepairable(ItemStack par1ItemStack,
+    @Override
+	public boolean getIsRepairable(ItemStack par1ItemStack,
             ItemStack par2ItemStack) {
         return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID ? true
                 : super.getIsRepairable(par1ItemStack, par2ItemStack);
     }
 
     // hoing script
-    public boolean onItemUse(ItemStack par1ItemStack,
+    @Override
+	public boolean onItemUse(ItemStack par1ItemStack,
             EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
             int par6, int par7, float par8, float par9, float par10) {
         if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7,
@@ -107,9 +111,9 @@ public class ItemOmniToolStone extends ItemTool {
                 return false;
             } else {
                 Block var13 = Block.tilledField;
-                par3World.playSoundEffect((double) ((float) par4 + 0.5F),
-                        (double) ((float) par5 + 0.5F),
-                        (double) ((float) par6 + 0.5F),
+                par3World.playSoundEffect(par4 + 0.5F,
+                        par5 + 0.5F,
+                        par6 + 0.5F,
                         var13.stepSound.getStepSound(),
                         (var13.stepSound.getVolume() + 1.0F) / 2.0F,
                         var13.stepSound.getPitch() * 0.8F);

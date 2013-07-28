@@ -10,7 +10,6 @@ import com.github.rossrkk.utilities.lib.Reference;
 import com.github.rossrkk.utilities.util.ConfigLoader;
 import com.github.rossrkk.utilities.util.CraftingManager;
 
-import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -30,7 +29,8 @@ public class Utilities {
     	
     	//Thanks SciGuy1121http://www.youtube.com/watch?v=8C_ptdFOIiE
     	utilTab = new CreativeTabs("util_utilities"){
-    		public ItemStack getIconItemStack(){ return new ItemStack(Items.cobbleHolder); }
+    		@Override
+			public ItemStack getIconItemStack(){ return new ItemStack(Items.cobbleHolder); }
     	};
     	
     	
