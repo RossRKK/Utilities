@@ -30,6 +30,52 @@ public class CraftingManager {
         GameRegistry.addShapelessRecipe(new ItemStack(Items.omnitoolWood, 1),
                 Item.axeWood, Item.pickaxeWood, Item.hoeWood, Item.shovelWood,
                 Item.swordWood);
+        GameRegistry.addShapelessRecipe(new ItemStack(Items.omnitoolWood, 1),
+                Items.turidiumAxe, Items.turidiumPick, Items.turidiumHoe, Items.turidiumShovel,
+                Items.turidiumSword);
+        
+        //Turidium tools
+        GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumPick, 1), new Object[]{
+            "III",
+            " S ",
+            " S ", 
+            'S', Item.stick, 'I', Items.ingotTuridium});
+        
+        GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumAxe, 1), new Object[]{
+            " II",
+            " SI",
+            " S ", 
+            'S', Item.stick, 'I', Items.ingotTuridium});
+        
+        GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumAxe, 1), new Object[]{
+            "II ",
+            "IS ",
+            " S ", 
+            'S', Item.stick, 'I', Items.ingotTuridium});
+        
+        GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumHoe, 1), new Object[]{
+            "II ",
+            " S ",
+            " S ", 
+            'S', Item.stick, 'I', Items.ingotTuridium});
+        
+        GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumHoe, 1), new Object[]{
+            " II",
+            " S ",
+            " S ", 
+            'S', Item.stick, 'I', Items.ingotTuridium});
+
+        GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumShovel, 1), new Object[]{
+            " I ",
+            " S ",
+            " S ", 
+            'S', Item.stick, 'I', Items.ingotTuridium});
+        
+        GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumSword, 1), new Object[]{
+            " I ",
+            " I ",
+            " S ", 
+            'S', Item.stick, 'I', Items.ingotTuridium});
         
         //Cobble Holder Recipe
         GameRegistry.addShapedRecipe(new ItemStack(Items.cobbleHolder, 1), new Object[]{

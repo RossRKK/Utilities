@@ -56,15 +56,15 @@ public class Items {
 	        
 	        // Omnitools
 	        omnitoolDiamond = new ItemOmniTool(IDs.omniToolDiamondID,
-	                EnumToolMaterial.EMERALD).setUnlocalizedName(Strings.OMNI_TOOL_DIAMOND_NAME).func_111206_d(Strings.OMNI_TOOL_GOLD_NAME);
+	                EnumToolMaterial.EMERALD).setUnlocalizedName(Strings.OMNI_TOOL_DIAMOND_NAME);
 	        omnitoolGold = new ItemOmniTool(IDs.omniToolGoldID,
-	                EnumToolMaterial.GOLD).setUnlocalizedName(Strings.OMNI_TOOL_GOLD_NAME).func_111206_d(Strings.OMNI_TOOL_GOLD_NAME);
+	                EnumToolMaterial.GOLD).setUnlocalizedName(Strings.OMNI_TOOL_GOLD_NAME);
 	        omnitoolIron = new ItemOmniTool(IDs.omniToolIronID,
-	                EnumToolMaterial.IRON).setUnlocalizedName(Strings.OMNI_TOOL_IRON_NAME).func_111206_d(Strings.OMNI_TOOL_GOLD_NAME);
+	                EnumToolMaterial.IRON).setUnlocalizedName(Strings.OMNI_TOOL_IRON_NAME);
 	        omnitoolStone = new ItemOmniTool(IDs.omniToolStoneID,
-	                EnumToolMaterial.STONE).setUnlocalizedName(Strings.OMNI_TOOL_STONE_NAME).func_111206_d(Strings.OMNI_TOOL_GOLD_NAME);
+	                EnumToolMaterial.STONE).setUnlocalizedName(Strings.OMNI_TOOL_STONE_NAME);
 	        omnitoolWood = new ItemOmniTool(IDs.omniToolWoodID,
-	                EnumToolMaterial.WOOD).setUnlocalizedName(Strings.OMNI_TOOL_WOOD_NAME).func_111206_d(Strings.OMNI_TOOL_GOLD_NAME);
+	                EnumToolMaterial.WOOD).setUnlocalizedName(Strings.OMNI_TOOL_WOOD_NAME);
 	        omnitoolTuridium = new ItemOmniTool(IDs.omniToolTuridiumID,
 	                turidium).setUnlocalizedName(Strings.OMNI_TOOL_TURIDIUM_NAME);
 	        
