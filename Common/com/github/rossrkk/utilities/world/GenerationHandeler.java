@@ -1,4 +1,4 @@
-package com.github.rossrkk.utilites.world;
+package com.github.rossrkk.utilities.world;
 
 import java.util.Random;
 

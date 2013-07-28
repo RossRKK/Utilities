@@ -3,7 +3,7 @@ package com.github.rossrkk.utilities;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-import com.github.rossrkk.utilites.world.GenerationHandeler;
+import com.github.rossrkk.utilities.world.GenerationHandeler;
 import com.github.rossrkk.utilities.block.Blocks;
 import com.github.rossrkk.utilities.item.Items;
 import com.github.rossrkk.utilities.lib.Reference;
