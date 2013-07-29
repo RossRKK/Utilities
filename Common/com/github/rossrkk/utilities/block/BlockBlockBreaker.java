@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
@@ -22,6 +23,11 @@ public class BlockBlockBreaker extends BlockContainer{
 		setHardness(3.0F);
 		setUnlocalizedName(Strings.BLOCK_BREAKER_NAME);
 		setCreativeTab(Utilities.utilTab);
+	}
+	
+	@Override
+	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
+		return world.getBlockMetadata(x, y, z) != side;
 	}
 	
 	@Override

@@ -9,7 +9,7 @@ public class TEBlockBreaker extends TileEntity{
 	
 	@Override
 	public void updateEntity() {
-		if (!worldObj.isRemote && worldObj.blockExists(xCoord - 1, yCoord, zCoord)) {
+		if (!worldObj.isRemote && worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
 			side = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 			switch (side) {
 			case 0: worldObj.destroyBlock(xCoord, yCoord - 1, zCoord, true);
