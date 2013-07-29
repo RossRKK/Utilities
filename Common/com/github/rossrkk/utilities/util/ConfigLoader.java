@@ -13,6 +13,7 @@ public class ConfigLoader {
 		config.load();
 		
 		IDs.blockOreTuridiumID = config.getBlock(Strings.BLOCK_ORE_TERIDIUM_KEY, IDs.BLOCK_ORE_TURIDIUM_DEFAULT_ID).getInt() - 256;
+		IDs.blockBreakerID = config.getBlock(Strings.BLOCK_BREAKER_KEY, IDs.BLOCK_BREAKER_DEFAULT_ID).getInt() - 256;
 		
 		IDs.cobbleHolderID = config.getItem(Strings.COBBLE_HOLDER_KEY, IDs.COBBLE_HOLDER_DEFAULT_ID).getInt() - 256;
 		

@@ -132,7 +132,6 @@ public class ItemOmniTool extends ItemTool {
     @Override
    	@SideOnly(Side.CLIENT)
    	public void registerIcons(IconRegister register) {
-   		itemIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":omni" + material.name());
-   		System.out.println(material.name());
+   		itemIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":omni" + material.name().toLowerCase());
    	}
 }
