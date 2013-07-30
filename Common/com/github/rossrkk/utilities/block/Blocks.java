@@ -14,11 +14,13 @@ public class Blocks {
 	
 	public static Block turidiumOre;
 	public static Block blockBreaker;
+	private static Block blockPlacer;
 	
 	public static void init() {
 		//create instances of each block
 		turidiumOre  = new BlockOreTuridium(IDs.blockOreTuridiumID, Material.rock);
 		blockBreaker = new BlockBlockBreaker(IDs.blockBreakerID, Material.rock);
+		blockPlacer = new BlockBlockBreaker(IDs.blockPlacerID, Material.rock);
 		
 		gameRegisters();
 		languageRegisters();
@@ -27,10 +29,12 @@ public class Blocks {
 	public static void gameRegisters() {
 		GameRegistry.registerBlock(turidiumOre, Strings.BLOCK_ORE_TURIDIUM_NAME + Reference.MOD_ID);
 		GameRegistry.registerBlock(blockBreaker, Strings.BLOCK_BREAKER_NAME + Reference.MOD_ID);
+		GameRegistry.registerBlock(blockPlacer, Strings.BLOCK_PLACER_NAME + Reference.MOD_ID);
 	}
 	
 	public static void languageRegisters() {
 		LanguageRegistry.addName(turidiumOre, "Turidium Ore");
 		LanguageRegistry.addName(blockBreaker, "Block Breaker");
+		LanguageRegistry.addName(blockPlacer, "Block Placer");
 	}
 }

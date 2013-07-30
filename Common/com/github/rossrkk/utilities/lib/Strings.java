@@ -41,5 +41,9 @@ public class Strings {
 
 	public static final String BLOCK_BREAKER_KEY = "blockBraker";
 
+	public static final String BLOCK_PLACER_NAME = "blockPlacer";
+
+	public static final String BLOCK_PLACER_KEY = "blockPlacer";
+
     
 }
