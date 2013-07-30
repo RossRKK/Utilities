@@ -1,27 +1,31 @@
 package com.github.rossrkk.utilities.block;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-
 import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
+import com.github.rossrkk.utilities.tileentities.TEBlockBreaker;
 import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBlockPlacer extends BlockContainer{
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+public class BlockBlockPlacer extends BlockContainer {
 	public static TileEntity tileEnt;
 
 	protected BlockBlockPlacer(int id, Material material) {
 		super(id, material);
 		setHardness(3.0F);
-		setUnlocalizedName(Strings.BLOCK_BREAKER_NAME);
+		setUnlocalizedName(Strings.BLOCK_PLACER_NAME);
 		setCreativeTab(Utilities.utilTab);
 	}
 	
@@ -35,11 +39,24 @@ public class BlockBlockPlacer extends BlockContainer{
 		world.setBlockMetadataWithNotify(x, y, z, side, 0);
 		return side;
 	}
-
+	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		tileEnt = new TEBlockPlacer();
 		return tileEnt;
+	}
+	
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+		try {
+			if (!(tileEnt instanceof IInventory)) {
+	            return;
+			} else {
+	        IInventory inventory = (IInventory) tileEnt;
+	        
+			EntityItem entityItem = new EntityItem(world, x, y, z, inventory.getStackInSlot(0));
+			}
+		} catch (NullPointerException e) {}
 	}
 	
 	@SideOnly(Side.CLIENT)

@@ -14,13 +14,13 @@ public class Blocks {
 	
 	public static Block turidiumOre;
 	public static Block blockBreaker;
-	private static Block blockPlacer;
+	public static Block blockPlacer;
 	
 	public static void init() {
 		//create instances of each block
 		turidiumOre  = new BlockOreTuridium(IDs.blockOreTuridiumID, Material.rock);
 		blockBreaker = new BlockBlockBreaker(IDs.blockBreakerID, Material.rock);
-		blockPlacer = new BlockBlockBreaker(IDs.blockPlacerID, Material.rock);
+		blockPlacer = new BlockBlockPlacer(IDs.blockPlacerID, Material.rock);
 		
 		gameRegisters();
 		languageRegisters();

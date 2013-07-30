@@ -22,6 +22,7 @@ public class Strings {
 	public static final String INGOT_TURIDIUM_NAME = "ingotTuridium";
 	
 	public static final String BLOCK_BREAKER_NAME = "blockBreaker";
+	public static final String BLOCK_PLACER_NAME = "blockPlacer";
     
     
     public static final String TEXTURE_LOCATION = "utilities";
@@ -40,8 +41,6 @@ public class Strings {
 	public static final String OMNI_TOOL_TURIDIUM_KEY = "omnitoolTuridium";
 
 	public static final String BLOCK_BREAKER_KEY = "blockBraker";
-
-	public static final String BLOCK_PLACER_NAME = "blockPlacer";
 
 	public static final String BLOCK_PLACER_KEY = "blockPlacer";
 
