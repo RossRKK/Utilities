@@ -3,7 +3,7 @@ package com.github.rossrkk.utilities.lib;
 public class IDs {
 	
 	//default ids
-    public static final int COBBLE_HOLDER_DEFAULT_ID = 3999;
+    public static final int COBBLE_HOLDER_DEFAULT_ID = 4018;
     public static final int OMNI_TOOL_DIAMOND_DEFAULT_ID = 4000;
     public static final int OMNI_TOOL_GOLD_DEFAULT_ID = 4001; 
     public static final int OMNI_TOOL_IRON_DEFAULT_ID = 4002; 
@@ -23,7 +23,7 @@ public class IDs {
     public static final int TURIDIUM_SWORD_DEFAULT_ID = 4013;
 	public static final int OMNI_TOOL_TURIDIUM_DEFAULT_ID = 4014;
 	public static final int BLOCK_PLACER_DEFAULT_ID = 4015;
-	public static final int FULL_STONE_SLAB_DEFAULT_ID = 4016;
+	public static final int FULL_STONE_SLAB_DEFAULT_ID = 4017;
 
     
     //ids
