@@ -15,8 +15,11 @@ public class ConfigLoader {
 		IDs.blockOreTuridiumID = config.getBlock(Strings.BLOCK_ORE_TERIDIUM_KEY, IDs.BLOCK_ORE_TURIDIUM_DEFAULT_ID).getInt() - 256;
 		IDs.blockBreakerID = config.getBlock(Strings.BLOCK_BREAKER_KEY, IDs.BLOCK_BREAKER_DEFAULT_ID).getInt() - 256;
 		IDs.blockPlacerID = config.getBlock(Strings.BLOCK_PLACER_KEY, IDs.BLOCK_PLACER_DEFAULT_ID).getInt() - 256;
+		IDs.blockFullStoneSlabID = config.getBlock(Strings.FULL_STONE_SLAB_KEY, IDs.FULL_STONE_SLAB_DEFAULT_ID).getInt() - 256;
 		
 		IDs.cobbleHolderID = config.getItem(Strings.COBBLE_HOLDER_KEY, IDs.COBBLE_HOLDER_DEFAULT_ID).getInt() - 256;
+		
+		IDs.ingotTuridiumID = config.getItem(Strings.INGOT_TURIDIUM_KEY, IDs.INGOT_TURIDIUM_DEFAULT_ID).getInt() - 256;
 		
 		IDs.enderPouchID = config.getItem(Strings.ENDER_POUCH_KEY, IDs.ENDER_POUCH_DEFAULT_ID).getInt() - 256;
 				

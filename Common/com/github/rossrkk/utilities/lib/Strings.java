@@ -24,6 +24,7 @@ public class Strings {
 	public static final String BLOCK_BREAKER_NAME = "blockBreaker";
 	public static final String BLOCK_PLACER_NAME = "blockPlacer";
     
+	public static final String FULL_STONE_SLAB_NAME = "fullStoneSlab";
     
     public static final String TEXTURE_LOCATION = "utilities";
     
@@ -43,6 +44,12 @@ public class Strings {
 	public static final String BLOCK_BREAKER_KEY = "blockBraker";
 
 	public static final String BLOCK_PLACER_KEY = "blockPlacer";
+
+	public static final String FULL_STONE_SLAB_KEY = "fullStoneSlab";
+
+	public static final String INGOT_TURIDIUM_KEY = "ingotTurridium";
+
+
 
     
 }

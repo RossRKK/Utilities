@@ -23,6 +23,7 @@ public class IDs {
     public static final int TURIDIUM_SWORD_DEFAULT_ID = 4013;
 	public static final int OMNI_TOOL_TURIDIUM_DEFAULT_ID = 4014;
 	public static final int BLOCK_PLACER_DEFAULT_ID = 4015;
+	public static final int FULL_STONE_SLAB_DEFAULT_ID = 4016;
 
     
     //ids
@@ -32,6 +33,8 @@ public class IDs {
     public static int ingotTuridiumID;
     public static int blockOreTuridiumID;
 	public static int blockBreakerID;
+	public static int blockPlacerID;
+	public static int fullStoneSlabID;
     
     	//omnitools
     public static int omniToolDiamondID;
@@ -47,7 +50,9 @@ public class IDs {
     public static int turidiumShovelID;
     public static int turidiumHoeID;
 	public static int omniToolTuridiumID;
-	public static int blockPlacerID;
+	public static int blockFullStoneSlabID;
+
+
 
 
 }
