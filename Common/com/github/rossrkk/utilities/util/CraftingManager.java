@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.github.rossrkk.utilities.block.Blocks;
 import com.github.rossrkk.utilities.item.Items;
 import com.github.rossrkk.utilities.lib.IDs;
 
@@ -90,6 +91,20 @@ public class CraftingManager {
             "LCL",
             " L ", 
             'E', Items.ingotTuridium,'L', Item.leather, 'C', Block.enderChest});
+        
+        //Block Placer
+        GameRegistry.addShapedRecipe(new ItemStack(Blocks.blockPlacer), new Object[]{
+        	"CTC",
+        	"CPC",
+        	"CRC",
+        'C', Block.cobblestone, 'T', Items.ingotTuridium, 'R', Item.redstone, 'P', Block.pistonBase});
+        
+        //Block breaker
+        GameRegistry.addShapedRecipe(new ItemStack(Blocks.blockBreaker), new Object[]{
+        	"C C",
+        	"CPC",
+        	"CRC",
+        'C', Block.cobblestone, 'T', Items.ingotTuridium, 'R', Item.redstone, 'P', Block.pistonBase});
 
         // Smelting Recipes
         

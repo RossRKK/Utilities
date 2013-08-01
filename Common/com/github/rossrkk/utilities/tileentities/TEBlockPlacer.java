@@ -64,8 +64,7 @@ public ItemStack inventory;
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		
-		compound.setInteger("stacksize", inventory.stackSize);
-		compound.setInteger("id", inventory.itemID);
+		inventory.writeToNBT(compound);
 		compound.setShort("side", (short)side);
 	}
 	
@@ -73,8 +72,7 @@ public ItemStack inventory;
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		
-		inventory.itemID = compound.getInteger("id");
-		inventory.stackSize =compound.getInteger("stacksize");
+		inventory.loadItemStackFromNBT(compound);
 		side = compound.getShort("side");
 	}
 
