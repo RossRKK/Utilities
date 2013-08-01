@@ -84,7 +84,7 @@ public class BlockBlockPlacer extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME);
-		placeIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME + "Place");
+		placeIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME + "Placer");
 	}
 	
 	@Override

@@ -105,6 +105,12 @@ public class CraftingManager {
         	"CPC",
         	"CRC",
         'C', Block.cobblestone, 'T', Items.ingotTuridium, 'R', Item.redstone, 'P', Block.pistonBase});
+        
+        //Full stone slab
+        GameRegistry.addShapedRecipe(new ItemStack(Blocks.fullStoneSlab), new Object[]{
+        	"S",
+        	"S",
+        'S', Block.stoneSingleSlab});
 
         // Smelting Recipes
         

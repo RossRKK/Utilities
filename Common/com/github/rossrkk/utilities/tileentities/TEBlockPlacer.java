@@ -3,6 +3,7 @@ package com.github.rossrkk.utilities.tileentities;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -21,8 +22,12 @@ public ItemStack inventory;
 				//this switch statment decides which direction to place the block based on side
 				switch (side) {
 				case 0: if (worldObj.isAirBlock(xCoord, yCoord - 1, zCoord)) {
-					worldObj.setBlock(xCoord, yCoord -1, zCoord, inventory.itemID, inventory.getItemDamage(), 2);
-				inventory.stackSize --;
+					if (inventory.itemID == Item.carrot.itemID) {
+						worldObj.setBlock(xCoord, yCoord -1, zCoord, Block.carrot.blockID, 0, 2);
+					} else {
+						worldObj.setBlock(xCoord, yCoord -1, zCoord, inventory.itemID, inventory.getItemDamage(), 2);
+						inventory.stackSize --;
+					}
 				}
 				break;
 				
