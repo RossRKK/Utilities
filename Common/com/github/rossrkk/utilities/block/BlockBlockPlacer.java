@@ -1,13 +1,5 @@
 package com.github.rossrkk.utilities.block;
 
-import com.github.rossrkk.utilities.Utilities;
-import com.github.rossrkk.utilities.lib.Strings;
-import com.github.rossrkk.utilities.tileentities.TEBlockBreaker;
-import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -19,6 +11,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.github.rossrkk.utilities.Utilities;
+import com.github.rossrkk.utilities.lib.Strings;
+import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
+
+import cpw.mods.fml.common.network.FMLNetworkHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBlockPlacer extends BlockContainer {
 	public static TileEntity tileEnt;
@@ -96,4 +96,13 @@ public class BlockBlockPlacer extends BlockContainer {
 			return blockIcon;
 		}
 	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote) {
+			FMLNetworkHandler.openGui(player, Utilities.instance, 0, world, x, y, z);
+			System.out.println("block activated");
+	}
+		return true;
+}
 }

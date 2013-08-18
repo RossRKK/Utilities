@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 
 import com.github.rossrkk.utilities.world.GenerationHandeler;
 import com.github.rossrkk.utilities.block.Blocks;
+import com.github.rossrkk.utilities.gui.GuiHandler;
 import com.github.rossrkk.utilities.item.Items;
 import com.github.rossrkk.utilities.lib.Reference;
 import com.github.rossrkk.utilities.util.ConfigLoader;
@@ -12,6 +13,7 @@ import com.github.rossrkk.utilities.util.CraftingManager;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -19,6 +21,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class Utilities {
+	
+	@Instance(Reference.MOD_ID)
+	public static Utilities instance;
 
 	public static CreativeTabs utilTab;
 
@@ -44,6 +49,7 @@ public class Utilities {
     	languageRegisters();
     	
     	new GenerationHandeler();
+		new GuiHandler();
     }
 
     @EventHandler
