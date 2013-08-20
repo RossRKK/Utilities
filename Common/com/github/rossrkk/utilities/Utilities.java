@@ -3,13 +3,13 @@ package com.github.rossrkk.utilities;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-import com.github.rossrkk.utilities.world.GenerationHandeler;
 import com.github.rossrkk.utilities.block.Blocks;
 import com.github.rossrkk.utilities.gui.GuiHandler;
 import com.github.rossrkk.utilities.item.Items;
 import com.github.rossrkk.utilities.lib.Reference;
 import com.github.rossrkk.utilities.util.ConfigLoader;
 import com.github.rossrkk.utilities.util.CraftingManager;
+import com.github.rossrkk.utilities.world.GenerationHandeler;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -17,9 +17,11 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
+@NetworkMod(channels = {Reference.CHANNEL}, clientSideRequired = true, serverSideRequired = false) 
 public class Utilities {
 	
 	@Instance(Reference.MOD_ID)

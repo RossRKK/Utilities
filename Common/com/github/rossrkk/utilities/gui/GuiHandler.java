@@ -19,7 +19,6 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-		System.out.println("Server Gui Element Called");
 		switch (ID) {
 		case 0:
 			TileEntity te = world.getBlockTileEntity(x, y, z);
@@ -37,7 +36,6 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-		System.out.println("Client Gui Element Called");
 		switch (ID) {
 		case 0:
 			TileEntity te = world.getBlockTileEntity(x, y, z);
