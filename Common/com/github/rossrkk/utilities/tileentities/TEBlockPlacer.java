@@ -215,8 +215,7 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		if (inventory == null) {
 			return true;
-		} else if (inventory.itemID == itemstack.itemID
-				&& itemstack.stackSize < 64 - inventory.stackSize) {
+		} else if (inventory.itemID == itemstack.itemID) {
 			return true;
 		}
 		return false;

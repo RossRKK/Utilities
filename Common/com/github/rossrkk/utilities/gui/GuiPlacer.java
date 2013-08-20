@@ -16,7 +16,6 @@ public class GuiPlacer extends GuiContainer {
 		
 		xSize = 176;
 		ySize = 154; //TODO do actual sizes
-		System.out.println("Gui Placer created");
 	}
 	
 	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/placer.png");
@@ -28,7 +27,6 @@ public class GuiPlacer extends GuiContainer {
 		Minecraft.getMinecraft().func_110434_K().func_110577_a(texture);
 		
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		System.out.println("Gui Contsiner Drawn");
 	}
 
 }
