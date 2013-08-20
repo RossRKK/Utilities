@@ -20,7 +20,7 @@
 	<property name="mod.name"		value="Utilities"/>
 	
 	<property name="mc.version"		value="1.6.2"/>
-	<property name="mod.version"	value="1.0.0"/>
+	<property name="mod.version"	value="1.0.1"/>
 	<property name="forge.version"	value="7.7.1.651"/>
 	
 	
