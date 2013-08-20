@@ -27,7 +27,7 @@ public class ContainerPlacer extends Container {
 			}
 		}
 		
-		addSlotToContainer(new Slot(machine, 0, 26, 17));
+		addSlotToContainer(new Slot(machine, 0, 79, 26));
 	}
 
 	@Override

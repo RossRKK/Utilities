@@ -1,13 +1,11 @@
 package com.github.rossrkk.utilities.tileentities;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.IPlantable;
 
 public class TEBlockPlacer extends TileEntity implements IInventory {
@@ -17,9 +15,12 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 	@Override
 	public void updateEntity() {
 		try {
+			if (inventory.stackSize <= 0) {
+				inventory = null;
+			}
 			if (!worldObj.isRemote
 					&& worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord,
-							zCoord) && inventory.stackSize > 0) {
+							zCoord) && inventory.stackSize >= 1) {
 				side = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 
 				// this switch statment decides which direction to place the
@@ -39,6 +40,7 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 									inventory.itemID,
 									inventory.getItemDamage(), 2);
 							inventory.stackSize--;
+							onInventoryChanged();
 						}
 					}
 					break;
@@ -57,6 +59,7 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 									inventory.itemID,
 									inventory.getItemDamage(), 2);
 							inventory.stackSize--;
+							onInventoryChanged();
 						}
 					}
 					break;
@@ -75,6 +78,7 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 									inventory.itemID,
 									inventory.getItemDamage(), 2);
 							inventory.stackSize--;
+							onInventoryChanged();
 						}
 					}
 					break;
@@ -93,6 +97,7 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 									inventory.itemID,
 									inventory.getItemDamage(), 2);
 							inventory.stackSize--;
+							onInventoryChanged();
 						}
 					}
 					break;
@@ -111,6 +116,7 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 									inventory.itemID,
 									inventory.getItemDamage(), 2);
 							inventory.stackSize--;
+							onInventoryChanged();
 						}
 					}
 					break;
@@ -129,6 +135,7 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 									inventory.itemID,
 									inventory.getItemDamage(), 2);
 							inventory.stackSize--;
+							onInventoryChanged();
 						}
 					}
 					break;
@@ -141,17 +148,33 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
-		if (inventory != null) {
-			inventory.writeToNBT(compound);
-		}
+		
+		NBTTagList items = new NBTTagList();
+			
+			ItemStack stack = getStackInSlot(0);
+			
+			if (stack != null) {
+				NBTTagCompound item = new NBTTagCompound();
+				stack.writeToNBT(item);
+				items.appendTag(item);
+			}
+		
+		compound.setTag("Items", items);
+		
 		compound.setShort("side", (short) side);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-
-		inventory.loadItemStackFromNBT(compound);
+		
+		NBTTagList items = compound.getTagList("Items");
+		
+			NBTTagCompound item = (NBTTagCompound)items.tagAt(0);
+			int slot = item.getByte("Slot");
+			
+			setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+		
 		side = compound.getShort("side");
 	}
 
