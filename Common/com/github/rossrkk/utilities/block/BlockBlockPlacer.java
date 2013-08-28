@@ -21,7 +21,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBlockPlacer extends BlockContainer {
-	public static TileEntity tileEnt;
 
 	protected BlockBlockPlacer(int id, Material material) {
 		super(id, material);
@@ -43,8 +42,7 @@ public class BlockBlockPlacer extends BlockContainer {
 	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		tileEnt = new TEBlockPlacer();
-		return tileEnt;
+		return new TEBlockPlacer();
 	}
 	
 	@Override
