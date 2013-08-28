@@ -2,11 +2,13 @@ package com.github.rossrkk.utilities.tileentities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.IPlantable;
+import net.minecraft.item.ItemBlock;
 
 public class TEBlockPlacer extends TileEntity implements IInventory {
 	public static int side;
@@ -18,132 +20,59 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 			if (inventory.stackSize <= 0) {
 				inventory = null;
 			}
-			if (!worldObj.isRemote
-					&& worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord,
-							zCoord) && inventory.stackSize >= 1) {
+			if (!worldObj.isRemote && worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && inventory.stackSize >= 1) {
 				side = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-
-				// this switch statment decides which direction to place the
-				// block based on side
-				switch (side) {
-				case 0:
-					if (worldObj.isAirBlock(xCoord, yCoord - 1, zCoord)) {
-						if (inventory.getItem() instanceof IPlantable) {
-							IPlantable plantItem = (IPlantable) inventory
-									.getItem();
-							worldObj.setBlock(xCoord, yCoord - 1, zCoord,
-									plantItem.getPlantID(worldObj, xCoord,
-											yCoord, zCoord), plantItem.getPlantMetadata(worldObj, xCoord,
-													yCoord, zCoord), 2);
-						} else {
-							worldObj.setBlock(xCoord, yCoord - 1, zCoord,
-									inventory.itemID,
-									inventory.getItemDamage(), 2);
-							inventory.stackSize--;
-							onInventoryChanged();
-						}
-					}
-					break;
-
-				case 1:
-					if (worldObj.isAirBlock(xCoord, yCoord + 1, zCoord)) {
-						if (inventory.getItem() instanceof IPlantable) {
-							IPlantable plantItem = (IPlantable) inventory
-									.getItem();
-							worldObj.setBlock(xCoord, yCoord + 1, zCoord,
-									plantItem.getPlantID(worldObj, xCoord,
-											yCoord, zCoord), plantItem.getPlantMetadata(worldObj, xCoord,
-													yCoord, zCoord), 2);
-						} else {
-							worldObj.setBlock(xCoord, yCoord + 1, zCoord,
-									inventory.itemID,
-									inventory.getItemDamage(), 2);
-							inventory.stackSize--;
-							onInventoryChanged();
-						}
-					}
-					break;
-
-				case 2:
-					if (worldObj.isAirBlock(xCoord, yCoord, zCoord - 1)) {
-						if (inventory.getItem() instanceof IPlantable) {
-							IPlantable plantItem = (IPlantable) inventory
-									.getItem();
-							worldObj.setBlock(xCoord, yCoord, zCoord - 1,
-									plantItem.getPlantID(worldObj, xCoord,
-											yCoord, zCoord), plantItem.getPlantMetadata(worldObj, xCoord,
-													yCoord, zCoord), 2);
-						} else {
-							worldObj.setBlock(xCoord, yCoord, zCoord - 1,
-									inventory.itemID,
-									inventory.getItemDamage(), 2);
-							inventory.stackSize--;
-							onInventoryChanged();
-						}
-					}
-					break;
-
-				case 3:
-					if (worldObj.isAirBlock(xCoord, yCoord, zCoord + 1)) {
-						if (inventory.getItem() instanceof IPlantable) {
-							IPlantable plantItem = (IPlantable) inventory
-									.getItem();
-							worldObj.setBlock(xCoord, yCoord, zCoord + 1,
-									plantItem.getPlantID(worldObj, xCoord,
-											yCoord, zCoord), plantItem.getPlantMetadata(worldObj, xCoord,
-													yCoord, zCoord), 2);
-						} else {
-							worldObj.setBlock(xCoord, yCoord, zCoord + 1,
-									inventory.itemID,
-									inventory.getItemDamage(), 2);
-							inventory.stackSize--;
-							onInventoryChanged();
-						}
-					}
-					break;
-
-				case 4:
-					if (worldObj.isAirBlock(xCoord - 1, yCoord, zCoord)) {
-						if (inventory.getItem() instanceof IPlantable) {
-							IPlantable plantItem = (IPlantable) inventory
-									.getItem();
-							worldObj.setBlock(xCoord - 1, yCoord, zCoord,
-									plantItem.getPlantID(worldObj, xCoord,
-											yCoord, zCoord), plantItem.getPlantMetadata(worldObj, xCoord,
-													yCoord, zCoord), 2);
-						} else {
-							worldObj.setBlock(xCoord - 1, yCoord, zCoord,
-									inventory.itemID,
-									inventory.getItemDamage(), 2);
-							inventory.stackSize--;
-							onInventoryChanged();
-						}
-					}
-					break;
-
-				case 5:
-					if (worldObj.isAirBlock(xCoord + 1, yCoord, zCoord)) {
-						if (inventory.getItem() instanceof IPlantable) {
-							IPlantable plantItem = (IPlantable) inventory
-									.getItem();
-							worldObj.setBlock(xCoord + 1, yCoord, zCoord,
-									plantItem.getPlantID(worldObj, xCoord,
-											yCoord, zCoord), plantItem.getPlantMetadata(worldObj, xCoord,
-													yCoord, zCoord), 2);
-						} else {
-							worldObj.setBlock(xCoord + 1, yCoord, zCoord,
-									inventory.itemID,
-									inventory.getItemDamage(), 2);
-							inventory.stackSize--;
-							onInventoryChanged();
-						}
-					}
-					break;
+				int blockId;
+				if (!(inventory.getItem() instanceof IPlantable)) {
+					ItemBlock item = (ItemBlock)inventory.getItem();
+					blockId = item.getBlockID();
+				} else {
+					blockId = ((IPlantable)inventory.getItem()).getPlantID(worldObj, xCoord, yCoord, zCoord);
 				}
+				choosePlace(side, blockId);
 			}
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
+			
 		}
 	}
+	
+public void choosePlace(int side, int blockId) {
+	// this switch statment decides which direction to place the
+			// block based on side
+			switch (side) {
+			case 0:
+				placeBlock(xCoord, yCoord - 1, zCoord, blockId);
+				break;
+				
+			case 1:
+				placeBlock(xCoord, yCoord + 1, zCoord, blockId);
+				break;
+
+			case 2:
+				placeBlock(xCoord, yCoord, zCoord - 1, blockId);
+				break;
+
+			case 3:
+				placeBlock(xCoord, yCoord, zCoord + 1, blockId);
+				break;
+
+			case 4:
+				placeBlock(xCoord - 1, yCoord, zCoord, blockId);
+				break;
+
+			case 5:
+				placeBlock(xCoord + 1, yCoord, zCoord, blockId);
+				break;
+			}
+}
+
+	public void placeBlock(int x, int y, int z, int blockId) {
+	if (worldObj.isAirBlock(x, y, z)) {
+			worldObj.setBlock(x, y, z, blockId, inventory.getItemDamage(), 2);
+			inventory.stackSize --;
+			onInventoryChanged();
+	}
+}
 
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
@@ -189,9 +118,19 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		inventory.stackSize -= j;
-		return inventory;
+	public ItemStack decrStackSize(int i, int count) {
+ItemStack itemstack = getStackInSlot(i);
+		
+		if (itemstack != null) {
+			if (itemstack.stackSize <= count) {
+				setInventorySlotContents(i, null);
+			}else{
+				itemstack = itemstack.splitStack(count);
+				onInventoryChanged();
+			}
+		}
+
+		return itemstack;
 	}
 
 	@Override
@@ -202,6 +141,11 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
 		inventory = itemstack;
+		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
+			itemstack.stackSize = getInventoryStackLimit();
+		}
+		
+		onInventoryChanged();
 	}
 
 	@Override
@@ -236,11 +180,6 @@ public class TEBlockPlacer extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if (inventory == null) {
-			return true;
-		} else if (inventory.itemID == itemstack.itemID) {
-			return true;
-		}
-		return false;
+		return (itemstack.getItem() instanceof IPlantable || itemstack.getItem() instanceof ItemBlock);
 	}
 }
