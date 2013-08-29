@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.IPlantable;
 
-public class TEBlockBreaker extends TileEntity implements IInventory{
+public class TEBlockBreaker extends TileEntity {
 	
 	public static int side;
 	public static ItemStack inventory;
@@ -43,30 +43,12 @@ public class TEBlockBreaker extends TileEntity implements IInventory{
 	}
 	
 	public void breakBlock(int x, int y, int z) {
-		int id = worldObj.getBlockId(x, y, z);
-		int metadata = worldObj.getBlockMetadata(x, y, z);
-		ItemStack stack = new ItemStack(worldObj.getBlockId(x, y, z), 1, metadata);
-		if (isItemValidForSlot(0, stack)) {
-			setInventorySlotContents(0, stack);
-			worldObj.destroyBlock(x, y, z, false);
-		}	
+		worldObj.destroyBlock(x, y, z, true);
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
-		
-		NBTTagList items = new NBTTagList();
-			
-			ItemStack stack = getStackInSlot(0);
-			
-			if (stack != null) {
-				NBTTagCompound item = new NBTTagCompound();
-				stack.writeToNBT(item);
-				items.appendTag(item);
-			}
-		
-		compound.setTag("Items", items);
 		
 		compound.setShort("side", (short) side);
 	}
@@ -74,90 +56,7 @@ public class TEBlockBreaker extends TileEntity implements IInventory{
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		
-		NBTTagList items = compound.getTagList("Items");
-		
-			NBTTagCompound item = (NBTTagCompound)items.tagAt(0);
-			int slot = item.getByte("Slot");
-			
-			setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
-		
+
 		side = compound.getShort("side");
-	}
-	
-	@Override
-	public int getSizeInventory() {
-		return 1;
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int i) {
-		return inventory;
-	}
-
-	@Override
-	public ItemStack decrStackSize(int i, int count) {
-ItemStack itemstack = getStackInSlot(i);
-		
-		if (itemstack != null) {
-			if (itemstack.stackSize <= count) {
-				setInventorySlotContents(i, null);
-			}else{
-				itemstack = itemstack.splitStack(count);
-				onInventoryChanged();
-			}
-		}
-
-		return itemstack;
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int i) {
-		return inventory;
-	}
-
-	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		inventory = itemstack;
-		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
-			itemstack.stackSize = getInventoryStackLimit();
-		}
-		
-		onInventoryChanged();
-	}
-
-	@Override
-	public String getInvName() {
-		return "blockBreaker";
-	}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		return entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) <= 64;
-	}
-
-	@Override
-	public void openChest() {
-
-	}
-
-	@Override
-	public void closeChest() {
-
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
 	}
 }

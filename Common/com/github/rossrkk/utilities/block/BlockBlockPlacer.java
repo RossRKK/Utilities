@@ -94,13 +94,4 @@ public class BlockBlockPlacer extends BlockContainer {
 			return blockIcon;
 		}
 	}
-	
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, Utilities.instance, 0, world, x, y, z);
-			System.out.println("block activated");
-	}
-		return true;
-}
 }

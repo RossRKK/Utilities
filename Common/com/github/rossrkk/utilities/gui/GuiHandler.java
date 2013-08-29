@@ -28,13 +28,6 @@ public class GuiHandler implements IGuiHandler {
 			}
 		
 			break;
-		case 1:
-			TileEntity tE = world.getBlockTileEntity(x, y, z);
-			if (tE != null && tE instanceof TEBlockBreaker) {
-				return new ContainerBreaker(player.inventory, (TEBlockBreaker)tE);
-			}
-		
-			break;
 	}
 
 
@@ -50,13 +43,6 @@ public class GuiHandler implements IGuiHandler {
 			if (te != null && te instanceof TEBlockPlacer) {
 				return new GuiPlacer(player.inventory, (TEBlockPlacer)te);
 			}
-		case 1:
-			TileEntity tE = world.getBlockTileEntity(x, y, z);
-			if (tE != null && tE instanceof TEBlockBreaker) {
-				return new GuiBreaker(player.inventory, (TEBlockBreaker)tE);
-			}
-		
-			break;
 	}
 
 
