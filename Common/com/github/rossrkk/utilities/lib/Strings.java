@@ -25,6 +25,7 @@ public class Strings {
 	public static final String BLOCK_PLACER_NAME = "blockPlacer";
     
 	public static final String FULL_STONE_SLAB_NAME = "fullStoneSlab";
+	public static final String JUMP_PAD_NAME = "jumpPad";
     
     public static final String TEXTURE_LOCATION = "utilities";
     
@@ -48,6 +49,14 @@ public class Strings {
 	public static final String FULL_STONE_SLAB_KEY = "fullStoneSlab";
 
 	public static final String INGOT_TURIDIUM_KEY = "ingotTurridium";
+
+	public static final String JUMP_PAD_KEY = "jumpPad";
+
+	public static final String NO_CLIP_NAME = "noClip";
+
+	public static final String NO_CLIP_KEY = "noClip";
+
+
 
 
 

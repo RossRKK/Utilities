@@ -24,6 +24,7 @@ public class IDs {
 	public static final int OMNI_TOOL_TURIDIUM_DEFAULT_ID = 4014;
 	public static final int BLOCK_PLACER_DEFAULT_ID = 4015;
 	public static final int FULL_STONE_SLAB_DEFAULT_ID = 4017;
+	public static final int JUMP_PAD_DEFAULT_ID = 4018;
 
     
     //ids
@@ -51,8 +52,5 @@ public class IDs {
     public static int turidiumHoeID;
 	public static int omniToolTuridiumID;
 	public static int blockFullStoneSlabID;
-
-
-
-
+	public static int blockJumpPad;
 }
