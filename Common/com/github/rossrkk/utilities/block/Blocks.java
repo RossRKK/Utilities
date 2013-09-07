@@ -22,11 +22,11 @@ public class Blocks {
 	
 	public static void init() {
 		//create instances of each block
-		turidiumOre  = new BlockOreTuridium(IDs.blockOreTuridiumID, Material.rock);
-		blockBreaker = new BlockBlockBreaker(IDs.blockBreakerID, Material.rock);
-		blockPlacer = new BlockBlockPlacer(IDs.blockPlacerID, Material.rock);
+		turidiumOre  = new BlockOreTuridium(IDs.blockOreTuridiumID, Material.iron);
+		blockBreaker = new BlockBlockBreaker(IDs.blockBreakerID, Material.iron);
+		blockPlacer = new BlockBlockPlacer(IDs.blockPlacerID, Material.iron);
 		fullStoneSlab = new BlockFullStoneSlab(IDs.blockFullStoneSlabID, Material.rock);
-		jumpPad = new BlockJumpPad(IDs.blockJumpPad, Material.rock);
+		jumpPad = new BlockJumpPad(IDs.blockJumpPad, Material.iron);
 		
 		gameRegisters();
 		languageRegisters();

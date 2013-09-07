@@ -4,7 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
@@ -21,6 +23,17 @@ public class BlockJumpPad extends Block {
 		setUnlocalizedName(Strings.JUMP_PAD_NAME);
 		setHardness(4.0F);
 		setCreativeTab(Utilities.utilTab);
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.1F, 1.0F);
+	}
+	
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 	
 	@Override
@@ -41,9 +54,13 @@ public class BlockJumpPad extends Block {
 	}
 
 	@Override
-	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
-		if (!entity.isSneaking()) {
-			entity.motionY += world.getBlockMetadata(x, y, z);
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+		entity.fallDistance = 0;
+		if (entity instanceof EntityLivingBase) {
+			if (!entity.isSneaking()) {
+				int i = 0;
+				entity.motionY += world.getBlockMetadata(x, y, z)/3 + 1;
+			}
 		}
 	}
 	
