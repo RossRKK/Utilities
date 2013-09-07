@@ -23,7 +23,7 @@ public class BlockJumpPad extends Block {
 		setUnlocalizedName(Strings.JUMP_PAD_NAME);
 		setHardness(4.0F);
 		setCreativeTab(Utilities.utilTab);
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.1F, 1.0F);
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ public class BlockJumpPad extends Block {
 		if (entity instanceof EntityLivingBase) {
 			if (!entity.isSneaking()) {
 				int i = 0;
-				entity.motionY += world.getBlockMetadata(x, y, z)/3 + 1;
+				entity.motionY += Math.sqrt(world.getBlockMetadata(x, y, z)) + 0.1;
 			}
 		}
 	}

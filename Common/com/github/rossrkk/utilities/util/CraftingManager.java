@@ -111,6 +111,12 @@ public class CraftingManager {
         	"S",
         	"S",
         'S', Block.stoneSingleSlab});
+        
+        //Jump pad
+        GameRegistry.addShapedRecipe(new ItemStack(Blocks.jumpPad, 6), new Object[]{
+        	"CTC",
+        	"CPC",
+        'C', Block.cobblestone, 'T', Items.ingotTuridium, 'R', Item.redstone, 'P', Block.pistonBase});
 
         // Smelting Recipes
         
