@@ -17,6 +17,8 @@ public class ConfigLoader {
 		IDs.blockPlacerID = config.getBlock(Strings.BLOCK_PLACER_KEY, IDs.BLOCK_PLACER_DEFAULT_ID).getInt() - 256;
 		IDs.blockFullStoneSlabID = config.getBlock(Strings.FULL_STONE_SLAB_KEY, IDs.FULL_STONE_SLAB_DEFAULT_ID).getInt() - 256;
 		IDs.blockJumpPad = config.getBlock(Strings.JUMP_PAD_KEY, IDs.JUMP_PAD_DEFAULT_ID).getInt() - 256;
+		IDs.blockMiner = config.getBlock(Strings.MINER_KEY, IDs.MINER_DEFAULT_ID).getInt() - 256;
+		IDs.cable = config.getBlock(Strings.CABLE_KEY, IDs.CABLE_DEFAULT_ID).getInt() - 256;
 		
 		IDs.cobbleHolderID = config.getItem(Strings.COBBLE_HOLDER_KEY, IDs.COBBLE_HOLDER_DEFAULT_ID).getInt() - 256;
 		

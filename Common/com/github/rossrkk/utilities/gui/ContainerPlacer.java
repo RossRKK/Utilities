@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 
 public class ContainerPlacer extends Container {
@@ -26,7 +27,6 @@ public class ContainerPlacer extends Container {
 				addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 72 + y * 18));
 			}
 		}
-		
 		addSlotToContainer(new Slot(machine, 0, 79, 26));
 	}
 

@@ -3,7 +3,7 @@ package com.github.rossrkk.utilities.lib;
 public class IDs {
 	
 	//default ids
-    public static final int COBBLE_HOLDER_DEFAULT_ID = 4018;
+    public static final int COBBLE_HOLDER_DEFAULT_ID = 3999;
     public static final int OMNI_TOOL_DIAMOND_DEFAULT_ID = 4000;
     public static final int OMNI_TOOL_GOLD_DEFAULT_ID = 4001; 
     public static final int OMNI_TOOL_IRON_DEFAULT_ID = 4002; 
@@ -25,6 +25,8 @@ public class IDs {
 	public static final int BLOCK_PLACER_DEFAULT_ID = 4015;
 	public static final int FULL_STONE_SLAB_DEFAULT_ID = 4017;
 	public static final int JUMP_PAD_DEFAULT_ID = 4018;
+	public static final int MINER_DEFAULT_ID = 4019;
+	public static final int CABLE_DEFAULT_ID = 4020;
 
     
     //ids
@@ -53,4 +55,7 @@ public class IDs {
 	public static int omniToolTuridiumID;
 	public static int blockFullStoneSlabID;
 	public static int blockJumpPad;
+	
+	public static int blockMiner;
+	public static int cable;
 }

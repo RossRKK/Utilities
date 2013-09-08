@@ -26,6 +26,9 @@ public class Strings {
     
 	public static final String FULL_STONE_SLAB_NAME = "fullStoneSlab";
 	public static final String JUMP_PAD_NAME = "jumpPad";
+	public static final String MINER_NAME = "miner";
+	
+	public static final String CABLE_NAME = "cable";
     
     public static final String TEXTURE_LOCATION = "utilities";
     
@@ -56,9 +59,7 @@ public class Strings {
 
 	public static final String NO_CLIP_KEY = "noClip";
 
+	public static final String MINER_KEY = "miner";
 
-
-
-
-    
+	public static final String CABLE_KEY = "cable";
 }

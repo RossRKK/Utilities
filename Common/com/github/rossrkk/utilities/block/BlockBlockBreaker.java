@@ -96,12 +96,4 @@ public class BlockBlockBreaker extends BlockContainer{
 		
 		super.breakBlock(world, x, y, z, id, meta);
 	}
-	
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, Utilities.instance, 1, world, x, y, z);
-		}
-		return true;
-	}
 }

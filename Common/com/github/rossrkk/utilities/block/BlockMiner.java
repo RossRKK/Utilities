@@ -8,41 +8,34 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
-import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
+import com.github.rossrkk.utilities.tileentities.TEMiner;
 
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBlockPlacer extends BlockContainer {
+public class BlockMiner extends BlockContainer{
 
-	protected BlockBlockPlacer(int id, Material material) {
-		super(id, material);
-		setHardness(3.0F);
-		setUnlocalizedName(Strings.BLOCK_PLACER_NAME);
+	protected BlockMiner(int par1, Material par2Material) {
+		super(par1, par2Material);
+		setUnlocalizedName(Strings.MINER_NAME);
 		setCreativeTab(Utilities.utilTab);
+		setHardness(4.0F);
 	}
-	
-	@Override
-	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
-		return world.getBlockMetadata(x, y, z) != side;
-	}
-	
-	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float par6, float par7, float par8, int par9) {
-		world.setBlockMetadataWithNotify(x, y, z, side, 0);
-		return side;
-	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TEBlockPlacer();
+		return new TEMiner();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister register) {
+		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME);
 	}
 	
 	@Override
@@ -71,34 +64,13 @@ public class BlockBlockPlacer extends BlockContainer {
 				}
 			}
 		}
-		
-		super.breakBlock(world, x, y, z, id, meta);
 	}
 	
-	@SideOnly(Side.CLIENT)
-	private Icon placeIcon;
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister register) {
-		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME);
-		placeIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME + "Placer");
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		if (meta == side) {
-			return placeIcon;
-		} else {
-			return blockIcon;
-		}
-	}
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, Utilities.instance, 0, world, x, y, z);
+			FMLNetworkHandler.openGui(player, Utilities.instance, 1, world, x, y, z);
 		}
 		return true;
 	}

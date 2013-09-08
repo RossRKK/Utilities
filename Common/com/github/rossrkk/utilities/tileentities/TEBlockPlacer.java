@@ -98,12 +98,12 @@ public void choosePlace(int side, int blockId) {
 		super.readFromNBT(compound);
 		
 		NBTTagList items = compound.getTagList("Items");
-		
+		if ((NBTTagCompound)items.tagAt(0) != null) {
 			NBTTagCompound item = (NBTTagCompound)items.tagAt(0);
 			int slot = item.getByte("Slot");
 			
 			setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
-		
+		}
 		side = compound.getShort("side");
 	}
 
