@@ -27,6 +27,8 @@ public class IDs {
 	public static final int JUMP_PAD_DEFAULT_ID = 4018;
 	public static final int MINER_DEFAULT_ID = 4019;
 	public static final int CABLE_DEFAULT_ID = 4020;
+	public static final int BATTERY_DEFAULT_ID = 4021;
+	public static final int CREATIVE_GENERATOR_DEFAULT_ID = 4022;
 
     
     //ids
@@ -58,4 +60,6 @@ public class IDs {
 	
 	public static int blockMiner;
 	public static int cable;
+	public static int battery;
+	public static int creativeGenerator;
 }

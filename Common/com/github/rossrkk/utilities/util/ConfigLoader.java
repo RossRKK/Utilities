@@ -19,6 +19,8 @@ public class ConfigLoader {
 		IDs.blockJumpPad = config.getBlock(Strings.JUMP_PAD_KEY, IDs.JUMP_PAD_DEFAULT_ID).getInt() - 256;
 		IDs.blockMiner = config.getBlock(Strings.MINER_KEY, IDs.MINER_DEFAULT_ID).getInt() - 256;
 		IDs.cable = config.getBlock(Strings.CABLE_KEY, IDs.CABLE_DEFAULT_ID).getInt() - 256;
+		IDs.battery = config.getBlock(Strings.BATTERY_NAME, IDs.BATTERY_DEFAULT_ID).getInt() - 256;
+		IDs.creativeGenerator = config.getBlock(Strings.CREATIVE_GENERATOR_NAME, IDs.CREATIVE_GENERATOR_DEFAULT_ID).getInt() - 256;
 		
 		IDs.cobbleHolderID = config.getItem(Strings.COBBLE_HOLDER_KEY, IDs.COBBLE_HOLDER_DEFAULT_ID).getInt() - 256;
 		

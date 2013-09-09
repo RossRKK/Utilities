@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
+import com.github.rossrkk.utilities.power.Power;
 import com.github.rossrkk.utilities.tileentities.TECable;
 
 import cpw.mods.fml.relauncher.Side;
@@ -16,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCable extends BlockContainer {
 
-	protected BlockCable(int id, Material material) {
+	public BlockCable(int id, Material material) {
 		super(id, material);
 		setUnlocalizedName(Strings.CABLE_NAME);
 		setCreativeTab(Utilities.utilTab);
@@ -39,8 +40,8 @@ public class BlockCable extends BlockContainer {
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
-		TECable te = (TECable)world.getBlockTileEntity(x, y, z);
-		System.out.println(te.getPower());
+		Power te = (Power)world.getBlockTileEntity(x, y, z);
+		player.addChatMessage("Power Level is:  " + te.getPower());
 		return true;
 	}
 	

@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TECable extends TileEntity implements Power {
 	
 	public int power;
-	public int maxPower = 6000;
+	public int maxPower = 32;
 
 	@Override
 	public void updateEntity() {
@@ -22,10 +22,8 @@ public class TECable extends TileEntity implements Power {
 	}
 	
 	public void transfer(int x, int y, int z) {
-		if (worldObj.getBlockTileEntity(x, y, z) instanceof Power) {
-			if (!((Power)worldObj.getBlockTileEntity(x, y, z)).isGenerator()) {
-				((Power)worldObj.getBlockTileEntity(x, y, z)).incrementPower(128);
-			}
+		if (worldObj.getBlockTileEntity(x, y, z) instanceof Power && !((Power)worldObj.getBlockTileEntity(x, y, z)).isGenerator() && power >= 16) {
+			power = power + ((Power)worldObj.getBlockTileEntity(x, y, z)).incrementPower(16) - 16;
 		}
 	}
 	
@@ -36,14 +34,14 @@ public class TECable extends TileEntity implements Power {
 
 	@Override
 	public int incrementPower(int count) {
-		if (count + power < maxPower) {
-			int toReturn = power + count - maxPower;
+		int totalPower = count + power;
+		if (totalPower > maxPower) {
 			power = maxPower;
-			return toReturn;
+			return totalPower - maxPower;
 		} else {
-			power += count;
+			power = totalPower;
+			return 0;
 		}
-		return 0;
 	}
 
 	@Override

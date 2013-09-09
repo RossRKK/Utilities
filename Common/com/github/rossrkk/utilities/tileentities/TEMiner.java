@@ -12,23 +12,6 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 	
 	ItemStack[] inventory = new ItemStack[11];
 	
-	@Override
-	public void updateEntity() {
-		transfer(xCoord - 1, yCoord, zCoord);
-		transfer(xCoord + 1, yCoord, zCoord);
-		transfer(xCoord, yCoord - 1, zCoord);
-		transfer(xCoord, yCoord + 1, zCoord);
-		transfer(xCoord, yCoord, zCoord - 1);
-		transfer(xCoord, yCoord, zCoord + 1);
-	}
-	
-	public void transfer(int x, int y, int z) {
-		if (worldObj.getBlockTileEntity(x, y, z) instanceof Power) {
-			if (!((Power)worldObj.getBlockTileEntity(x, y, z)).isGenerator()) {
-				((Power)worldObj.getBlockTileEntity(x, y, z)).incrementPower(1);
-			}
-		}
-	}
 
 	@Override
 	public int getSizeInventory() {
@@ -120,7 +103,7 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 	@Override
 	public boolean isGenerator() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 }
