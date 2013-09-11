@@ -6,12 +6,43 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TEMiner extends TileEntity implements IInventory, Power {
 	
-	ItemStack[] inventory = new ItemStack[11];
+	ItemStack[] inventory = new ItemStack[10];
 	
+	int power;
+	int maxPower = 1024;
+	
+	int tickCount = 0;
+	
+	@Override
+	public void updateEntity() {
+		tickCount++;
+		if (power >= 16 && tickCount == 10) {
+			tickCount = 0;
+		}
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		for (int i = 0; i < inventory.length; i++) {
+			inventory[i].readFromNBT(compound);
+		}
+		
+		compound.getInteger("power");
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound compound) {
+		for (int i = 0; i < inventory.length; i++) {
+			inventory[i].writeToNBT(compound);
+		}
+		
+		compound.setInteger("power", power);
+	}
 
 	@Override
 	public int getSizeInventory() {
@@ -89,20 +120,23 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 
 	@Override
 	public int getPower() {
-		// TODO Auto-generated method stub
-		return 0;
+		return power;
 	}
 
 	@Override
 	public int incrementPower(int count) {
-		return 0;
-		// TODO Auto-generated method stub
-		
+		int totalPower = count + power;
+		if (totalPower > maxPower) {
+			power = maxPower;
+			return totalPower - maxPower;
+		} else {
+			power = totalPower;
+			return 0;
+		}
 	}
 
 	@Override
 	public boolean isGenerator() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

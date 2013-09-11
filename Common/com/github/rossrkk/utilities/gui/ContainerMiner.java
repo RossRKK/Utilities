@@ -30,9 +30,9 @@ public class ContainerMiner extends Container {
 			}
 			
 			addSlotToContainer(new SlotDiamondPick(machine, 0, 12, 10));
-			addSlotToContainer(new Slot(machine, 1, 12, 41));
+			//addSlotToContainer(new Slot(machine, 1, 12, 41));
 			
-			int index = 2;
+			int index = 1;
 			for (int y = 0; y < 3; y++) {
 				for (int x = 0; x < 3; x++) {
 					addSlotToContainer(new Slot(machine, index, x * 21 + 79, 6 + y * 20));
