@@ -54,7 +54,6 @@ public class BlockCable extends BlockContainer {
 	}
 	
 	@Override
-
 	public void setBlockBoundsBasedOnState(IBlockAccess blockAccess, int x, int y, int z) {
 		minX = 0.3;
 		minY = 0.3;

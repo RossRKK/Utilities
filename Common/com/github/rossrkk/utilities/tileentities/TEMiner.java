@@ -1,7 +1,8 @@
 package com.github.rossrkk.utilities.tileentities;
 
-import com.github.rossrkk.utilities.power.Power;
+import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -10,6 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
+import com.github.rossrkk.utilities.power.Power;
+
 public class TEMiner extends TileEntity implements IInventory, Power {
 	
 	ItemStack[] inventory = new ItemStack[10];
@@ -17,15 +20,31 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 	int power;
 	int maxPower = 1024;
 	
-	int tickCount = 0;
+	int heightDug = -1;
 	
 	@Override
 	public void updateEntity() {
-		tickCount++;
-		if (power >= 16 && tickCount == 10) {
-			tickCount = 0;
+		if (heightDug + yCoord < 1) {
+			heightDug = -1;
+		}
+		
+		if (power >= 16 && inventory[0] != null) {
 			if (inventory[0].itemID == Item.pickaxeDiamond.itemID) {
-				worldObj.destroyBlock(xCoord, yCoord - 1, zCoord, true);
+				if (Block.blocksList[worldObj.getBlockId(xCoord, yCoord + heightDug, zCoord)].blockID != Block.bedrock.blockID) {
+					
+					ArrayList<ItemStack> dropped = Block.blocksList[worldObj.getBlockId(xCoord, yCoord + heightDug, zCoord)].getBlockDropped(worldObj, xCoord, yCoord + heightDug, zCoord, worldObj.getBlockMetadata(xCoord, yCoord + heightDug, zCoord), 1);
+					ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
+					
+					if (worldObj.destroyBlock(xCoord, yCoord + heightDug, zCoord, false)) {
+						for (int i = 0; i < dropped.size(); i++) {
+							if (isItemValidForSlot(i + 1, droppedAr[i])) {
+								setInventorySlotContents(i + 1, droppedAr[i]);
+							}
+						}
+						heightDug --;
+						inventory[0].setItemDamage(inventory[0].getItemDamage() + 1);
+					}
+				}
 			}
 		}
 	}
@@ -45,7 +64,8 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 			}
 		}
 		
-		compound.getInteger("power");
+		power = compound.getInteger("power");
+		heightDug = compound.getInteger("heightDug");
 	}
 	
 	@Override
@@ -66,6 +86,7 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 		}
 		
 		compound.setInteger("power", power);
+		compound.setInteger("heightDug", heightDug);
 	}
 
 	@Override
