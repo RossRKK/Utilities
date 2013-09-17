@@ -30,9 +30,9 @@ public class BlockBattery extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
 		if (player.isSneaking()) {
 			if (world.getBlockMetadata(x, y, z) == 0) {
-				world.setBlockMetadataWithNotify(x, y, z, 1, 4);
+				world.setBlockMetadataWithNotify(x, y, z, 1, 2);
 			} else {
-				world.setBlockMetadataWithNotify(x, y, z, 0, 4);
+				world.setBlockMetadataWithNotify(x, y, z, 0, 2);
 			}
 		} else {
 			Power te = (Power)world.getBlockTileEntity(x, y, z);

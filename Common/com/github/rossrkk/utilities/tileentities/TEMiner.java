@@ -18,34 +18,63 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 	ItemStack[] inventory = new ItemStack[10];
 	
 	int power;
-	int maxPower = 1024;
+	public int maxPower = 1024;
 	
 	int heightDug = -1;
 	
 	@Override
 	public void updateEntity() {
-		if (heightDug + yCoord < 1) {
-			heightDug = -1;
-		}
-		
-		if (power >= 16 && inventory[0] != null) {
-			if (inventory[0].itemID == Item.pickaxeDiamond.itemID) {
-				if (Block.blocksList[worldObj.getBlockId(xCoord, yCoord + heightDug, zCoord)].blockID != Block.bedrock.blockID) {
-					
-					ArrayList<ItemStack> dropped = Block.blocksList[worldObj.getBlockId(xCoord, yCoord + heightDug, zCoord)].getBlockDropped(worldObj, xCoord, yCoord + heightDug, zCoord, worldObj.getBlockMetadata(xCoord, yCoord + heightDug, zCoord), 1);
-					ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
-					
-					if (worldObj.destroyBlock(xCoord, yCoord + heightDug, zCoord, false)) {
-						for (int i = 0; i < dropped.size(); i++) {
-							if (isItemValidForSlot(i + 1, droppedAr[i])) {
-								setInventorySlotContents(i + 1, droppedAr[i]);
+		try {
+			
+			//reset the dig height if the dig height is bellow the world
+			if (heightDug + yCoord < 1) {
+				heightDug = -1;
+			}
+			
+			//if there is more than 16 power units run
+			if (power >= 16 && inventory[0] != null) {
+				if (inventory[0].itemID == Item.pickaxeDiamond.itemID) {
+					//if the block isn't bedrock
+					if (Block.blocksList[worldObj.getBlockId(xCoord, yCoord + heightDug, zCoord)].blockID != Block.bedrock.blockID) {
+						
+						//get the dropped block
+						ArrayList<ItemStack> dropped = Block.blocksList[worldObj.getBlockId(xCoord, yCoord + heightDug, zCoord)].getBlockDropped(worldObj, xCoord, yCoord + heightDug, zCoord, worldObj.getBlockMetadata(xCoord, yCoord + heightDug, zCoord), 1);
+						ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
+						
+						//if the block is successfully destroyed
+						if (worldObj.destroyBlock(xCoord, yCoord + heightDug, zCoord, false)) {
+							for (int i = 0; i < dropped.size(); i++) {
+								//if the item is valid for the slot
+								if (isItemValidForSlot(i + 1, droppedAr[i])) {
+									//manual valid item check
+									if (getStackInSlot(i + 1).itemID == droppedAr[i].itemID) {
+										//if else to switch between the item adding system
+										if (getStackInSlot(i + 1).stackSize + droppedAr[i].stackSize >= droppedAr[i].getMaxStackSize() || getStackInSlot(i + 1) == null) {
+											droppedAr[i].stackSize = droppedAr[i].stackSize + getStackInSlot(i + 1).stackSize;
+											setInventorySlotContents(i + 1, droppedAr[i]);
+											
+											//decrease the power level
+											power -= 16;
+										} else {
+											droppedAr[i].stackSize = droppedAr[i].getMaxStackSize();
+											setInventorySlotContents(i + 1, droppedAr[i]);
+											
+											//decrease the power level
+											power -= 16;
+										}
+									}
+								}
 							}
+							//dig down
+							heightDug --;
+							//damage the pickaxe
+							inventory[0].setItemDamage(inventory[0].getItemDamage() + 1);
 						}
-						heightDug --;
-						inventory[0].setItemDamage(inventory[0].getItemDamage() + 1);
 					}
 				}
 			}
+		} catch (NullPointerException e) {
+			
 		}
 	}
 	
@@ -106,7 +135,7 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 		if (itemstack != null) {
 			if (itemstack.stackSize <= j) {
 				setInventorySlotContents(i, null);
-			}else{
+			} else {
 				itemstack = itemstack.splitStack(j);
 				onInventoryChanged();
 			}

@@ -2,6 +2,7 @@ package com.github.rossrkk.utilities.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.github.rossrkk.utilities.lib.IDs;
 import com.github.rossrkk.utilities.lib.Reference;
@@ -40,6 +41,8 @@ public class Blocks {
 		cable = new BlockCable(IDs.cable, Material.iron);
 		battery = new BlockBattery(IDs.battery, Material.iron);
 		creativeGenerator = new BlockCreativeGenerator(IDs.creativeGenerator, Material.iron);
+		
+		MinecraftForge.setBlockHarvestLevel(turidiumOre, "pickaxe", 2);
 		
 		gameRegisters();
 		languageRegisters();

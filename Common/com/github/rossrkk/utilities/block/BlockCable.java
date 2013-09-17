@@ -29,6 +29,10 @@ public class BlockCable extends BlockContainer {
 	public TileEntity createNewTileEntity(World world) {
 		return new TECable();
 	}
+	@Override
+	public int getRenderType() {
+		return 0;
+	}
 
 	@Override
 	public boolean isOpaqueCube() {
@@ -51,6 +55,17 @@ public class BlockCable extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.CABLE_NAME);
+	}
+	
+	@Override
+	public void setBlockBoundsForItemRender() {
+		minX = 0F;
+		minY = 0.3;
+		minZ = 0.3;
+		
+		maxX = 1F;
+		maxY = 0.7;
+		maxZ = 0.7;
 	}
 	
 	@Override
