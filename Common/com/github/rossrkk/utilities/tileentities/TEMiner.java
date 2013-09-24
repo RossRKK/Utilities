@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
+import com.github.rossrkk.utilities.item.Items;
 import com.github.rossrkk.utilities.power.Power;
 
 public class TEMiner extends TileEntity implements IInventory, Power {
@@ -30,64 +31,18 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 		if (tickCount == 16) {
 			
 			tickCount = 0;
-			
-			try {
-				// reset the dig height if the dig height is bellow the world
-				if (heightDug + yCoord == 0) {
+			// reset the dig height if the dig height is bellow the world
+			if (heightDug + yCoord == 0) {
 					heightDug = -1;
-				}
-	
-				// if there is more than 16 power units run
-				if (power >= 16 && inventory[0] != null) {
-					if (inventory[0].itemID == Item.pickaxeDiamond.itemID) {
-						// if the block isn't bedrock
-						if (worldObj.getBlockId(xCoord, yCoord + heightDug, zCoord) != Block.bedrock.blockID) {
-							if (worldObj.getBlockId(xCoord, yCoord + heightDug,
-									zCoord) != 0) {
-								// get the dropped block
-								ArrayList<ItemStack> dropped = Block.blocksList[worldObj
-										.getBlockId(xCoord, yCoord + heightDug,
-												zCoord)].getBlockDropped(worldObj, xCoord, yCoord + heightDug, zCoord, worldObj.getBlockMetadata(xCoord, yCoord + heightDug, zCoord), 0);
-								ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
-	
-								if (worldObj.destroyBlock(xCoord, yCoord + heightDug, zCoord, false)) {
-									for (int i = 0; i < dropped.size(); i++) {
-										for (int j = 1; j < inventory.length; j++) {
-											if (inventory[j] != null) {
-												if (inventory[j].itemID == droppedAr[i].itemID) {
-													if (inventory[j].stackSize + droppedAr[i].stackSize <= droppedAr[i].getMaxStackSize()) {
-														droppedAr[i].stackSize += inventory[j].stackSize;
-														setInventorySlotContents(j,
-																droppedAr[i]);
-														break;
-													} else {
-														droppedAr[i].stackSize = droppedAr[i].getMaxStackSize();
-														setInventorySlotContents(j, droppedAr[i]);
-														break;
-													}
-												}
-											} else {
-												setInventorySlotContents(j,
-														droppedAr[i]);
-												break;
-											}
-											onInventoryChanged();
-										}
-									}
-	
-									// damage the pickaxe
-									inventory[0].setItemDamage(inventory[0]
-											.getItemDamage() + 1);
-								}
-							}
-						}
-					}
-				}
-				
-				//digDown
-				heightDug --;
-			} catch (InputMismatchException e) {
 			}
+			// if there is more than 16 power units run
+			if (power >= 16 && inventory[0] != null) {
+				if (inventory[0].itemID == Items.turidiumPick.itemID || inventory[0].itemID == Item.pickaxeDiamond.itemID) {
+					breakBlock(0, 0);
+				}
+			}
+			//digDown
+			heightDug --;
 		}
 		tickCount ++;
 	}
@@ -109,6 +64,50 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 		worldObj.spawnEntityInWorld(droppedItem);
 	}
 
+	public void breakBlock(int xDifference, int zDifference) {
+		// if the block isn't bedrock
+		if (worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference) != Block.bedrock.blockID) {
+			if (worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug,
+					zCoord + zDifference) != 0) {
+				// get the dropped block
+				ArrayList<ItemStack> dropped = Block.blocksList[worldObj
+						.getBlockId(xCoord + xDifference, yCoord + heightDug,
+								zCoord + zDifference)].getBlockDropped(worldObj, xCoord + xDifference, yCoord + heightDug, zCoord + zDifference, worldObj.getBlockMetadata(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference), 0);
+				ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
+
+				if (worldObj.destroyBlock(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference, false)) {
+					for (int i = 0; i < dropped.size(); i++) {
+						for (int j = 1; j < inventory.length; j++) {
+							if (inventory[j] != null) {
+								if (inventory[j].itemID == droppedAr[i].itemID) {
+									if (inventory[j].stackSize + droppedAr[i].stackSize <= droppedAr[i].getMaxStackSize()) {
+										droppedAr[i].stackSize += inventory[j].stackSize;
+										setInventorySlotContents(j,
+												droppedAr[i]);
+										break;
+									} else {
+										droppedAr[i].stackSize = droppedAr[i].getMaxStackSize();
+										setInventorySlotContents(j, droppedAr[i]);
+										break;
+									}
+								}
+							} else {
+								setInventorySlotContents(j,
+										droppedAr[i]);
+								break;
+							}
+							onInventoryChanged();
+						}
+					}
+
+					// damage the pickaxe
+					inventory[0].setItemDamage(inventory[0]
+							.getItemDamage() + 1);
+				}
+			}
+		}
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
@@ -218,9 +217,7 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		if (i == 0) {
-			return itemstack.itemID == Item.pickaxeDiamond.itemID;
-		} else if (i == 1) {
-			return true;
+			return itemstack.itemID == Item.pickaxeDiamond.itemID || itemstack.itemID == Items.turidiumPick.itemID;
 		}
 		return true;
 	}
