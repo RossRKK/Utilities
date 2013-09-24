@@ -23,6 +23,7 @@ public class Blocks {
 	public static Block blockPlacer;
 	public static Block fullStoneSlab;
 	public static Block jumpPad;
+	public static Block clearGlass;
 	
 	public static Block miner;
 	public static Block cable;
@@ -41,6 +42,7 @@ public class Blocks {
 		cable = new BlockCable(IDs.cable, Material.iron);
 		battery = new BlockBattery(IDs.battery, Material.iron);
 		creativeGenerator = new BlockCreativeGenerator(IDs.creativeGenerator, Material.iron);
+		clearGlass = new BlockClearGlass(IDs.clearGlass, Material.glass);
 		
 		MinecraftForge.setBlockHarvestLevel(turidiumOre, "pickaxe", 2);
 		
@@ -58,6 +60,7 @@ public class Blocks {
 		GameRegistry.registerBlock(cable, Strings.CABLE_NAME + Reference.MOD_ID);
 		GameRegistry.registerBlock(battery, Strings.BATTERY_NAME + Reference.MOD_ID);
 		GameRegistry.registerBlock(creativeGenerator, Strings.CREATIVE_GENERATOR_NAME + Reference.MOD_ID);
+		GameRegistry.registerBlock(clearGlass, Strings.CLEAR_GLASS_NAME + Reference.MOD_ID);
 		
 		GameRegistry.registerTileEntity(TEBlockBreaker.class, "blockBreaker");
 		GameRegistry.registerTileEntity(TEBlockPlacer.class, "blockPlacer");
@@ -77,5 +80,6 @@ public class Blocks {
 		LanguageRegistry.addName(cable, "Cable");
 		LanguageRegistry.addName(battery, "Battery");
 		LanguageRegistry.addName(creativeGenerator, "Creative Generator");
+		LanguageRegistry.addName(clearGlass, "Clear Glass");
 	}
 }

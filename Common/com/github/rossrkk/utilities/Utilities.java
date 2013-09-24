@@ -34,7 +34,7 @@ public class Utilities {
     	
     	ConfigLoader.init(event.getSuggestedConfigurationFile());
     	
-    	//Thanks SciGuy1121http://www.youtube.com/watch?v=8C_ptdFOIiE
+    	//Thanks SciGuy1121 http://www.youtube.com/watch?v=8C_ptdFOIiE
     	utilTab = new CreativeTabs("util_utilities"){
     		@Override
 			public ItemStack getIconItemStack(){ return new ItemStack(Items.cobbleHolder); }

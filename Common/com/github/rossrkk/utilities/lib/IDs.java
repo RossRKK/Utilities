@@ -29,6 +29,7 @@ public class IDs {
 	public static final int CABLE_DEFAULT_ID = 4020;
 	public static final int BATTERY_DEFAULT_ID = 4021;
 	public static final int CREATIVE_GENERATOR_DEFAULT_ID = 4022;
+	public static final int CLEAR_GLASS_DEFAULT_ID = 4023;
 
     
     //ids
@@ -62,4 +63,5 @@ public class IDs {
 	public static int cable;
 	public static int battery;
 	public static int creativeGenerator;
+	public static int clearGlass;
 }

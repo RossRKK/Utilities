@@ -31,6 +31,7 @@ public class Strings {
 	public static final String CABLE_NAME = "cable";
 	public static final String BATTERY_NAME = "battery";
 	public static final String CREATIVE_GENERATOR_NAME = "creativeGenerator";
+	public static final String CLEAR_GLASS_NAME = "clearGlass";
     
     public static final String TEXTURE_LOCATION = "utilities";
     
@@ -64,6 +65,4 @@ public class Strings {
 	public static final String MINER_KEY = "miner";
 
 	public static final String CABLE_KEY = "cable";
-
-
 }
