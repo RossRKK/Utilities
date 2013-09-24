@@ -64,6 +64,8 @@ public class BlockMiner extends BlockContainer{
 				}
 			}
 		}
+		
+		super.breakBlock(world, x, y, z, id, meta);
 	}
 	
 	
