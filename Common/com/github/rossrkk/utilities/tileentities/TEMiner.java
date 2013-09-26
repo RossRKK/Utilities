@@ -70,8 +70,7 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 			if (worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug,
 					zCoord + zDifference) != 0) {
 				// get the dropped block
-				ArrayList<ItemStack> dropped = Block.blocksList[worldObj
-						.getBlockId(xCoord + xDifference, yCoord + heightDug,
+				ArrayList<ItemStack> dropped = Block.blocksList[worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug,
 								zCoord + zDifference)].getBlockDropped(worldObj, xCoord + xDifference, yCoord + heightDug, zCoord + zDifference, worldObj.getBlockMetadata(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference), 0);
 				ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
 
@@ -110,17 +109,16 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		super.readFromNBT(compound);
-
-		for (int i = 0; i < inventory.length; i++) {
-
-			NBTTagList items = compound.getTagList("Items");
-			if ((NBTTagCompound) items.tagAt(i) != null) {
-				NBTTagCompound item = (NBTTagCompound) items.tagAt(i);
-				int slot = item.getByte("Slot");
-
-				setInventorySlotContents(slot,
-						ItemStack.loadItemStackFromNBT(item));
+super.readFromNBT(compound);
+		
+		NBTTagList items = compound.getTagList("Items");
+		
+		for (int i = 0; i < items.tagCount(); i++) {
+			NBTTagCompound item = (NBTTagCompound)items.tagAt(i);
+			int slot = item.getByte("Slot");
+			
+			if (slot >= 0 && slot < getSizeInventory()) {
+				setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
 			}
 		}
 
@@ -131,19 +129,21 @@ public class TEMiner extends TileEntity implements IInventory, Power {
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
-		for (int i = 0; i < inventory.length; i++) {
-			NBTTagList items = new NBTTagList();
-
-			ItemStack stack = inventory[i];
-
+		
+		NBTTagList items = new NBTTagList();
+		
+		for (int i = 0; i < getSizeInventory(); i++) {		
+			ItemStack stack = getStackInSlot(i);
+			
 			if (stack != null) {
 				NBTTagCompound item = new NBTTagCompound();
+				item.setByte("Slot", (byte)i);
 				stack.writeToNBT(item);
 				items.appendTag(item);
 			}
-
-			compound.setTag("Items", items);
 		}
+		
+		compound.setTag("Items", items);
 
 		compound.setInteger("power", power);
 		compound.setInteger("heightDug", heightDug);

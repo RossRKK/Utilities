@@ -65,4 +65,5 @@ public class Strings {
 	public static final String MINER_KEY = "miner";
 
 	public static final String CABLE_KEY = "cable";
+
 }
