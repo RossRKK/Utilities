@@ -57,7 +57,7 @@ public class BlockClearGlass extends Block {
 	        return getConnectedBlockTexture(par1IBlockAccess, par2, par3, par4, par5, icons);
 	    }
 
-	    public Icon getConnectedBlockTexture (IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5, Icon[] icons)
+	    public Icon getConnectedBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5, Icon[] icons)
 	    {
 
 	        boolean isOpenUp = false, isOpenDown = false, isOpenLeft = false, isOpenRight = false;
@@ -594,5 +594,4 @@ public class BlockClearGlass extends Block {
 	        icons[14] = par1IconRegister.registerIcon("utilities:glass/glass_3_r");
 	        icons[15] = par1IconRegister.registerIcon("utilities:glass/glass_4");
 	    }
-	
 }

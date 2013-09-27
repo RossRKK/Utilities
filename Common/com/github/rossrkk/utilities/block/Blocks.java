@@ -2,6 +2,7 @@ package com.github.rossrkk.utilities.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.github.rossrkk.utilities.lib.IDs;
@@ -12,6 +13,7 @@ import com.github.rossrkk.utilities.tileentities.TEBlockBreaker;
 import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
 import com.github.rossrkk.utilities.tileentities.TECable;
 import com.github.rossrkk.utilities.tileentities.TEMiner;
+import com.github.rossrkk.utilities.tileentities.TEGenerator;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -29,6 +31,7 @@ public class Blocks {
 	public static Block cable;
 	public static Block battery;
 	public static Block creativeGenerator;
+	public static Block coalGen;
 	
 	public static void init() {
 		//create instances of each block
@@ -42,6 +45,8 @@ public class Blocks {
 		cable = new BlockCable(IDs.cable, Material.iron);
 		battery = new BlockBattery(IDs.battery, Material.iron);
 		creativeGenerator = new BlockCreativeGenerator(IDs.creativeGenerator, Material.iron);
+		coalGen = new BlockCoalGen(IDs.coalGen, Material.iron);
+		
 		clearGlass = new BlockClearGlass(IDs.clearGlass, Material.glass);
 		
 		MinecraftForge.setBlockHarvestLevel(turidiumOre, "pickaxe", 2);
@@ -60,6 +65,8 @@ public class Blocks {
 		GameRegistry.registerBlock(cable, Strings.CABLE_NAME + Reference.MOD_ID);
 		GameRegistry.registerBlock(battery, Strings.BATTERY_NAME + Reference.MOD_ID);
 		GameRegistry.registerBlock(creativeGenerator, Strings.CREATIVE_GENERATOR_NAME + Reference.MOD_ID);
+		GameRegistry.registerBlock(coalGen, Strings.COAL_GEN_NAME + Reference.MOD_ID);
+
 		GameRegistry.registerBlock(clearGlass, Strings.CLEAR_GLASS_NAME + Reference.MOD_ID);
 		
 		GameRegistry.registerTileEntity(TEBlockBreaker.class, "blockBreaker");
@@ -67,6 +74,7 @@ public class Blocks {
 		GameRegistry.registerTileEntity(TEMiner.class, "miner");
 		GameRegistry.registerTileEntity(TECable.class, "cable");
 		GameRegistry.registerTileEntity(TEBattery.class, "battery");
+		GameRegistry.registerTileEntity(TEGenerator.class, "coalGen");
 	}
 	
 	public static void languageRegisters() {
@@ -80,6 +88,8 @@ public class Blocks {
 		LanguageRegistry.addName(cable, "Cable");
 		LanguageRegistry.addName(battery, "Battery");
 		LanguageRegistry.addName(creativeGenerator, "Creative Generator");
+		LanguageRegistry.addName(coalGen, "Coal Generator");
+
 		LanguageRegistry.addName(clearGlass, "Clear Glass");
 	}
 }

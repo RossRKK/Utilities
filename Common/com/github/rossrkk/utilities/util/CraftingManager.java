@@ -80,10 +80,10 @@ public class CraftingManager {
         
         //Cobble Holder Recipe
         GameRegistry.addShapedRecipe(new ItemStack(Items.cobbleHolder, 1), new Object[]{
-        "SES",
-        "LPL",
-        "BLB", 
-        'S', Item.silk, 'E', Item.emerald,'L', Item.leather, 'P', Item.enderPearl, 'B', Item.blazeRod});
+	        "SES",
+	        "LPL",
+	        "BLB", 
+	        'S', Item.silk, 'E', Item.emerald,'L', Item.leather, 'P', Item.enderPearl, 'B', Item.blazeRod});
         
         //Ender pouch recipe
         GameRegistry.addShapedRecipe(new ItemStack(Items.enderPouch, 1), new Object[]{
@@ -117,6 +117,30 @@ public class CraftingManager {
         	"CTC",
         	"CPC",
         'C', Block.cobblestone, 'T', Items.ingotTuridium, 'R', Item.redstone, 'P', Block.pistonBase});
+        
+        //Cable
+        GameRegistry.addShapedRecipe(new ItemStack(Blocks.cable, 6), new Object[]{
+        	"SSS",
+        	"RRR",
+        	"SSS",
+        	'S', Block.stoneSingleSlab, 'R', Item.redstone
+        });
+        
+        //Battery
+        GameRegistry.addShapedRecipe(new ItemStack(Blocks.battery, 1), new Object[]{
+        	"WCW",
+        	"TRT",
+        	"WWW",
+        	'W', Item.ingotIron, 'T', Items.ingotTuridium, 'C', Blocks.cable, 'R', Item.redstone
+        });
+        
+        //Miner
+        GameRegistry.addShapedRecipe(new ItemStack(Blocks.miner, 1), new Object[]{
+        	"IEI",
+        	"ICI",
+        	"T T",
+        	'I', Item.ingotIron, 'E', Item.emerald, 'C', Block.chest, 'T', Items.ingotTuridium
+        });
 
         // Smelting Recipes
         
@@ -124,6 +148,9 @@ public class CraftingManager {
 
         // rotten flesh --> leather
         GameRegistry.addSmelting(Item.rottenFlesh.itemID, new ItemStack(Item.leather, 1), 1);
+        
+        //clear glass
+        GameRegistry.addSmelting(Block.glass.blockID, new ItemStack(Blocks.clearGlass, 1), 1);
 	}
 
 }

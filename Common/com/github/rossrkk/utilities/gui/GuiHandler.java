@@ -5,8 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
-import com.github.rossrkk.utilities.tileentities.TEBlockBreaker;
 import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
+import com.github.rossrkk.utilities.tileentities.TEGenerator;
 import com.github.rossrkk.utilities.tileentities.TEMiner;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -34,6 +34,12 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerMiner(player.inventory, (TEMiner)te2);
 			}
 			break;
+		case 2:
+			TileEntity te3 = world.getBlockTileEntity(x, y, z);
+			if (te3 != null && te3 instanceof TEGenerator) {
+				return new ContainerGenerator(player.inventory, (TEGenerator)te3);
+			}
+			break;
 	}
 
 
@@ -53,6 +59,11 @@ public class GuiHandler implements IGuiHandler {
 			TileEntity te2 = world.getBlockTileEntity(x, y, z);
 			if (te2 != null && te2 instanceof TEMiner) {
 				return new GuiMiner(player.inventory, (TEMiner)te2);
+			}
+		case 2:
+			TileEntity te3 = world.getBlockTileEntity(x, y, z);
+			if (te3 != null && te3 instanceof TEMiner) {
+				return new GuiCoalGen(player.inventory, (TEGenerator)te3);
 			}
 	}
 

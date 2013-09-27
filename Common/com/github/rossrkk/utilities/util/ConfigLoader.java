@@ -22,6 +22,7 @@ public class ConfigLoader {
 		IDs.battery = config.getBlock(Strings.BATTERY_NAME, IDs.BATTERY_DEFAULT_ID).getInt() - 256;
 		IDs.creativeGenerator = config.getBlock(Strings.CREATIVE_GENERATOR_NAME, IDs.CREATIVE_GENERATOR_DEFAULT_ID).getInt() - 256;
 		IDs.clearGlass = config.getBlock(Strings.CLEAR_GLASS_NAME, IDs.CLEAR_GLASS_DEFAULT_ID).getInt() - 256;
+		IDs.coalGen = config.getBlock(Strings.COAL_GEN_NAME, IDs.COAL_GEN_DEFAULT_ID).getInt() - 256;
 		
 		IDs.cobbleHolderID = config.getItem(Strings.COBBLE_HOLDER_KEY, IDs.COBBLE_HOLDER_DEFAULT_ID).getInt() - 256;
 		
