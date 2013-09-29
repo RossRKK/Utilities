@@ -71,11 +71,11 @@ public class Items {
 	        
 	        
 	        //turidium tools
-	        turidiumPick = new ItemPickaxe(IDs.turidiumPickID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_PICK_NAME).func_111206_d(Strings.TURIDIUM_PICK_NAME);
-	        turidiumSword = new ItemSword(IDs.turidiumSwordID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_SWORD_NAME).func_111206_d(Strings.TURIDIUM_SWORD_NAME);
-	        turidiumShovel = new ItemSpade(IDs.turidiumShovelID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_SHOVEL_NAME).func_111206_d(Strings.TURIDIUM_SHOVEL_NAME);
-	        turidiumAxe = new ItemAxe(IDs.turidiumAxeID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_AXE_NAME).func_111206_d(Strings.TURIDIUM_AXE_NAME);
-	        turidiumHoe = new ItemHoe(IDs.turidiumHoeID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_HOE_NAME).func_111206_d(Strings.TURIDIUM_HOE_NAME);
+	        turidiumPick = new ItemPickaxe(IDs.turidiumPickID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_PICK_NAME).setTextureName(Strings.TURIDIUM_PICK_NAME);
+	        turidiumSword = new ItemSword(IDs.turidiumSwordID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_SWORD_NAME).setTextureName(Strings.TURIDIUM_SWORD_NAME);
+	        turidiumShovel = new ItemSpade(IDs.turidiumShovelID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_SHOVEL_NAME).setTextureName(Strings.TURIDIUM_SHOVEL_NAME);
+	        turidiumAxe = new ItemAxe(IDs.turidiumAxeID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_AXE_NAME).setTextureName(Strings.TURIDIUM_AXE_NAME);
+	        turidiumHoe = new ItemHoe(IDs.turidiumHoeID, turidium).setCreativeTab(Utilities.utilTab).setUnlocalizedName(Strings.TURIDIUM_HOE_NAME).setTextureName(Strings.TURIDIUM_HOE_NAME);
 	        
 	        gameRegisters();
 	        languageRegisters();

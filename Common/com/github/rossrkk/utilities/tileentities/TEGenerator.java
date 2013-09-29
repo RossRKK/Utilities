@@ -2,6 +2,7 @@ package com.github.rossrkk.utilities.tileentities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
@@ -13,6 +14,51 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 	
 	public int power;
 	public int maxPower = 1024;
+	public int toTransfer = 16;
+	
+	public int currentBurnTime = 0;
+	
+	@Override
+	public void updateEntity() {
+		if (currentBurnTime == 0) {
+			if (inventory != null && inventory.itemID == Item.coal.itemID) {
+				inventory.stackSize --;
+				currentBurnTime = 1600;
+			}
+		}
+		
+		if (currentBurnTime > 0) {
+			power += 1;
+			currentBurnTime --;
+		}
+		
+		if (power >= 16) {
+			//Transfer power
+			int randomSide = worldObj.rand.nextInt(6);
+			switch (randomSide) {
+				case 0: transfer(xCoord, yCoord, zCoord + 1);
+				break;
+				case 1: transfer(xCoord - 1, yCoord, zCoord);
+				break;
+				case 2: transfer(xCoord + 1, yCoord, zCoord);
+				break;
+				case 3: transfer(xCoord, yCoord - 1, zCoord);
+				break;
+				case 4: transfer(xCoord, yCoord + 1, zCoord);
+				break;
+				case 5: transfer(xCoord, yCoord, zCoord - 1);
+				break;
+			}
+		}
+	}
+	
+	public void transfer(int x, int y, int z) {
+		if (worldObj.getBlockTileEntity(x, y, z) instanceof Power 
+				&& !((Power)worldObj.getBlockTileEntity(x, y, z)).isGenerator() 
+				&& power >= toTransfer) {
+			power = power + ((Power)worldObj.getBlockTileEntity(x, y, z)).incrementPower(toTransfer) - toTransfer;
+		}
+	}
 	
 	@Override
 	public int getPower() {
@@ -103,7 +149,10 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return itemstack.itemID == inventory.itemID;
+		if (inventory != null) {
+			return itemstack.itemID == inventory.itemID;
+		}
+		return true;
 	}
 
 }

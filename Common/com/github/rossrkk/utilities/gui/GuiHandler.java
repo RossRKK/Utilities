@@ -62,11 +62,10 @@ public class GuiHandler implements IGuiHandler {
 			}
 		case 2:
 			TileEntity te3 = world.getBlockTileEntity(x, y, z);
-			if (te3 != null && te3 instanceof TEMiner) {
+			if (te3 != null && te3 instanceof TEGenerator) {
 				return new GuiCoalGen(player.inventory, (TEGenerator)te3);
 			}
-	}
-
+		}
 
 	return null;
 	}

@@ -28,7 +28,7 @@ public class ContainerGenerator extends Container {
 			}
 		}
 		
-		addSlotToContainer(new Slot(machine, 0, 12, 10));
+		addSlotToContainer(new Slot(machine, 0, 79, 26));
 	}
 
 	@Override

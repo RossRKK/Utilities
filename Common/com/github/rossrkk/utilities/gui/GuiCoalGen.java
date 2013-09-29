@@ -26,7 +26,7 @@ public class GuiCoalGen extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
-		Minecraft.getMinecraft().func_110434_K().func_110577_a(texture);
+		Minecraft.getMinecraft().getTextureManager().getTexture(texture);
 		
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
