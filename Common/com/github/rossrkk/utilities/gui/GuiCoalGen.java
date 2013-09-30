@@ -12,9 +12,13 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiCoalGen extends GuiContainer {
+	
+	private TEGenerator machine;
 
 	public GuiCoalGen(InventoryPlayer invPlayer, TEGenerator machine) {
 		super(new ContainerGenerator(invPlayer, machine));
+		
+		this.machine = machine;
 		
 		xSize = 176;
 		ySize = 154;
@@ -26,9 +30,19 @@ public class GuiCoalGen extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
-		Minecraft.getMinecraft().getTextureManager().getTexture(texture);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		
+		float filled = machine.getPower() / machine.maxPower;
+		int barHeight = machine.getPower()/16;
+		if (barHeight > 0) {
+			int srcX = xSize;
+			int srcY = 32 - barHeight;
+			
+			drawTexturedModalRect(guiLeft + 126, guiTop + 17 + 32 - barHeight, srcX, srcY, 10, barHeight);
+		}
+
 	}
 
 }

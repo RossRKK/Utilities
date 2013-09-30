@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 
 import com.github.rossrkk.utilities.power.Power;
 
@@ -20,10 +21,15 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 	
 	@Override
 	public void updateEntity() {
+		/*if (inventory != null && inventory.stackSize <= 0) {
+			inventory.stackSize = -1;
+		}*/
+		
 		if (currentBurnTime == 0) {
 			if (inventory != null && inventory.itemID == Item.coal.itemID) {
 				inventory.stackSize --;
-				currentBurnTime = 1600;
+				onInventoryChanged();
+				currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory);
 			}
 		}
 		
@@ -93,14 +99,14 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 	}
 
 	@Override
-	public ItemStack decrStackSize(int i, int j) {
+	public ItemStack decrStackSize(int i, int count) {
 		ItemStack itemstack = getStackInSlot(i);
 		
 		if (itemstack != null) {
-			if (itemstack.stackSize <= j) {
+			if (itemstack.stackSize <= count) {
 				setInventorySlotContents(i, null);
-			} else {
-				itemstack = itemstack.splitStack(j);
+			}else{
+				itemstack = itemstack.splitStack(count);
 				onInventoryChanged();
 			}
 		}
@@ -116,7 +122,13 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
 		inventory = itemstack;
-		onInventoryChanged();
+		
+		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
+        {
+            itemstack.stackSize = this.getInventoryStackLimit();
+        }
+
+        this.onInventoryChanged();
 	}
 
 	@Override
@@ -149,9 +161,6 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if (inventory != null) {
-			return itemstack.itemID == inventory.itemID;
-		}
 		return true;
 	}
 

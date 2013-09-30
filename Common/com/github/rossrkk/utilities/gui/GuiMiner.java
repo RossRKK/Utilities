@@ -13,8 +13,7 @@ import com.github.rossrkk.utilities.tileentities.TEMiner;
 
 public class GuiMiner extends GuiContainer {
 	
-	public int power;
-	public int maxPower;
+	TEMiner machine;
 	
 	public GuiMiner(InventoryPlayer invPlayer, TEMiner machine) {
 		super(new ContainerMiner(invPlayer, machine));
@@ -22,18 +21,7 @@ public class GuiMiner extends GuiContainer {
 		xSize = 176;
 		ySize = 154;
 		
-		power = machine.getPower();
-		maxPower = machine.maxPower;
-	}
-	
-	public void drawPowerBar() {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		
-		drawRect(8, 35, 8, 65, 1);
-		
-		if (power > maxPower / 6) {
-			drawRect(0, 0, 0, 0, 0);
-		}
+		this.machine = machine;
 	}
 	
 	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/miner.png");
@@ -42,10 +30,17 @@ public class GuiMiner extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
-		Minecraft.getMinecraft().getTextureManager().getTexture(texture);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		
-		drawPowerBar();
+		float filled = machine.getPower() / machine.maxPower;
+		int barHeight = machine.getPower()/16;
+		if (barHeight > 0) {
+			int srcX = xSize;
+			int srcY = 32 - barHeight;
+			
+			drawTexturedModalRect(guiLeft + 15, guiTop + 31 + 32 - barHeight, srcX, srcY, 10, barHeight);
+		}
 	}
 }
