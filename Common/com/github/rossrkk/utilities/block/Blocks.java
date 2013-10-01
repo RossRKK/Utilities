@@ -13,7 +13,7 @@ import com.github.rossrkk.utilities.tileentities.TEBlockBreaker;
 import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
 import com.github.rossrkk.utilities.tileentities.TECable;
 import com.github.rossrkk.utilities.tileentities.TEMiner;
-import com.github.rossrkk.utilities.tileentities.TEGenerator;
+import com.github.rossrkk.utilities.tileentities.TECoalGen;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -74,7 +74,7 @@ public class Blocks {
 		GameRegistry.registerTileEntity(TEMiner.class, "miner");
 		GameRegistry.registerTileEntity(TECable.class, "cable");
 		GameRegistry.registerTileEntity(TEBattery.class, "battery");
-		GameRegistry.registerTileEntity(TEGenerator.class, "coalGen");
+		GameRegistry.registerTileEntity(TECoalGen.class, "coalGen");
 	}
 	
 	public static void languageRegisters() {

@@ -2,6 +2,7 @@ package com.github.rossrkk.utilities.block;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,9 +12,11 @@ import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
-import com.github.rossrkk.utilities.tileentities.TEGenerator;
+import com.github.rossrkk.utilities.tileentities.TECoalGen;
 
 import cpw.mods.fml.common.network.FMLNetworkHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCoalGen extends BlockContainer {
 
@@ -26,7 +29,7 @@ public class BlockCoalGen extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TEGenerator();
+		return new TECoalGen();
 	}
 
 	@Override
@@ -65,5 +68,11 @@ public class BlockCoalGen extends BlockContainer {
 		}
 		
 		super.breakBlock(world, x, y, z, id, meta);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister register) {
+		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.COAL_GEN_NAME);
 	}
 }

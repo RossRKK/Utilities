@@ -2,7 +2,7 @@ package com.github.rossrkk.utilities.block;
 
 import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
-import com.github.rossrkk.utilities.power.Power;
+import com.github.rossrkk.utilities.power.IPower;
 import com.github.rossrkk.utilities.tileentities.TEBattery;
 import com.github.rossrkk.utilities.tileentities.TECable;
 
@@ -35,7 +35,7 @@ public class BlockBattery extends BlockContainer {
 				world.setBlockMetadataWithNotify(x, y, z, 0, 2);
 			}
 		} else {
-			Power te = (Power)world.getBlockTileEntity(x, y, z);
+			IPower te = (IPower)world.getBlockTileEntity(x, y, z);
 			player.addChatMessage("Power Level is:  " + te.getPower());
 		}
 		return true;

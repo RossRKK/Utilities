@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
-import com.github.rossrkk.utilities.power.Power;
+import com.github.rossrkk.utilities.power.IPower;
 import com.github.rossrkk.utilities.tileentities.TECable;
 
 import cpw.mods.fml.relauncher.Side;
@@ -46,7 +46,7 @@ public class BlockCable extends BlockContainer {
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
-		Power te = (Power)world.getBlockTileEntity(x, y, z);
+		IPower te = (IPower)world.getBlockTileEntity(x, y, z);
 		player.addChatMessage("Power Level is:  " + te.getPower());
 		return true;
 	}
@@ -78,22 +78,22 @@ public class BlockCable extends BlockContainer {
 		maxY = 0.7;
 		maxZ = 0.7;
 		
-		if (blockAccess.getBlockTileEntity(x, y + 1, z) instanceof Power) {
+		if (blockAccess.getBlockTileEntity(x, y + 1, z) instanceof IPower) {
 			setBlockBounds((float)minX, (float)minY, (float)minZ, (float)maxX, (float)maxY + 0.3F, (float)maxZ);
 		}
-		if (blockAccess.getBlockTileEntity(x, y - 1, z) instanceof Power) {
+		if (blockAccess.getBlockTileEntity(x, y - 1, z) instanceof IPower) {
 			setBlockBounds((float)minX, (float)minY - 0.3F, (float)minZ, (float)maxX, (float)maxY, (float)maxZ);
 		}
-		if (blockAccess.getBlockTileEntity(x + 1, y, z) instanceof Power) {
+		if (blockAccess.getBlockTileEntity(x + 1, y, z) instanceof IPower) {
 			setBlockBounds((float)minX, (float)minY, (float)minZ, (float)maxX + 0.3F, (float)maxY, (float)maxZ);
 		}
-		if (blockAccess.getBlockTileEntity(x - 1, y, z) instanceof Power) {
+		if (blockAccess.getBlockTileEntity(x - 1, y, z) instanceof IPower) {
 			setBlockBounds((float)minX - 0.3F, (float)minY, (float)minZ, (float)maxX, (float)maxY, (float)maxZ);
 		}
-		if (blockAccess.getBlockTileEntity(x, y, z + 1) instanceof Power) {
+		if (blockAccess.getBlockTileEntity(x, y, z + 1) instanceof IPower) {
 			setBlockBounds((float)minX, (float)minY, (float)minZ, (float)maxX, (float)maxY, (float)maxZ + 0.3F);
 		}
-		if (blockAccess.getBlockTileEntity(x, y, z - 1) instanceof Power) {
+		if (blockAccess.getBlockTileEntity(x, y, z - 1) instanceof IPower) {
 			setBlockBounds((float)minX, (float)minY, (float)minZ - 0.3F, (float)maxX, (float)maxY, (float)maxZ);
 		}
 	}

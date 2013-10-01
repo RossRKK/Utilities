@@ -14,9 +14,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 import com.github.rossrkk.utilities.item.Items;
-import com.github.rossrkk.utilities.power.Power;
+import com.github.rossrkk.utilities.power.IPower;
 
-public class TEMiner extends TileEntity implements IInventory, Power {
+public class TEMiner extends TileEntity implements IInventory, IPower {
 
 	ItemStack[] inventory = new ItemStack[10];
 

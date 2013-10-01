@@ -2,7 +2,7 @@ package com.github.rossrkk.utilities.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.github.rossrkk.utilities.tileentities.TEGenerator;
+import com.github.rossrkk.utilities.tileentities.TECoalGen;
 import com.github.rossrkk.utilities.tileentities.TEMiner;
 
 import net.minecraft.client.Minecraft;
@@ -13,10 +13,10 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiCoalGen extends GuiContainer {
 	
-	private TEGenerator machine;
+	private TECoalGen machine;
 
-	public GuiCoalGen(InventoryPlayer invPlayer, TEGenerator machine) {
-		super(new ContainerGenerator(invPlayer, machine));
+	public GuiCoalGen(InventoryPlayer invPlayer, TECoalGen machine) {
+		super(new ContainerCoalGen(invPlayer, machine));
 		
 		this.machine = machine;
 		

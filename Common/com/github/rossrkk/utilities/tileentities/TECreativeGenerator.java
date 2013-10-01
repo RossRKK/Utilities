@@ -2,9 +2,9 @@ package com.github.rossrkk.utilities.tileentities;
 
 import net.minecraft.tileentity.TileEntity;
 
-import com.github.rossrkk.utilities.power.Power;
+import com.github.rossrkk.utilities.power.IPower;
 
-public class TECreativeGenerator extends TileEntity implements Power {
+public class TECreativeGenerator extends TileEntity implements IPower {
 
 	@Override
 	public void updateEntity() {
@@ -17,8 +17,8 @@ public class TECreativeGenerator extends TileEntity implements Power {
 	}
 	
 	public void transfer(int x, int y, int z) {
-		if (worldObj.getBlockTileEntity(x, y, z) instanceof Power && !((Power)worldObj.getBlockTileEntity(x, y, z)).isGenerator()) {
-			((Power)worldObj.getBlockTileEntity(x, y, z)).incrementPower(1);
+		if (worldObj.getBlockTileEntity(x, y, z) instanceof IPower && !((IPower)worldObj.getBlockTileEntity(x, y, z)).isGenerator()) {
+			((IPower)worldObj.getBlockTileEntity(x, y, z)).incrementPower(1);
 		}
 	}
 	

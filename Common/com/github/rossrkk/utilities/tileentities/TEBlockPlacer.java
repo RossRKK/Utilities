@@ -119,7 +119,7 @@ public void choosePlace(int side, int blockId) {
 
 	@Override
 	public ItemStack decrStackSize(int i, int count) {
-ItemStack itemstack = getStackInSlot(i);
+		ItemStack itemstack = getStackInSlot(i);
 		
 		if (itemstack != null) {
 			if (itemstack.stackSize <= count) {

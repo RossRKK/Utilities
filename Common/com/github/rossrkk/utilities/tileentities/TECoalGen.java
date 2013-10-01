@@ -3,13 +3,17 @@ package com.github.rossrkk.utilities.tileentities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.common.IPlantable;
 
-import com.github.rossrkk.utilities.power.Power;
+import com.github.rossrkk.utilities.power.IPower;
 
-public class TEGenerator extends TileEntity implements Power, IInventory {
+public class TECoalGen extends TileEntity implements IPower, IInventory {
 
 	public static ItemStack inventory;
 	
@@ -21,23 +25,27 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 	
 	@Override
 	public void updateEntity() {
-		/*if (inventory != null && inventory.stackSize <= 0) {
-			inventory.stackSize = -1;
-		}*/
-		
-		if (currentBurnTime == 0) {
-			if (inventory != null && inventory.itemID == Item.coal.itemID) {
-				inventory.stackSize --;
-				onInventoryChanged();
-				currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory);
+		try {
+			if(inventory.stackSize <= 0) {
+				inventory = null;
 			}
-		}
+			
+			if (currentBurnTime > 0 && power < maxPower) {
+				power += 1;
+				currentBurnTime --;
+			}
+			
+			if (currentBurnTime == 0 && power < maxPower) {
+				burn();
+			}
 		
-		if (currentBurnTime > 0) {
-			power += 1;
-			currentBurnTime --;
+			transferPower();	
+		} catch (Exception e) {
+			
 		}
-		
+	}
+	
+	public void transferPower() {
 		if (power >= 16) {
 			//Transfer power
 			int randomSide = worldObj.rand.nextInt(6);
@@ -58,11 +66,51 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 		}
 	}
 	
+	public void burn() {
+		if (inventory.itemID == Item.coal.itemID) {
+			inventory.stackSize --;
+			onInventoryChanged();
+			currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory);
+		}
+	}
+	
+	public void writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		
+		NBTTagList items = new NBTTagList();
+			
+			ItemStack stack = getStackInSlot(0);
+			
+			if (stack != null) {
+				NBTTagCompound item = new NBTTagCompound();
+				stack.writeToNBT(item);
+				items.appendTag(item);
+			}
+		
+		compound.setTag("Items", items);
+		
+		compound.setShort("power", (short) power);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		
+		NBTTagList items = compound.getTagList("Items");
+		if ((NBTTagCompound)items.tagAt(0) != null) {
+			NBTTagCompound item = (NBTTagCompound)items.tagAt(0);
+			int slot = item.getByte("Slot");
+			
+			setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+		}
+		power = compound.getShort("power");
+	}
+	
 	public void transfer(int x, int y, int z) {
-		if (worldObj.getBlockTileEntity(x, y, z) instanceof Power 
-				&& !((Power)worldObj.getBlockTileEntity(x, y, z)).isGenerator() 
+		if (worldObj.getBlockTileEntity(x, y, z) instanceof IPower 
+				&& !((IPower)worldObj.getBlockTileEntity(x, y, z)).isGenerator() 
 				&& power >= toTransfer) {
-			power = power + ((Power)worldObj.getBlockTileEntity(x, y, z)).incrementPower(toTransfer) - toTransfer;
+			power = power + ((IPower)worldObj.getBlockTileEntity(x, y, z)).incrementPower(toTransfer) - toTransfer;
 		}
 	}
 	
@@ -122,18 +170,16 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
 		inventory = itemstack;
+		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
+			itemstack.stackSize = getInventoryStackLimit();
+		}
 		
-		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-        {
-            itemstack.stackSize = this.getInventoryStackLimit();
-        }
-
-        this.onInventoryChanged();
+		onInventoryChanged();
 	}
 
 	@Override
 	public String getInvName() {
-		return "coalGen";
+		return "coalGenerator";
 	}
 
 	@Override
@@ -152,16 +198,17 @@ public class TEGenerator extends TileEntity implements Power, IInventory {
 	}
 
 	@Override
-	public void openChest() {		
+	public void openChest() {
+
 	}
 
 	@Override
-	public void closeChest() {		
+	public void closeChest() {
+
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return true;
 	}
-
 }

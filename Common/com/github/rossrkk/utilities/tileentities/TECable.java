@@ -3,9 +3,9 @@ package com.github.rossrkk.utilities.tileentities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import com.github.rossrkk.utilities.power.Power;
+import com.github.rossrkk.utilities.power.IPower;
 
-public class TECable extends TileEntity implements Power {
+public class TECable extends TileEntity implements IPower {
 	
 	public int power;
 	public int maxPower = 32;
@@ -39,10 +39,10 @@ public class TECable extends TileEntity implements Power {
 	}
 	
 	public void transfer(int x, int y, int z) {
-		if (worldObj.getBlockTileEntity(x, y, z) instanceof Power 
-				&& !((Power)worldObj.getBlockTileEntity(x, y, z)).isGenerator() 
+		if (worldObj.getBlockTileEntity(x, y, z) instanceof IPower 
+				&& !((IPower)worldObj.getBlockTileEntity(x, y, z)).isGenerator() 
 				&& power >= toTransfer) {
-			power = power + ((Power)worldObj.getBlockTileEntity(x, y, z)).incrementPower(toTransfer) - toTransfer;
+			power = power + ((IPower)worldObj.getBlockTileEntity(x, y, z)).incrementPower(toTransfer) - toTransfer;
 		}
 	}
 	

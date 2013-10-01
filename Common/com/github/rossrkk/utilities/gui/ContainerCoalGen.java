@@ -1,6 +1,6 @@
 package com.github.rossrkk.utilities.gui;
 
-import com.github.rossrkk.utilities.tileentities.TEGenerator;
+import com.github.rossrkk.utilities.tileentities.TECoalGen;
 import com.github.rossrkk.utilities.tileentities.TEMiner;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,13 +9,13 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerGenerator extends Container {
+public class ContainerCoalGen extends Container {
 
-	public TEGenerator machine;
+	public TECoalGen machine;
 	
 	public int numRows = 1;
 
-	public ContainerGenerator(InventoryPlayer invPlayer, TEGenerator machine) {
+	public ContainerCoalGen(InventoryPlayer invPlayer, TECoalGen machine) {
 		this.machine = machine;
 		
 		for (int x = 0; x < 9; x++) {
@@ -28,7 +28,7 @@ public class ContainerGenerator extends Container {
 			}
 		}
 		
-		addSlotToContainer(new Slot(machine, 1, 79, 26));
+		addSlotToContainer(new Slot(machine, 0, 79, 26));
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class ContainerGenerator extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
-		ItemStack itemstack = null;
+		/*ItemStack itemstack = null;
         Slot slot = (Slot)this.inventorySlots.get(par2);
 
         if (slot != null && slot.getHasStack())
@@ -67,8 +67,7 @@ public class ContainerGenerator extends Container {
                 slot.onSlotChanged();
             }
         }
-
-        return itemstack;
+		*/
+        return null;
 	}
-
 }
