@@ -15,7 +15,7 @@ public class GuiPlacer extends GuiContainer {
 		super(new ContainerPlacer(invPlayer, machine));
 		
 		xSize = 176;
-		ySize = 154; //TODO do actual sizes
+		ySize = 154;
 	}
 	
 	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/placer.png");

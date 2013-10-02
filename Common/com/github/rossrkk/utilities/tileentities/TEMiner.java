@@ -75,6 +75,7 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 				ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
 
 				if (worldObj.destroyBlock(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference, false)) {
+					power -= 16;
 					for (int i = 0; i < dropped.size(); i++) {
 						for (int j = 1; j < inventory.length; j++) {
 							if (inventory[j] != null) {

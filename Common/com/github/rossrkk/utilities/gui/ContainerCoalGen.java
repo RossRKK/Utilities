@@ -1,16 +1,15 @@
 package com.github.rossrkk.utilities.gui;
 
-import com.github.rossrkk.utilities.tileentities.TECoalGen;
-import com.github.rossrkk.utilities.tileentities.TEMiner;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerCoalGen extends Container {
+import com.github.rossrkk.utilities.tileentities.TECoalGen;
 
+public class ContainerCoalGen extends Container {
+	
 	public TECoalGen machine;
 	
 	public int numRows = 1;
@@ -27,7 +26,6 @@ public class ContainerCoalGen extends Container {
 				addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 72 + y * 18));
 			}
 		}
-		
 		addSlotToContainer(new Slot(machine, 0, 79, 26));
 	}
 
@@ -38,7 +36,7 @@ public class ContainerCoalGen extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
-		/*ItemStack itemstack = null;
+		ItemStack itemstack = null;
         Slot slot = (Slot)this.inventorySlots.get(par2);
 
         if (slot != null && slot.getHasStack())
@@ -67,7 +65,7 @@ public class ContainerCoalGen extends Container {
                 slot.onSlotChanged();
             }
         }
-		*/
-        return null;
+
+        return itemstack;
 	}
 }

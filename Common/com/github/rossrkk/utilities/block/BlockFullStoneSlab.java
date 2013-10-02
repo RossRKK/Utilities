@@ -17,8 +17,7 @@ public class BlockFullStoneSlab extends Block {
 		setHardness(4F);
 		setCreativeTab(Utilities.utilTab);
 	}
-	
-	@Override
+		@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.FULL_STONE_SLAB_NAME);

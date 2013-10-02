@@ -24,12 +24,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	public int currentBurnTime = 0;
 	
 	@Override
-	public void updateEntity() {
-		try {
-			if(inventory.stackSize <= 0) {
-				inventory = null;
-			}
-			
+	public void updateEntity() {		
 			if (currentBurnTime > 0 && power < maxPower) {
 				power += 1;
 				currentBurnTime --;
@@ -39,10 +34,14 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 				burn();
 			}
 		
-			transferPower();	
-		} catch (Exception e) {
-			
-		}
+			if (inventory != null) {
+				System.out.println("ItemID:" + inventory.itemID);
+				System.out.println("StackSize:" + inventory.stackSize);
+				System.out.println("Name: " + inventory.getDisplayName());
+				System.out.println("Power: " + power);
+				System.out.println("Burn Time: " + currentBurnTime);
+			}
+			transferPower();
 	}
 	
 	public void transferPower() {
@@ -67,43 +66,11 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	}
 	
 	public void burn() {
-		if (inventory.itemID == Item.coal.itemID) {
+		if (inventory != null && inventory.itemID == Item.coal.itemID) {
 			inventory.stackSize --;
 			onInventoryChanged();
 			currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory);
 		}
-	}
-	
-	public void writeToNBT(NBTTagCompound compound) {
-		super.writeToNBT(compound);
-		
-		NBTTagList items = new NBTTagList();
-			
-			ItemStack stack = getStackInSlot(0);
-			
-			if (stack != null) {
-				NBTTagCompound item = new NBTTagCompound();
-				stack.writeToNBT(item);
-				items.appendTag(item);
-			}
-		
-		compound.setTag("Items", items);
-		
-		compound.setShort("power", (short) power);
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		super.readFromNBT(compound);
-		
-		NBTTagList items = compound.getTagList("Items");
-		if ((NBTTagCompound)items.tagAt(0) != null) {
-			NBTTagCompound item = (NBTTagCompound)items.tagAt(0);
-			int slot = item.getByte("Slot");
-			
-			setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
-		}
-		power = compound.getShort("power");
 	}
 	
 	public void transfer(int x, int y, int z) {
@@ -134,6 +101,39 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	@Override
 	public boolean isGenerator() {
 		return true;
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		
+		NBTTagList items = new NBTTagList();
+			
+			ItemStack stack = getStackInSlot(0);
+			
+			if (stack != null) {
+				NBTTagCompound item = new NBTTagCompound();
+				stack.writeToNBT(item);
+				items.appendTag(item);
+			}
+		
+		compound.setTag("Items", items);
+		
+		compound.setShort("power", (short) power);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		
+		NBTTagList items = compound.getTagList("Items");
+		if ((NBTTagCompound)items.tagAt(0) != null) {
+			NBTTagCompound item = (NBTTagCompound)items.tagAt(0);
+			int slot = item.getByte("Slot");
+			
+			setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+		}
+		power = compound.getShort("power");
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 
 	@Override
 	public String getInvName() {
-		return "coalGenerator";
+		return "coalGen";
 	}
 
 	@Override
@@ -209,6 +209,14 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
+		return TileEntityFurnace.getItemBurnTime(itemstack) > 0;
+	}
+	
+	@Override
+	public void onInventoryChanged() {
+		super.onInventoryChanged();
+		if (inventory != null && inventory.stackSize <= 0) {
+			inventory = null;
+		}
 	}
 }
