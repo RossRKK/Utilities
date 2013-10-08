@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
 import com.github.rossrkk.utilities.tileentities.TECoalGen;
+import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
 import com.github.rossrkk.utilities.tileentities.TEMiner;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -40,6 +41,12 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerCoalGen(player.inventory, (TECoalGen)te3);
 			}
 			break;
+		case 3:
+			TileEntity te4 = world.getBlockTileEntity(x, y, z);
+			if (te4 != null && te4 instanceof TEElectricFurnace) {
+				return new ContainerElectricFurnace(player.inventory, (TEElectricFurnace)te4);
+			}
+			break;
 	}
 
 
@@ -64,6 +71,11 @@ public class GuiHandler implements IGuiHandler {
 			TileEntity te3 = world.getBlockTileEntity(x, y, z);
 			if (te3 != null && te3 instanceof TECoalGen) {
 				return new GuiCoalGen(player.inventory, (TECoalGen)te3);
+			}
+		case 3:
+			TileEntity te4 = world.getBlockTileEntity(x, y, z);
+			if (te4 != null && te4 instanceof TEElectricFurnace) {
+				return new GuiElectircFurnace(player.inventory, (TEElectricFurnace)te4);
 			}
 		}
 

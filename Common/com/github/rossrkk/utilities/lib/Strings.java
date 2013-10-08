@@ -64,6 +64,8 @@ public class Strings {
 
 	public static final String CABLE_KEY = "cable";
 
+	public static final String ELECTRIC_FURNACE_NAME = "electricFurace";
+
 
 
 }

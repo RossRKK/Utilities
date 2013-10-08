@@ -12,6 +12,7 @@ import com.github.rossrkk.utilities.tileentities.TEBattery;
 import com.github.rossrkk.utilities.tileentities.TEBlockBreaker;
 import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
 import com.github.rossrkk.utilities.tileentities.TECable;
+import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
 import com.github.rossrkk.utilities.tileentities.TEMiner;
 import com.github.rossrkk.utilities.tileentities.TECoalGen;
 
@@ -32,6 +33,7 @@ public class Blocks {
 	public static Block battery;
 	public static Block creativeGenerator;
 	public static Block coalGen;
+	public static Block electricFurnace;
 	
 	public static void init() {
 		//create instances of each block
@@ -46,6 +48,7 @@ public class Blocks {
 		battery = new BlockBattery(IDs.battery, Material.iron);
 		creativeGenerator = new BlockCreativeGenerator(IDs.creativeGenerator, Material.iron);
 		coalGen = new BlockCoalGen(IDs.coalGen, Material.iron);
+		electricFurnace = new BlockElectricFurnace(IDs.elctricFurnace);
 		
 		clearGlass = new BlockClearGlass(IDs.clearGlass, Material.glass);
 		
@@ -66,6 +69,7 @@ public class Blocks {
 		GameRegistry.registerBlock(battery, Strings.BATTERY_NAME + Reference.MOD_ID);
 		GameRegistry.registerBlock(creativeGenerator, Strings.CREATIVE_GENERATOR_NAME + Reference.MOD_ID);
 		GameRegistry.registerBlock(coalGen, Strings.COAL_GEN_NAME + Reference.MOD_ID);
+		GameRegistry.registerBlock(electricFurnace, Strings.ELECTRIC_FURNACE_NAME + Reference.MOD_ID);
 
 		GameRegistry.registerBlock(clearGlass, Strings.CLEAR_GLASS_NAME + Reference.MOD_ID);
 		
@@ -75,6 +79,7 @@ public class Blocks {
 		GameRegistry.registerTileEntity(TECable.class, "cable");
 		GameRegistry.registerTileEntity(TEBattery.class, "battery");
 		GameRegistry.registerTileEntity(TECoalGen.class, "coalGen");
+		GameRegistry.registerTileEntity(TEElectricFurnace.class, "electicFurnace");
 	}
 	
 	public static void languageRegisters() {
@@ -89,6 +94,7 @@ public class Blocks {
 		LanguageRegistry.addName(battery, "Battery");
 		LanguageRegistry.addName(creativeGenerator, "Creative Generator");
 		LanguageRegistry.addName(coalGen, "Coal Generator");
+		LanguageRegistry.addName(electricFurnace, "Electric Furnace");
 
 		LanguageRegistry.addName(clearGlass, "Clear Glass");
 	}
