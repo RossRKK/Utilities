@@ -67,7 +67,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	
 	public void burn() {
 		if (inventory != null && inventory.itemID == Item.coal.itemID) {
-			inventory.stackSize --;
+			decrStackSize(0, 1);
 			onInventoryChanged();
 			currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory);
 		}
@@ -153,7 +153,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 		if (itemstack != null) {
 			if (itemstack.stackSize <= count) {
 				setInventorySlotContents(i, null);
-			}else{
+			} else {
 				itemstack = itemstack.splitStack(count);
 				onInventoryChanged();
 			}
@@ -212,11 +212,11 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 		return TileEntityFurnace.getItemBurnTime(itemstack) > 0;
 	}
 	
-	@Override
-	public void onInventoryChanged() {
-		super.onInventoryChanged();
-		if (inventory != null && inventory.stackSize <= 0) {
-			inventory = null;
-		}
-	}
+//	@Override
+//	public void onInventoryChanged() {
+//		super.onInventoryChanged();
+//		if (inventory != null && inventory.stackSize <= 0) {
+//			inventory = null;
+//		}
+//	}
 }
