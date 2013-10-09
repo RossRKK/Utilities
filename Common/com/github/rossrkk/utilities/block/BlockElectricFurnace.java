@@ -1,26 +1,27 @@
 package com.github.rossrkk.utilities.block;
 
-import com.github.rossrkk.utilities.Utilities;
-import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
-
-import cpw.mods.fml.common.network.FMLNetworkHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockElectricFurnace extends BlockFurnace {
+import com.github.rossrkk.utilities.Utilities;
+import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
+
+import cpw.mods.fml.common.network.FMLNetworkHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class BlockElectricFurnace extends BlockContainer {
 
 	protected BlockElectricFurnace(int id) {
-		super(id, false);
+		super(id, Material.rock);
 		setCreativeTab(Utilities.utilTab);
 	}
 

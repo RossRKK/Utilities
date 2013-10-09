@@ -5,17 +5,20 @@ import org.lwjgl.opengl.GL11;
 import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiElectircFurnace extends GuiFurnace {
+public class GuiElectircFurnace extends GuiContainer {
 
 	TEElectricFurnace machine;
 	
 	public GuiElectircFurnace(InventoryPlayer inventory, TEElectricFurnace machine) {
-		super(inventory, machine);
+		super(new ContainerElectricFurnace(inventory, machine));
 		
 		this.machine = machine;
 		

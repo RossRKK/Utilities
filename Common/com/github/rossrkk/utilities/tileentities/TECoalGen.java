@@ -15,7 +15,7 @@ import com.github.rossrkk.utilities.power.IPower;
 
 public class TECoalGen extends TileEntity implements IPower, IInventory {
 
-	public static ItemStack inventory;
+	public ItemStack inventory;
 	
 	public int power;
 	public int maxPower = 1024;
