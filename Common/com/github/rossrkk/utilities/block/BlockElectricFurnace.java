@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -21,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockElectricFurnace extends BlockContainer {
 
 	protected BlockElectricFurnace(int id) {
-		super(id, Material.rock);
+		super(id, Material.iron);
 		setCreativeTab(Utilities.utilTab);
 	}
 
@@ -63,7 +64,7 @@ public class BlockElectricFurnace extends BlockContainer {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
     {
     	if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, Utilities.instance, 1, world, x, y, z);
+			FMLNetworkHandler.openGui(player, Utilities.instance, 3, world, x, y, z);
 		}
 		return true;
     }
@@ -72,7 +73,7 @@ public class BlockElectricFurnace extends BlockContainer {
 	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if (te != null && te instanceof IInventory) {
-			IInventory inventory = (IInventory)te;
+			ISidedInventory inventory = (ISidedInventory)te;
 			
 			for (int i = 0; i < inventory.getSizeInventory(); i++) {
 				ItemStack stack = inventory.getStackInSlotOnClosing(i);

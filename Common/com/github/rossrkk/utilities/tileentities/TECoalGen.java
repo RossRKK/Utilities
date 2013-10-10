@@ -13,6 +13,8 @@ import net.minecraftforge.common.IPlantable;
 
 import com.github.rossrkk.utilities.power.IPower;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class TECoalGen extends TileEntity implements IPower, IInventory {
 
 	public ItemStack inventory;
@@ -32,14 +34,6 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 			
 			if (currentBurnTime == 0 && power < maxPower) {
 				burn();
-			}
-		
-			if (inventory != null) {
-				System.out.println("ItemID:" + inventory.itemID);
-				System.out.println("StackSize:" + inventory.stackSize);
-				System.out.println("Name: " + inventory.getDisplayName());
-				System.out.println("Power: " + power);
-				System.out.println("Burn Time: " + currentBurnTime);
 			}
 			transferPower();
 	}
@@ -66,10 +60,10 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	}
 	
 	public void burn() {
-		if (inventory != null && inventory.itemID == Item.coal.itemID) {
+		if (inventory != null && GameRegistry.getFuelValue(inventory) > 0) {
 			decrStackSize(0, 1);
 			onInventoryChanged();
-			currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory);
+			currentBurnTime = GameRegistry.getFuelValue(inventory);
 		}
 	}
 	

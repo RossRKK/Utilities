@@ -20,17 +20,17 @@ public class ContainerElectricFurnace extends Container {
 		this.machine = machine;
 		
 		for (int x = 0; x < 9; x++) {
-			addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 130));
+			addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 142));
 		}
 		
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 9; x++) {
-				addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 72 + y * 18));
+				addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 84 + y * 18));
 			}
 		}
 
-		addSlotToContainer(new Slot(machine, 55, 55, 0));
-		addSlotToContainer(new Slot(machine, 55, 17, 1));
+		addSlotToContainer(new Slot(machine, 1, 116, 35));
+		addSlotToContainer(new Slot(machine, 0, 56, 17));
 	}
 
 	@Override

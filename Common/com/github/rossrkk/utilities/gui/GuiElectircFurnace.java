@@ -35,5 +35,8 @@ public class GuiElectircFurnace extends GuiContainer {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		
+		int i1 = (int) (this.machine.cookTime / 10.7);
+        drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, i1 + 1, 16);
 	}
 }
