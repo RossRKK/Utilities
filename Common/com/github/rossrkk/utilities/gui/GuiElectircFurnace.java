@@ -22,8 +22,8 @@ public class GuiElectircFurnace extends GuiContainer {
 		
 		this.machine = machine;
 		
-		xSize = 175;
-		ySize = 165;
+		xSize = 176;
+		ySize = 166;
 	}
 
 	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/furnace.png");
@@ -38,5 +38,16 @@ public class GuiElectircFurnace extends GuiContainer {
 		
 		int i1 = (int) (this.machine.cookTime / 10.7);
         drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, i1 + 1, 16);
+        
+        float filled = machine.getPower() / machine.maxPower;
+		int barHeight = machine.getPower()/32;
+		if (barHeight > 0) {
+			int srcX = xSize;
+			int srcY = 63 - barHeight;
+			
+			drawTexturedModalRect(guiLeft + 15, guiTop + 31 + 32 - barHeight, srcX, srcY, 10, barHeight);
+		}
+		
+		fontRenderer.drawString("Electric Furnace", 20 + (guiLeft + xSize)/2, guiTop + 10, 2);
 	}
 }

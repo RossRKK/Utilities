@@ -7,8 +7,8 @@ import com.github.rossrkk.utilities.power.IPower;
 
 public class TEBattery extends TileEntity implements IPower {
 
-	public int maxPower = 1024;
-	public int power;
+	public final int maxPower = 100000;
+	public int power = 0;
 	
 	@Override
 	public void updateEntity() {
@@ -31,11 +31,13 @@ public class TEBattery extends TileEntity implements IPower {
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
 		power = compound.getInteger("power");
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
 		compound.setInteger("power", power);
 	}
 

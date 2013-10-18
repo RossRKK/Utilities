@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 
 public class ContainerElectricFurnace extends Container {
@@ -29,8 +30,8 @@ public class ContainerElectricFurnace extends Container {
 			}
 		}
 
-		addSlotToContainer(new Slot(machine, 1, 116, 35));
-		addSlotToContainer(new Slot(machine, 0, 56, 17));
+		addSlotToContainer(new SlotElectricFurnace(machine, 1, 116, 35));
+		addSlotToContainer(new Slot(machine, 0, 56, 35));
 	}
 
 	@Override

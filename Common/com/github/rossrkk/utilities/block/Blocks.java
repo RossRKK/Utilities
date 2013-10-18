@@ -2,7 +2,6 @@ package com.github.rossrkk.utilities.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.github.rossrkk.utilities.lib.IDs;
@@ -12,9 +11,10 @@ import com.github.rossrkk.utilities.tileentities.TEBattery;
 import com.github.rossrkk.utilities.tileentities.TEBlockBreaker;
 import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
 import com.github.rossrkk.utilities.tileentities.TECable;
+import com.github.rossrkk.utilities.tileentities.TECoalGen;
+import com.github.rossrkk.utilities.tileentities.TECreativeGenerator;
 import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
 import com.github.rossrkk.utilities.tileentities.TEMiner;
-import com.github.rossrkk.utilities.tileentities.TECoalGen;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -80,6 +80,7 @@ public class Blocks {
 		GameRegistry.registerTileEntity(TEBattery.class, "battery");
 		GameRegistry.registerTileEntity(TECoalGen.class, "coalGen");
 		GameRegistry.registerTileEntity(TEElectricFurnace.class, "electicFurnace");
+		GameRegistry.registerTileEntity(TECreativeGenerator.class, "creativeGenerator");
 	}
 	
 	public static void languageRegisters() {

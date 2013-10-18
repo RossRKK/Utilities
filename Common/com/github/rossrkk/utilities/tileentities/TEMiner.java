@@ -110,7 +110,7 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-super.readFromNBT(compound);
+		super.readFromNBT(compound);
 		
 		NBTTagList items = compound.getTagList("Items");
 		

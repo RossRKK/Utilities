@@ -46,9 +46,12 @@ public class BlockCable extends BlockContainer {
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
-		IPower te = (IPower)world.getBlockTileEntity(x, y, z);
-		player.addChatMessage("Power Level is:  " + te.getPower());
-		return true;
+		if (world.getBlockTileEntity(x, y, z) instanceof IPower) {
+			IPower te = (IPower)world.getBlockTileEntity(x, y, z);
+			player.addChatMessage("Power Level is:  " + te.getPower());
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

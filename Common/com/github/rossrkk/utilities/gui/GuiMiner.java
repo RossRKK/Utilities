@@ -35,7 +35,7 @@ public class GuiMiner extends GuiContainer {
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		
 		float filled = machine.getPower() / machine.maxPower;
-		int barHeight = machine.getPower()/16;
+		int barHeight = machine.getPower()/32;
 		if (barHeight > 0) {
 			int srcX = xSize;
 			int srcY = 32 - barHeight;
