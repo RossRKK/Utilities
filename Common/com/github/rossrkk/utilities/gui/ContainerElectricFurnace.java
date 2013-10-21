@@ -1,15 +1,16 @@
 package com.github.rossrkk.utilities.gui;
 
-import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
-import com.github.rossrkk.utilities.tileentities.TEMiner;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
+
+import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerElectricFurnace extends Container {
 
@@ -73,5 +74,23 @@ public class ContainerElectricFurnace extends Container {
 
         return itemstack;
 	}
+	
+	@Override
+	public void addCraftingToCrafters(ICrafting player) {
+		super.addCraftingToCrafters(player);
+		
+		player.sendProgressBarUpdate(this, 0, machine.cookTime);
+		player.sendProgressBarUpdate(this, 1, machine.power);
+	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void updateProgressBar(int id, int data) {
+		switch (id) {
+		case 0: machine.cookTime = data;
+			break;
+		case 1: machine.power = data;
+		break;
+		}
+	}
 }

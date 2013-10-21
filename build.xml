@@ -19,9 +19,9 @@
 	<property name="lang.dir"		value="Utilities\lang"/>  <!-- Optional, delete if you don't have one -->
 	<property name="mod.name"		value="Utilities"/>
 	
-	<property name="mc.version"		value="1.6.2"/>
-	<property name="mod.version"	value="1.0.1"/>
-	<property name="forge.version"	value="7.7.1.651"/>
+	<property name="mc.version"		value="1.6.4"/>
+	<property name="mod.version"	value="1.0.2 Development"/>
+	<property name="forge.version"	value="?"/>
 	
 	
 	<!-- Copy the files -->
@@ -30,7 +30,6 @@
 		</echo>
 		<copy todir="${mcpsrc.dir}">
 			<fileset dir="${mod.common.dir}"/>
-			<fileset dir="Equivalent-Exchange-3/ee3_common"/>
 		</copy>
 		<replace dir="${mcpsrc.dir}" token="@VERSION@" value="${mod.version}"/>
 	</target>
@@ -96,7 +95,6 @@ Last step!  Building the jar! (4/4)
 		<jar destfile="${release.dir}\${mod.name} ${mod.version}.jar">
 			<fileset dir="${mod.common.dir}" includes="mcmod.info"/>
 			<fileset dir="${mcpreobf.dir}"/>
-			<fileset dir="${lang.dir}"/>
 			<fileset dir="${source.dir}\Resource"/>
 		</jar>
 	</target>

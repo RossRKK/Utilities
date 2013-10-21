@@ -63,7 +63,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 		if (inventory != null && GameRegistry.getFuelValue(inventory) > 0) {
 			decrStackSize(0, 1);
 			onInventoryChanged();
-			currentBurnTime = GameRegistry.getFuelValue(inventory);
+			currentBurnTime = GameRegistry.getFuelValue(inventory) / 100;
 		}
 	}
 	

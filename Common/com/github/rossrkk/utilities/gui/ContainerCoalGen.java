@@ -3,10 +3,14 @@ package com.github.rossrkk.utilities.gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.github.rossrkk.utilities.tileentities.TECoalGen;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerCoalGen extends Container {
 	
@@ -67,5 +71,21 @@ public class ContainerCoalGen extends Container {
         }
 
         return itemstack;
+	}
+	
+	@Override
+	public void addCraftingToCrafters(ICrafting player) {
+		super.addCraftingToCrafters(player);
+
+		player.sendProgressBarUpdate(this, 0, machine.power);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void updateProgressBar(int id, int data) {
+		switch (id) {
+		case 0: machine.power = data;
+		break;
+		}
 	}
 }

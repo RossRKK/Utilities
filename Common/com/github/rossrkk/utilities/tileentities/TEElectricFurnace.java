@@ -21,7 +21,7 @@ public class TEElectricFurnace extends TileEntity implements ISidedInventory, IP
 	
 	@Override
 	public void updateEntity() {
-		System.out.println(power);
+		System.out.println(xCoord + " " + yCoord + " " + zCoord + ":" + power);
 		ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inventory[0]);
 		
 		if (power > 16 && result != null) {
@@ -33,9 +33,11 @@ public class TEElectricFurnace extends TileEntity implements ISidedInventory, IP
 			if (getStackInSlot(1) == null) {
 				setInventorySlotContents(1, result);
 				onInventoryChanged();
+				power -= 16;
 			} else if (getStackInSlot(1).itemID == result.itemID && getStackInSlot(1).stackSize < result.getMaxStackSize()) {
 				getStackInSlot(1).stackSize ++;
 				onInventoryChanged();
+				power -= 16;
 			}
 			cookTime = 0;
 		}
@@ -46,8 +48,6 @@ public class TEElectricFurnace extends TileEntity implements ISidedInventory, IP
 		super.readFromNBT(compound);
 		power = compound.getInteger("power");
 		cookTime = compound.getInteger("cookTime");
-		
-		
 		
 		NBTTagList items = compound.getTagList("Items");
 		

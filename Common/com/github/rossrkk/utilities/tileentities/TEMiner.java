@@ -20,7 +20,7 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 
 	ItemStack[] inventory = new ItemStack[10];
 
-	int power;
+	public int power;
 	public int maxPower = 1024;
 	int tickCount = 0;
 
