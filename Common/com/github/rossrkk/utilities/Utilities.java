@@ -23,42 +23,42 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 @NetworkMod(channels = {Reference.CHANNEL}, clientSideRequired = true, serverSideRequired = false) 
 public class Utilities {
-	
+
 	@Instance(Reference.MOD_ID)
 	public static Utilities instance;
 
 	public static CreativeTabs utilTab;
 
-    @EventHandler
-    public void ModsToLoad(FMLPreInitializationEvent event) {
-    	
-    	ConfigLoader.init(event.getSuggestedConfigurationFile());
-    	
-    	//Thanks SciGuy1121 http://www.youtube.com/watch?v=8C_ptdFOIiE
-    	utilTab = new CreativeTabs("util_utilities"){
-    		@Override
+	@EventHandler
+	public void ModsToLoad(FMLPreInitializationEvent event) {
+
+		ConfigLoader.init(event.getSuggestedConfigurationFile());
+
+		//Thanks SciGuy1121 http://www.youtube.com/watch?v=8C_ptdFOIiE
+		utilTab = new CreativeTabs("util_utilities"){
+			@Override
 			public ItemStack getIconItemStack(){ return new ItemStack(Items.cobbleHolder); }
-    	};
-    	
-    	
-        Items.init();
-        Blocks.init();
-    }
+		};
 
-    @EventHandler
-    public void load(FMLInitializationEvent event) {
-    	CraftingManager.init();
-    	languageRegisters();
-    	
-    	new GenerationHandeler();
+
+		Items.init();
+		Blocks.init();
+	}
+
+	@EventHandler
+	public void load(FMLInitializationEvent event) {
+		CraftingManager.init();
+		languageRegisters();
+
+		new GenerationHandeler();
 		new GuiHandler();
-    }
+	}
 
-    @EventHandler
-    public void modsLoaded(FMLPostInitializationEvent event) {
-    }
-    
-    public static void languageRegisters() {
-    	 LanguageRegistry.instance().addStringLocalization("itemGroup.util_utilities", "Utilities");
-    }
+	@EventHandler
+	public void modsLoaded(FMLPostInitializationEvent event) {
+	}
+
+	public static void languageRegisters() {
+		LanguageRegistry.instance().addStringLocalization("itemGroup.util_utilities", "Utilities");
+	}
 }

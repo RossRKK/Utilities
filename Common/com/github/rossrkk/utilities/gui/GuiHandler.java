@@ -14,7 +14,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class GuiHandler implements IGuiHandler {
-	
+
 	public GuiHandler() {
 		NetworkRegistry.instance().registerGuiHandler(Utilities.instance, this);
 	}
@@ -47,10 +47,10 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerElectricFurnace(player.inventory, (TEElectricFurnace)te4);
 			}
 			break;
-	}
+		}
 
 
-	return null;
+		return null;
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class GuiHandler implements IGuiHandler {
 			}
 		}
 
-	return null;
+		return null;
 	}
 
 }

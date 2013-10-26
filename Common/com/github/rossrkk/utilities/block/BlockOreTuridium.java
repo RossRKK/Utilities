@@ -1,14 +1,14 @@
 package com.github.rossrkk.utilities.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+
 import com.github.rossrkk.utilities.Utilities;
 import com.github.rossrkk.utilities.lib.Strings;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 
 public class BlockOreTuridium extends Block{
 
@@ -18,7 +18,7 @@ public class BlockOreTuridium extends Block{
 		setHardness(4F);
 		setCreativeTab(Utilities.utilTab);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {

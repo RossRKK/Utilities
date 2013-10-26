@@ -39,37 +39,37 @@ public class BlockCoalGen extends BlockContainer {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if (te != null && te instanceof IInventory) {
 			IInventory inventory = (IInventory)te;
-			
+
 			for (int i = 0; i < inventory.getSizeInventory(); i++) {
 				ItemStack stack = inventory.getStackInSlotOnClosing(i);
-				
+
 				if (stack != null) {
 					float spawnX = x + world.rand.nextFloat();
 					float spawnY = y + world.rand.nextFloat();
 					float spawnZ = z + world.rand.nextFloat();
-					
+
 					EntityItem droppedItem = new EntityItem(world, spawnX, spawnY, spawnZ, stack);
-					
+
 					float mult = 0.05F;
-					
+
 					droppedItem.motionX = (-0.5F + world.rand.nextFloat()) * mult;
 					droppedItem.motionY = (4 + world.rand.nextFloat()) * mult;
 					droppedItem.motionZ = (-0.5F + world.rand.nextFloat()) * mult;
-					
+
 					world.spawnEntityInWorld(droppedItem);
 				}
 			}
 		}
-		
+
 		super.breakBlock(world, x, y, z, id, meta);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {

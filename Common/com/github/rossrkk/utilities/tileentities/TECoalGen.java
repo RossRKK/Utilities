@@ -2,14 +2,11 @@ package com.github.rossrkk.utilities.tileentities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraftforge.common.IPlantable;
 
 import com.github.rossrkk.utilities.power.IPower;
 
@@ -18,47 +15,47 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class TECoalGen extends TileEntity implements IPower, IInventory {
 
 	public ItemStack inventory;
-	
+
 	public int power;
 	public int maxPower = 1024;
 	public int toTransfer = 16;
-	
+
 	public int currentBurnTime = 0;
-	
+
 	@Override
 	public void updateEntity() {		
-			if (currentBurnTime > 0 && power < maxPower) {
-				power += 1;
-				currentBurnTime --;
-			}
-			
-			if (currentBurnTime == 0 && power < maxPower) {
-				burn();
-			}
-			transferPower();
+		if (currentBurnTime > 0 && power < maxPower) {
+			power += 1;
+			currentBurnTime --;
+		}
+
+		if (currentBurnTime == 0 && power < maxPower) {
+			burn();
+		}
+		transferPower();
 	}
-	
+
 	public void transferPower() {
 		if (power >= 16) {
 			//Transfer power
 			int randomSide = worldObj.rand.nextInt(6);
 			switch (randomSide) {
-				case 0: transfer(xCoord, yCoord, zCoord + 1);
-				break;
-				case 1: transfer(xCoord - 1, yCoord, zCoord);
-				break;
-				case 2: transfer(xCoord + 1, yCoord, zCoord);
-				break;
-				case 3: transfer(xCoord, yCoord - 1, zCoord);
-				break;
-				case 4: transfer(xCoord, yCoord + 1, zCoord);
-				break;
-				case 5: transfer(xCoord, yCoord, zCoord - 1);
-				break;
+			case 0: transfer(xCoord, yCoord, zCoord + 1);
+			break;
+			case 1: transfer(xCoord - 1, yCoord, zCoord);
+			break;
+			case 2: transfer(xCoord + 1, yCoord, zCoord);
+			break;
+			case 3: transfer(xCoord, yCoord - 1, zCoord);
+			break;
+			case 4: transfer(xCoord, yCoord + 1, zCoord);
+			break;
+			case 5: transfer(xCoord, yCoord, zCoord - 1);
+			break;
 			}
 		}
 	}
-	
+
 	public void burn() {
 		if (inventory != null && GameRegistry.getFuelValue(inventory) > 0) {
 			decrStackSize(0, 1);
@@ -66,7 +63,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 			currentBurnTime = GameRegistry.getFuelValue(inventory) / 100;
 		}
 	}
-	
+
 	public void transfer(int x, int y, int z) {
 		if (worldObj.getBlockTileEntity(x, y, z) instanceof IPower 
 				&& !((IPower)worldObj.getBlockTileEntity(x, y, z)).isGenerator() 
@@ -74,7 +71,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 			power = power + ((IPower)worldObj.getBlockTileEntity(x, y, z)).incrementPower(toTransfer) - toTransfer;
 		}
 	}
-	
+
 	@Override
 	public int getPower() {
 		return power;
@@ -100,31 +97,31 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
-		
+
 		NBTTagList items = new NBTTagList();
-			
-			ItemStack stack = getStackInSlot(0);
-			
-			if (stack != null) {
-				NBTTagCompound item = new NBTTagCompound();
-				stack.writeToNBT(item);
-				items.appendTag(item);
-			}
-		
+
+		ItemStack stack = getStackInSlot(0);
+
+		if (stack != null) {
+			NBTTagCompound item = new NBTTagCompound();
+			stack.writeToNBT(item);
+			items.appendTag(item);
+		}
+
 		compound.setTag("Items", items);
-		
+
 		compound.setShort("power", (short) power);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		
+
 		NBTTagList items = compound.getTagList("Items");
 		if ((NBTTagCompound)items.tagAt(0) != null) {
 			NBTTagCompound item = (NBTTagCompound)items.tagAt(0);
 			int slot = item.getByte("Slot");
-			
+
 			setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
 		}
 		power = compound.getShort("power");
@@ -143,7 +140,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	@Override
 	public ItemStack decrStackSize(int i, int count) {
 		ItemStack itemstack = getStackInSlot(i);
-		
+
 		if (itemstack != null) {
 			if (itemstack.stackSize <= count) {
 				setInventorySlotContents(i, null);
@@ -167,7 +164,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
 			itemstack.stackSize = getInventoryStackLimit();
 		}
-		
+
 		onInventoryChanged();
 	}
 
@@ -205,12 +202,12 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return TileEntityFurnace.getItemBurnTime(itemstack) > 0;
 	}
-	
-//	@Override
-//	public void onInventoryChanged() {
-//		super.onInventoryChanged();
-//		if (inventory != null && inventory.stackSize <= 0) {
-//			inventory = null;
-//		}
-//	}
+
+	//	@Override
+	//	public void onInventoryChanged() {
+	//		super.onInventoryChanged();
+	//		if (inventory != null && inventory.stackSize <= 0) {
+	//			inventory = null;
+	//		}
+	//	}
 }

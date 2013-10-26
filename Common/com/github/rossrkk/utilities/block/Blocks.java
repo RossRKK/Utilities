@@ -20,21 +20,21 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Blocks {
-	
+
 	public static Block turidiumOre;
 	public static Block blockBreaker;
 	public static Block blockPlacer;
 	public static Block fullStoneSlab;
 	public static Block jumpPad;
 	public static Block clearGlass;
-	
+
 	public static Block miner;
 	public static Block cable;
 	public static Block battery;
 	public static Block creativeGenerator;
 	public static Block coalGen;
 	public static Block electricFurnace;
-	
+
 	public static void init() {
 		//create instances of each block
 		turidiumOre  = new BlockOreTuridium(IDs.blockOreTuridiumID, Material.iron);
@@ -42,22 +42,22 @@ public class Blocks {
 		blockPlacer = new BlockBlockPlacer(IDs.blockPlacerID, Material.iron);
 		fullStoneSlab = new BlockFullStoneSlab(IDs.blockFullStoneSlabID, Material.rock);
 		jumpPad = new BlockJumpPad(IDs.blockJumpPad, Material.iron);
-		
+
 		miner = new BlockMiner(IDs.blockMiner, Material.iron);
 		cable = new BlockCable(IDs.cable, Material.iron);
 		battery = new BlockBattery(IDs.battery, Material.iron);
 		creativeGenerator = new BlockCreativeGenerator(IDs.creativeGenerator, Material.iron);
 		coalGen = new BlockCoalGen(IDs.coalGen, Material.iron);
 		electricFurnace = new BlockElectricFurnace(IDs.elctricFurnace);
-		
+
 		clearGlass = new BlockClearGlass(IDs.clearGlass, Material.glass);
-		
+
 		MinecraftForge.setBlockHarvestLevel(turidiumOre, "pickaxe", 2);
-		
+
 		gameRegisters();
 		languageRegisters();
 	}
-	
+
 	public static void gameRegisters() {
 		GameRegistry.registerBlock(turidiumOre, Strings.BLOCK_ORE_TURIDIUM_NAME + Reference.MOD_ID);
 		GameRegistry.registerBlock(blockBreaker, Strings.BLOCK_BREAKER_NAME + Reference.MOD_ID);
@@ -72,7 +72,7 @@ public class Blocks {
 		GameRegistry.registerBlock(electricFurnace, Strings.ELECTRIC_FURNACE_NAME + Reference.MOD_ID);
 
 		GameRegistry.registerBlock(clearGlass, Strings.CLEAR_GLASS_NAME + Reference.MOD_ID);
-		
+
 		GameRegistry.registerTileEntity(TEBlockBreaker.class, "blockBreaker");
 		GameRegistry.registerTileEntity(TEBlockPlacer.class, "blockPlacer");
 		GameRegistry.registerTileEntity(TEMiner.class, "miner");
@@ -82,13 +82,13 @@ public class Blocks {
 		GameRegistry.registerTileEntity(TEElectricFurnace.class, "electicFurnace");
 		GameRegistry.registerTileEntity(TECreativeGenerator.class, "creativeGenerator");
 	}
-	
+
 	public static void languageRegisters() {
 		LanguageRegistry.addName(turidiumOre, "Turidium Ore");
 		LanguageRegistry.addName(blockBreaker, "Block Breaker");
 		LanguageRegistry.addName(blockPlacer, "Block Placer");
 		LanguageRegistry.addName(fullStoneSlab, "Full Stone Slab");
-		
+
 		LanguageRegistry.addName(jumpPad, "Jump Pad");
 		LanguageRegistry.addName(miner, "Miner");
 		LanguageRegistry.addName(cable, "Cable");

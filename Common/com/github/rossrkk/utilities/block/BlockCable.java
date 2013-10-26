@@ -5,7 +5,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -38,12 +37,12 @@ public class BlockCable extends BlockContainer {
 	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
 		if (world.getBlockTileEntity(x, y, z) instanceof IPower) {
@@ -53,34 +52,34 @@ public class BlockCable extends BlockContainer {
 		}
 		return false;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.CABLE_NAME);
 	}
-	
+
 	@Override
 	public void setBlockBoundsForItemRender() {
 		minX = 0F;
 		minY = 0.3;
 		minZ = 0.3;
-		
+
 		maxX = 1F;
 		maxY = 0.7;
 		maxZ = 0.7;
 	}
-	
+
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess blockAccess, int x, int y, int z) {
 		minX = 0.3;
 		minY = 0.3;
 		minZ = 0.3;
-		
+
 		maxX = 0.7;
 		maxY = 0.7;
 		maxZ = 0.7;
-		
+
 		if (blockAccess.getBlockTileEntity(x, y + 1, z) instanceof IPower) {
 			setBlockBounds((float)minX, (float)minY, (float)minZ, (float)maxX, (float)maxY + 0.3F, (float)maxZ);
 		}

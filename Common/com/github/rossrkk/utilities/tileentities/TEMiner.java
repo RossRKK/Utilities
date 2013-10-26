@@ -1,7 +1,6 @@
 package com.github.rossrkk.utilities.tileentities;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -88,16 +87,16 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 	public boolean addToInventory(ItemStack stack) {
 		if (stack != null) {
 			int validSlot = getValidSlot(stack);	
-			
+
 			if (validSlot == -1) {
 				return false;
 			}
-	
+
 			if (getStackInSlot(validSlot) != null /*&& getStackInSlot(validSlot).itemID == stack.itemID*/) {
 				int totalStackSize = stack.stackSize + getStackInSlot(validSlot).stackSize;
-				
+
 				if (totalStackSize > stack.getMaxStackSize()) {
-					
+
 					ItemStack stack2 = new ItemStack(stack.getItem(), totalStackSize - stack.getMaxStackSize());
 					int validSlot2 = getValidSlot(stack2);
 					if (validSlot2 != -1){
@@ -107,21 +106,21 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 					} else {
 						return false;
 					}
-					
+
 				} else {
-					
+
 					stack.stackSize = totalStackSize;
-					
+
 					setInventorySlotContents(validSlot, stack);
 					onInventoryChanged();
-					
+
 					return true;
 				}
 			} else {
 
-				
+
 				setInventorySlotContents(validSlot, stack);
-	
+
 				onInventoryChanged();
 				return true;
 			}
@@ -129,11 +128,11 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 			return true;
 		}
 	}
-	
+
 	public int getValidSlot(ItemStack stack) {
 		int validSlot = -1;
 		for (int i = 0; i < getSizeInventory(); i++) {
-			if (getStackInSlot(i) == null || (getStackInSlot(i).itemID == stack.itemID && getStackInSlot(i).stackSize < getStackInSlot(i).getMaxStackSize())) {
+			if (getStackInSlot(i) == null || getStackInSlot(i).itemID == stack.itemID && getStackInSlot(i).stackSize < getStackInSlot(i).getMaxStackSize()) {
 				validSlot = i;
 				break;
 			}

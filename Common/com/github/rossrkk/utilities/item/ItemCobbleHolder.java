@@ -15,60 +15,57 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCobbleHolder extends Item {
 
-    public ItemCobbleHolder(int id) {
-        super(id);
-        maxStackSize = 1;
-        this.setUnlocalizedName(Strings.COBBLE_HOLDER_NAME);
-        this.setCreativeTab(Utilities.utilTab);
-        this.setNoRepair();
-        this.setMaxDamage(2304);
-        this.setNoRepair();
-    }
+	public ItemCobbleHolder(int id) {
+		super(id);
+		maxStackSize = 1;
+		setUnlocalizedName(Strings.COBBLE_HOLDER_NAME);
+		setCreativeTab(Utilities.utilTab);
+		setNoRepair();
+		setMaxDamage(2304);
+		setNoRepair();
+	}
 
-    @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world,
-            EntityPlayer player) {
-        
-        //the inventory being searched
-        ItemStack[] inventory = player.inventory.mainInventory;
-        
-        // if cobble has been absorbed
-        boolean cobbleAbsorbed = false;
-        
-        if (!player.isSneaking() && (itemStack.getItemDamage() < getMaxDamage())) {
-            // loop through each stack in the inventory and check if it's
-            // cobble
-            for (int i = 1; i < 36; i++) {
-            	try{
-            		
-	                if(inventory[i].itemID == 4) {
-	                    // add the size of the itemstack to cobbleheld
-	                    itemStack.setItemDamage(itemStack.getItemDamage() + inventory[i].stackSize);
-	                }
-            	} catch (NullPointerException e){/*Swallowed*/}
-            	
-            }
-            // clear the inventory of cobble
-            player.inventory.clearInventory(4, -1);
-        } else {
-        	
-        		//if there is more than a stack to give, give a stack
-            	if (itemStack.getItemDamage() >= 64){
-                	if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, 64))) {
-	                	//remove a stack from the total left to give
-	                	this.setDamage(itemStack, getDamage(itemStack) - 64);
-	                	}
-            	} else {
-            		//if there is less than a stack to give give what's left
-            		if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, itemStack.getItemDamage()))) {
-            			this.setDamage(itemStack, 0);
-            		}
-            	}
-        }
-        return itemStack;
-    }
-    
-    @Override
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStack, World world,
+			EntityPlayer player) {
+
+		//the inventory being searched
+		ItemStack[] inventory = player.inventory.mainInventory;
+
+		if (!player.isSneaking() && itemStack.getItemDamage() < getMaxDamage()) {
+			// loop through each stack in the inventory and check if it's
+			// cobble
+			for (int i = 1; i < 36; i++) {
+				try{
+
+					if(inventory[i].itemID == 4) {
+						// add the size of the itemstack to cobbleheld
+						itemStack.setItemDamage(itemStack.getItemDamage() + inventory[i].stackSize);
+					}
+				} catch (NullPointerException e){/*Swallowed*/}
+
+			}
+			// clear the inventory of cobble
+			player.inventory.clearInventory(4, -1);
+		} else {
+
+			//if there is more than a stack to give, give a stack
+			if (itemStack.getItemDamage() >= 64){
+				if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, 64))) {
+					//remove a stack from the total left to give
+					setDamage(itemStack, getDamage(itemStack) - 64);
+				}
+			} else {
+				//if there is less than a stack to give give what's left
+				if (player.inventory.addItemStackToInventory(new ItemStack(Block.cobblestone, itemStack.getItemDamage()))) {
+					setDamage(itemStack, 0);
+				}
+			}
+		}
+		return itemStack;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		itemIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.COBBLE_HOLDER_NAME);

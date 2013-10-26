@@ -12,9 +12,9 @@ public class SlotDiamondPick extends Slot {
 	public SlotDiamondPick(IInventory inventory, int index, int x,int y) {
 		super(inventory, index, x, y);
 	}
-	
+
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-        return stack.itemID == Item.pickaxeDiamond.itemID || stack.itemID == Items.turidiumPick.itemID;
-    }
+		return stack.itemID == Item.pickaxeDiamond.itemID || stack.itemID == Items.turidiumPick.itemID;
+	}
 }

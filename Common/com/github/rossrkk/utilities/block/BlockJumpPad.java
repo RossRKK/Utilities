@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
@@ -16,7 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockJumpPad extends Block {
-	
+
 
 	public BlockJumpPad(int id, Material material) {
 		super(id, material);
@@ -25,17 +24,17 @@ public class BlockJumpPad extends Block {
 		setCreativeTab(Utilities.utilTab);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
 		int meta = world.getBlockMetadata(x, y, z);
@@ -58,12 +57,11 @@ public class BlockJumpPad extends Block {
 		entity.fallDistance = 0;
 		if (entity instanceof EntityLivingBase) {
 			if (!entity.isSneaking()) {
-				int i = 0;
 				entity.motionY += Math.sqrt(world.getBlockMetadata(x, y, z)) + 0.1;
 			}
 		}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {

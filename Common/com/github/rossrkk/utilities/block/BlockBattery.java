@@ -1,14 +1,5 @@
 package com.github.rossrkk.utilities.block;
 
-import com.github.rossrkk.utilities.Utilities;
-import com.github.rossrkk.utilities.lib.Strings;
-import com.github.rossrkk.utilities.power.IPower;
-import com.github.rossrkk.utilities.tileentities.TEBattery;
-import com.github.rossrkk.utilities.tileentities.TECable;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,6 +7,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+
+import com.github.rossrkk.utilities.Utilities;
+import com.github.rossrkk.utilities.lib.Strings;
+import com.github.rossrkk.utilities.power.IPower;
+import com.github.rossrkk.utilities.tileentities.TEBattery;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBattery extends BlockContainer {
 
@@ -40,22 +39,22 @@ public class BlockBattery extends BlockContainer {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TEBattery();
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public Icon out;
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BATTERY_NAME + "In");
 		out = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BATTERY_NAME + "Out");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {

@@ -3,7 +3,6 @@ package com.github.rossrkk.utilities.block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -27,110 +26,111 @@ public class BlockElectricFurnace extends BlockContainer {
 		super(id, Material.iron);
 		setCreativeTab(Utilities.utilTab);
 	}
-	
-//	@Override
-//	public void onBlockPlaced(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack){
-//		if (entity.posX > x) {
-//			world.setBlockMetadataWithNotify(x, y, z, 5, 4);
-//		} else if (entity.posX > x) {
-//			world.setBlockMetadataWithNotify(x, y, z, 4, 4);
-//		} else if (entity.posZ < x) {
-//			world.setBlockMetadataWithNotify(x, y, z, 3, 4);
-//		} else if (entity.posZ < x) {
-//			world.setBlockMetadataWithNotify(x, y, z, 2, 4);
-//		} else {
-//			world.setBlockMetadataWithNotify(x, y, z, 5, 4);
-//		}
-//	}
-	
-	
+
+	//	@Override
+	//	public void onBlockPlaced(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack){
+	//		if (entity.posX > x) {
+	//			world.setBlockMetadataWithNotify(x, y, z, 5, 4);
+	//		} else if (entity.posX > x) {
+	//			world.setBlockMetadataWithNotify(x, y, z, 4, 4);
+	//		} else if (entity.posZ < x) {
+	//			world.setBlockMetadataWithNotify(x, y, z, 3, 4);
+	//		} else if (entity.posZ < x) {
+	//			world.setBlockMetadataWithNotify(x, y, z, 2, 4);
+	//		} else {
+	//			world.setBlockMetadataWithNotify(x, y, z, 5, 4);
+	//		}
+	//	}
+
+
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-        return side;
-    }
-	
-    @Override
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
-    public TileEntity createNewTileEntity(World par1World)
-    {
-        return new TEElectricFurnace();
-    }
-    
-    @SideOnly(Side.CLIENT)
-    Icon side;
-    
-    @SideOnly(Side.CLIENT)
-    Icon front;
-    
-    @Override
-    @SideOnly(Side.CLIENT)
+		return side;
+	}
 
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
-    public Icon getIcon(int side, int meta) {
-    	if (meta == side) {
-    		return front;
-    	} if (side == 1 || side == 0) {
-    		return blockIcon;
-    	} else 
-    	return this.side;
-    }
+	@Override
+	/**
+	 * Returns a new instance of a block's tile entity class. Called on placing the block.
+	 */
+	public TileEntity createNewTileEntity(World par1World)
+	{
+		return new TEElectricFurnace();
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
+	Icon side;
 
-    /**
-     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-     * is the only chance you get to register icons.
-     */
-    public void registerIcons(IconRegister register) {
-    	blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.ELECTRIC_FURNACE_NAME);
-    	side = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.ELECTRIC_FURNACE_NAME + "side");
-    	front = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.ELECTRIC_FURNACE_NAME + "front");
-    }
+	@SideOnly(Side.CLIENT)
+	Icon front;
 
-    @Override
-    /**
-     * Called upon block activation (right click on the block.)
-     */
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
-    {
-    	if (!world.isRemote) {
+	@Override
+	@SideOnly(Side.CLIENT)
+
+	/**
+	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
+	 */
+	public Icon getIcon(int side, int meta) {
+		if (meta == side) {
+			return front;
+		} if (side == 1 || side == 0) {
+			return blockIcon;
+		} else {
+			return this.side;
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+
+	/**
+	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This
+	 * is the only chance you get to register icons.
+	 */
+	public void registerIcons(IconRegister register) {
+		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.ELECTRIC_FURNACE_NAME);
+		side = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.ELECTRIC_FURNACE_NAME + "side");
+		front = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.ELECTRIC_FURNACE_NAME + "front");
+	}
+
+	@Override
+	/**
+	 * Called upon block activation (right click on the block.)
+	 */
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+	{
+		if (!world.isRemote) {
 			FMLNetworkHandler.openGui(player, Utilities.instance, 3, world, x, y, z);
 		}
 		return true;
-    }
-    
-    @Override
+	}
+
+	@Override
 	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if (te != null && te instanceof IInventory) {
 			ISidedInventory inventory = (ISidedInventory)te;
-			
+
 			for (int i = 0; i < inventory.getSizeInventory(); i++) {
 				ItemStack stack = inventory.getStackInSlotOnClosing(i);
-				
+
 				if (stack != null) {
 					float spawnX = x + world.rand.nextFloat();
 					float spawnY = y + world.rand.nextFloat();
 					float spawnZ = z + world.rand.nextFloat();
-					
+
 					EntityItem droppedItem = new EntityItem(world, spawnX, spawnY, spawnZ, stack);
-					
+
 					float mult = 0.05F;
-					
+
 					droppedItem.motionX = (-0.5F + world.rand.nextFloat()) * mult;
 					droppedItem.motionY = (4 + world.rand.nextFloat()) * mult;
 					droppedItem.motionZ = (-0.5F + world.rand.nextFloat()) * mult;
-					
+
 					world.spawnEntityInWorld(droppedItem);
 				}
 			}
 		}
-		
+
 		super.breakBlock(world, x, y, z, id, meta);
 	}
 }
