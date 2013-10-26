@@ -25,26 +25,27 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 	int tickCount = 0;
 
 	int heightDug = -1;
+	
+	int timesCalled = 0;
 
 	@Override
 	public void updateEntity() {
 		if (tickCount == 16) {
-			
+
 			tickCount = 0;
 			// reset the dig height if the dig height is bellow the world
 			if (heightDug + yCoord == 0) {
-					heightDug = -1;
+				heightDug = -1;
 			}
 			// if there is more than 16 power units run
-			if (power >= 16 && inventory[0] != null) {
-				if (inventory[0].itemID == Items.turidiumPick.itemID || inventory[0].itemID == Item.pickaxeDiamond.itemID) {
-					breakBlock(0, 0);
-				}
+			if (power >= 16 && inventory[0] != null && (inventory[0].itemID == Items.turidiumPick.itemID
+					|| inventory[0].itemID == Item.pickaxeDiamond.itemID)) {
+				breakBlock(0, 0);
 			}
-			//digDown
-			heightDug --;
+			// digDown
+			heightDug--;
 		}
-		tickCount ++;
+		tickCount++;
 	}
 
 	public void dropItem(ItemStack stack) {
@@ -66,60 +67,96 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 
 	public void breakBlock(int xDifference, int zDifference) {
 		// if the block isn't bedrock
-		if (worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference) != Block.bedrock.blockID) {
-			if (worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug,
-					zCoord + zDifference) != 0) {
-				// get the dropped block
-				ArrayList<ItemStack> dropped = Block.blocksList[worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug,
-								zCoord + zDifference)].getBlockDropped(worldObj, xCoord + xDifference, yCoord + heightDug, zCoord + zDifference, worldObj.getBlockMetadata(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference), 0);
-				ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
+		if (worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference) != Block.bedrock.blockID 
+				&& worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference) != 0) {
+			// get the dropped block
+			ArrayList<ItemStack> dropped = Block.blocksList[worldObj.getBlockId(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference)].getBlockDropped( worldObj, xCoord + xDifference, yCoord + heightDug, zCoord + zDifference, worldObj.getBlockMetadata(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference), 0);
+			ItemStack[] droppedAr = dropped.toArray(new ItemStack[9]);
 
-				if (worldObj.destroyBlock(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference, false)) {
-					power -= 16;
-					for (int i = 0; i < dropped.size(); i++) {
-						for (int j = 1; j < inventory.length; j++) {
-							if (inventory[j] != null) {
-								if (inventory[j].itemID == droppedAr[i].itemID) {
-									if (inventory[j].stackSize + droppedAr[i].stackSize <= droppedAr[i].getMaxStackSize()) {
-										droppedAr[i].stackSize += inventory[j].stackSize;
-										setInventorySlotContents(j,
-												droppedAr[i]);
-										break;
-									} else {
-										droppedAr[i].stackSize = droppedAr[i].getMaxStackSize();
-										setInventorySlotContents(j, droppedAr[i]);
-										break;
-									}
-								}
-							} else {
-								setInventorySlotContents(j,
-										droppedAr[i]);
-								break;
-							}
-							onInventoryChanged();
-						}
+			if (worldObj.destroyBlock(xCoord + xDifference, yCoord + heightDug, zCoord + zDifference, false)) {
+				power -= 16;
+				for (int i = 0; i < droppedAr.length; i++) {
+					if (!addToInventory(droppedAr[i])) {
+						dropItem(droppedAr[i]);
 					}
-
-					// damage the pickaxe
-					inventory[0].setItemDamage(inventory[0]
-							.getItemDamage() + 1);
 				}
 			}
+
+			// damage the pickaxe
+			inventory[0].setItemDamage(inventory[0].getItemDamage() + 1);
+		}
+	}
+
+	public boolean addToInventory(ItemStack stack) {
+		System.out.println(timesCalled ++);
+		if (stack != null) {
+			int validSlot = getValidSlot(stack);	
+			
+			if (validSlot == -1) {
+				return false;
+			}
+	
+			if (getStackInSlot(validSlot) != null /*&& getStackInSlot(validSlot).itemID == stack.itemID*/) {
+				int totalStackSize = stack.stackSize + getStackInSlot(validSlot).stackSize;
+				
+				if (totalStackSize > stack.getMaxStackSize()) {
+					
+					ItemStack stack2 = new ItemStack(stack.getItem(), totalStackSize - stack.getMaxStackSize());
+					int validSlot2 = getValidSlot(stack2);
+					if (validSlot2 != -1){
+						setInventorySlotContents(validSlot2, stack2);
+						onInventoryChanged();
+						return true;
+					} else {
+						return false;
+					}
+					
+				} else {
+					
+					stack.stackSize = totalStackSize;
+					
+					setInventorySlotContents(validSlot, stack);
+					onInventoryChanged();
+					
+					return true;
+				}
+			} else {
+
+				
+				setInventorySlotContents(validSlot, stack);
+	
+				onInventoryChanged();
+				return true;
+			}
+		} else {
+			return true;
 		}
 	}
 	
+	public int getValidSlot(ItemStack stack) {
+		int validSlot = -1;
+		for (int i = 0; i < getSizeInventory(); i++) {
+			if (getStackInSlot(i) == null || (getStackInSlot(i).itemID == stack.itemID && getStackInSlot(i).stackSize < getStackInSlot(i).getMaxStackSize())) {
+				validSlot = i;
+				break;
+			}
+		}
+		return validSlot;
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		
+
 		NBTTagList items = compound.getTagList("Items");
-		
+
 		for (int i = 0; i < items.tagCount(); i++) {
-			NBTTagCompound item = (NBTTagCompound)items.tagAt(i);
+			NBTTagCompound item = (NBTTagCompound) items.tagAt(i);
 			int slot = item.getByte("Slot");
-			
+
 			if (slot >= 0 && slot < getSizeInventory()) {
-				setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+				setInventorySlotContents(slot,
+						ItemStack.loadItemStackFromNBT(item));
 			}
 		}
 
@@ -130,20 +167,20 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
-		
+
 		NBTTagList items = new NBTTagList();
-		
-		for (int i = 0; i < getSizeInventory(); i++) {		
+
+		for (int i = 0; i < getSizeInventory(); i++) {
 			ItemStack stack = getStackInSlot(i);
-			
+
 			if (stack != null) {
 				NBTTagCompound item = new NBTTagCompound();
-				item.setByte("Slot", (byte)i);
+				item.setByte("Slot", (byte) i);
 				stack.writeToNBT(item);
 				items.appendTag(item);
 			}
 		}
-		
+
 		compound.setTag("Items", items);
 
 		compound.setInteger("power", power);
@@ -218,7 +255,8 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		if (i == 0) {
-			return itemstack.itemID == Item.pickaxeDiamond.itemID || itemstack.itemID == Items.turidiumPick.itemID;
+			return itemstack.itemID == Item.pickaxeDiamond.itemID
+					|| itemstack.itemID == Items.turidiumPick.itemID;
 		}
 		return true;
 	}

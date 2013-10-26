@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.github.rossrkk.utilities.Utilities;
@@ -31,11 +32,28 @@ public class BlockMiner extends BlockContainer{
 	public TileEntity createNewTileEntity(World world) {
 		return new TEMiner();
 	}
+	
+	@SideOnly(Side.CLIENT)
+	public Icon top;
+	@SideOnly(Side.CLIENT)
+	public Icon bottom;
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
-		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME);
+		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Side");
+		top = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Top");
+		bottom = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Bottom");
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getIcon(int side, int meta) {
+		switch (side) {
+		case 0: return top;
+		case 1: return bottom;
+		default:return blockIcon;
+		}
 	}
 	
 	@Override

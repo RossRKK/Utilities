@@ -21,7 +21,6 @@ public class TEElectricFurnace extends TileEntity implements ISidedInventory, IP
 	
 	@Override
 	public void updateEntity() {
-		System.out.println(xCoord + " " + yCoord + " " + zCoord + ":" + power);
 		ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inventory[0]);
 		
 		if (power > 16 && result != null) {
