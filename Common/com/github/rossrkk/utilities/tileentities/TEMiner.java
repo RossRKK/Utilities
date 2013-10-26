@@ -25,8 +25,6 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 	int tickCount = 0;
 
 	int heightDug = -1;
-	
-	int timesCalled = 0;
 
 	@Override
 	public void updateEntity() {
@@ -88,7 +86,6 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 	}
 
 	public boolean addToInventory(ItemStack stack) {
-		System.out.println(timesCalled ++);
 		if (stack != null) {
 			int validSlot = getValidSlot(stack);	
 			
