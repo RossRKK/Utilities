@@ -42,7 +42,5 @@ public class GuiElectircFurnace extends GuiContainer {
 
 			drawTexturedModalRect(guiLeft + 15, guiTop + 31 + 32 - barHeight, srcX, srcY, 10, barHeight);
 		}
-
-		fontRenderer.drawString("Electric Furnace", 20 + (guiLeft + xSize)/2, guiTop + 10, 2);
 	}
 }
