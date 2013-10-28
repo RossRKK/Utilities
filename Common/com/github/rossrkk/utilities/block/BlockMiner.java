@@ -50,8 +50,8 @@ public class BlockMiner extends BlockContainer{
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
 		switch (side) {
-		case 0: return top;
-		case 1: return bottom;
+		case 0: return bottom;
+		case 1: return top;
 		default:return blockIcon;
 		}
 	}
