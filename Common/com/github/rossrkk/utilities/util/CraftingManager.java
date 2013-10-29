@@ -141,6 +141,22 @@ public class CraftingManager {
 			"T T",
 			'I', Item.ingotIron, 'E', Item.emerald, 'C', Block.chest, 'T', Items.ingotTuridium
 		});
+		
+		//electric furnace
+		GameRegistry.addShapedRecipe(new ItemStack(Blocks.electricFurnace, 1), new Object[] {
+			"III",
+			"TFT",
+			"III",
+			'I', Item.ingotIron, 'T', Items.ingotTuridium, 'F', Block.furnaceIdle
+		});
+		
+		//coal generator
+		GameRegistry.addShapedRecipe(new ItemStack(Blocks.coalGen, 1), new Object[] {
+			"III",
+			"TFT",
+			"GGG",
+			'I', Item.ingotIron, 'T', Items.ingotTuridium, 'F', Block.furnaceIdle, 'G', Item.ingotGold
+		});
 
 		// Smelting Recipes
 
