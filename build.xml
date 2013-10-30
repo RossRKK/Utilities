@@ -20,7 +20,7 @@
 	<property name="mod.name"		value="Utilities"/>
 	
 	<property name="mc.version"		value="1.6.4"/>
-	<property name="mod.version"	value="1.0.2 Development"/>
+	<property name="mod.version"	value="1.2 Beta 1"/>
 	<property name="forge.version"	value="?"/>
 	
 	
@@ -66,13 +66,13 @@
 		<exec dir="${mcp.dir}" executable="bash" osfamily="Unix" failonerror="true">
 			<arg line="reobfuscate.sh"/>
 		</exec>
-		<delete dir="${mcpreobf.dir}\com\pahimar"/>
+		<delete dir="${mcpreobf.dir}\net"/>
 	</target>
 	
 	<!-- Cleans up -->
 	<target name = "cleanup">
 		<echo>Cleaning Up</echo>
-	        <delete dir="${mcpsrc.dir}\ee3_common"/>
+	        <delete dir="${mcpsrc.dir}\net"/>
 	        <delete dir="${mcpsrc.dir}\resources"/>
 		
 	</target>

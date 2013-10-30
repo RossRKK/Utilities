@@ -18,6 +18,7 @@ public class BlockClearGlass extends Block {
 		setUnlocalizedName(Strings.CLEAR_GLASS_NAME);
 		setHardness(4.0F);
 		setCreativeTab(Utilities.utilTab);
+		setStepSound(soundGlassFootstep);
 	}
 
 	@Override

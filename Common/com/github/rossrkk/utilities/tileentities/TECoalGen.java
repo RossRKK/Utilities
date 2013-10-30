@@ -3,6 +3,7 @@ package com.github.rossrkk.utilities.tileentities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -29,7 +30,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 			currentBurnTime --;
 		}
 
-		if (currentBurnTime == 0 && power < maxPower) {
+		if (currentBurnTime <= 0 && power < maxPower) {
 			burn();
 		}
 		transferPower();
@@ -56,11 +57,11 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 		}
 	}
 
-	public void burn() {
-		if (inventory != null && GameRegistry.getFuelValue(inventory) > 0) {
+	public void burn() {		
+		if (inventory != null && TileEntityFurnace.getItemBurnTime(inventory) > 0) {
+			currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory) / 100;
 			decrStackSize(0, 1);
 			onInventoryChanged();
-			currentBurnTime = GameRegistry.getFuelValue(inventory) / 100;
 		}
 	}
 
