@@ -72,7 +72,6 @@
 	<!-- Cleans up -->
 	<target name = "cleanup">
 		<echo>Cleaning Up</echo>
-	        <delete dir="${mcpsrc.dir}\net"/>
 	        <delete dir="${mcpsrc.dir}\resources"/>
 		
 	</target>
