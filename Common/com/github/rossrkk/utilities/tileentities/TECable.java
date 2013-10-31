@@ -48,11 +48,13 @@ public class TECable extends TileEntity implements IPower {
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
 		power = compound.getInteger("power");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
 		compound.setInteger("power", power);
 	}
 
