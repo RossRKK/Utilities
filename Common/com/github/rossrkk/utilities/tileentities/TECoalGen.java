@@ -24,7 +24,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 	public int currentBurnTime = 0;
 
 	@Override
-	public void updateEntity() {		
+	public void updateEntity() {
 		if (currentBurnTime > 0 && power < maxPower) {
 			power += 1;
 			currentBurnTime --;
@@ -59,7 +59,7 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 
 	public void burn() {		
 		if (inventory != null && TileEntityFurnace.getItemBurnTime(inventory) > 0) {
-			currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory) / 100;
+			currentBurnTime = TileEntityFurnace.getItemBurnTime(inventory);
 			decrStackSize(0, 1);
 			onInventoryChanged();
 		}
