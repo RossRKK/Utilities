@@ -2,14 +2,14 @@
 {
   "modid": "UTIL",
   "name": "Utilities",
-  "description": "A bunch of random stuff",
-  "version": "1.2 Beta",
+  "description": "A bunch of odd stuff",
+  "version": "1.1.0",
   "url": "",
   "updateUrl": "",
   "authorList": [
     "RossRKK"
   ],
-  "credits": "By RossRKK, Thanks to Pahimar,and VSWE!",
+  "credits": "By RossRKK, Textures by Usually Correct, Thanks to Pahimar,and VSWE!",
   "logoFile": "assets/utilities/logo.png",
   "screenshots": [
   ],
