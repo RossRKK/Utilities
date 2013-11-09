@@ -53,7 +53,7 @@
 		</fail>
 		
 		<delete dir="${common.in.dir}"/>
-		<delete file="${mcpsrc.dir}\mcmod.info"/>
+		<delete file="${mcp.dir}\bin\mcmod.info"/>
 	</target>
 	
 	<!-- Reobfuscate the files -->
@@ -61,19 +61,18 @@
 		<echo>Reobfuscating... (3/4)
 		</echo>
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="Windows" failonerror="true">
-			<arg line="/c reobfuscate.bat"/>
+			<arg line="/c reobfuscate_srg.bat"/>
 		</exec>
 		<exec dir="${mcp.dir}" executable="bash" osfamily="Unix" failonerror="true">
-			<arg line="reobfuscate.sh"/>
+			<arg line="reobfuscate_srg.sh"/>
 		</exec>
-		<delete dir="${mcpreobf.dir}\net"/>
 	</target>
 	
 	<!-- Cleans up -->
 	<target name = "cleanup">
 		<echo>Cleaning Up</echo>
 	        <delete dir="${mcpsrc.dir}\resources"/>
-		
+			<delete dir="${mcpreobf.dir}\net"/>
 	</target>
 	
 	<!-- Default target to run, does everything for you -->
@@ -92,9 +91,9 @@ Last step!  Building the jar! (4/4)
 		<antcall target = "cleanup"/>
 		<mkdir dir="${release.dir}"/>
 		<jar destfile="${release.dir}\${mod.name} ${mod.version}.jar">
-			<fileset dir="${mod.common.dir}" includes="mcmod.info"/>
+			<fileset dir="${mod.common.dir}" includes="assets\*\*\*\*\" excludes="com"/>
 			<fileset dir="${mcpreobf.dir}"/>
-			<fileset dir="${source.dir}\Resource"/>
+			<fileset file="${mod.common.dir}/mcmod.info"/>
 		</jar>
 	</target>
 </project>
