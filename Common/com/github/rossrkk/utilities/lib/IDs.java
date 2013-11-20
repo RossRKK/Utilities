@@ -30,8 +30,9 @@ public class IDs {
 	public static final int BATTERY_DEFAULT_ID = 4021;
 	public static final int CREATIVE_GENERATOR_DEFAULT_ID = 4022;
 	public static final int CLEAR_GLASS_DEFAULT_ID = 4023;
-	public static final int COAL_GEN_DEFAULT_ID = 2024;
-	public static final int ELECTRIC_FURNACE_DEFAULT_ID = 2025;
+	public static final int COAL_GEN_DEFAULT_ID = 4024;
+	public static final int ELECTRIC_FURNACE_DEFAULT_ID = 4025;
+	public static final int SOLAR_DEFAULT_ID = 4026;
 
 
 	//ids
@@ -68,4 +69,5 @@ public class IDs {
 	public static int clearGlass;
 	public static int coalGen;
 	public static int elctricFurnace;
+	public static int solar;
 }

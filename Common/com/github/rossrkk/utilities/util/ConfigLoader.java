@@ -24,6 +24,7 @@ public class ConfigLoader {
 		IDs.clearGlass = config.getBlock(Strings.CLEAR_GLASS_NAME, IDs.CLEAR_GLASS_DEFAULT_ID).getInt() - 256;
 		IDs.coalGen = config.getBlock(Strings.COAL_GEN_NAME, IDs.COAL_GEN_DEFAULT_ID).getInt() - 256;
 		IDs.elctricFurnace = config.getBlock(Strings.ELECTRIC_FURNACE_NAME, IDs.ELECTRIC_FURNACE_DEFAULT_ID).getInt() - 256;
+		IDs.solar = config.getBlock(Strings.SOLAR_NAME, IDs.SOLAR_DEFAULT_ID).getInt() - 256;
 
 		IDs.cobbleHolderID = config.getItem(Strings.COBBLE_HOLDER_KEY, IDs.COBBLE_HOLDER_DEFAULT_ID).getInt() - 256;
 

@@ -3,6 +3,7 @@ package com.github.rossrkk.utilities.tileentities;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

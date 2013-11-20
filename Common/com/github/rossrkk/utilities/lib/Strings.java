@@ -66,6 +66,8 @@ public class Strings {
 
 	public static final String ELECTRIC_FURNACE_NAME = "electricFurnace";
 
+	public static final String SOLAR_NAME = "solar";
+
 
 
 }
