@@ -22,44 +22,20 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Blocks {
 
-	public static Block turidiumOre;
+	public static Block battery;
 	public static Block blockBreaker;
 	public static Block blockPlacer;
+	public static Block cable;
+	public static Block clearGlass;
+	public static Block coalGen;
+
+	public static Block creativeGenerator;
+	public static Block electricFurnace;
 	public static Block fullStoneSlab;
 	public static Block jumpPad;
-	public static Block clearGlass;
-
 	public static Block miner;
-	public static Block cable;
-	public static Block battery;
-	public static Block creativeGenerator;
-	public static Block coalGen;
-	public static Block electricFurnace;
 	public static Block solar;
-
-	public static void init() {
-		//create instances of each block
-		turidiumOre  = new BlockOreTuridium(IDs.blockOreTuridiumID, Material.iron);
-		blockBreaker = new BlockBlockBreaker(IDs.blockBreakerID, Material.iron);
-		blockPlacer = new BlockBlockPlacer(IDs.blockPlacerID, Material.iron);
-		fullStoneSlab = new BlockFullStoneSlab(IDs.blockFullStoneSlabID, Material.rock);
-		jumpPad = new BlockJumpPad(IDs.blockJumpPad, Material.iron);
-
-		miner = new BlockMiner(IDs.blockMiner, Material.iron);
-		cable = new BlockCable(IDs.cable, Material.iron);
-		battery = new BlockBattery(IDs.battery, Material.iron);
-		creativeGenerator = new BlockCreativeGenerator(IDs.creativeGenerator, Material.iron);
-		coalGen = new BlockCoalGen(IDs.coalGen, Material.iron);
-		electricFurnace = new BlockElectricFurnace(IDs.elctricFurnace);
-		solar = new BlockSolar(IDs.solar, Material.iron);
-
-		clearGlass = new BlockClearGlass(IDs.clearGlass, Material.glass);
-
-		MinecraftForge.setBlockHarvestLevel(turidiumOre, "pickaxe", 2);
-
-		gameRegisters();
-		languageRegisters();
-	}
+	public static Block turidiumOre;
 
 	public static void gameRegisters() {
 		GameRegistry.registerBlock(turidiumOre, Strings.BLOCK_ORE_TURIDIUM_NAME + Reference.MOD_ID);
@@ -86,6 +62,30 @@ public class Blocks {
 		GameRegistry.registerTileEntity(TEElectricFurnace.class, "electicFurnace");
 		GameRegistry.registerTileEntity(TECreativeGenerator.class, "creativeGenerator");
 		GameRegistry.registerTileEntity(TESolar.class, "solar");
+	}
+
+	public static void init() {
+		//create instances of each block
+		turidiumOre  = new BlockOreTuridium(IDs.blockOreTuridiumID, Material.iron);
+		blockBreaker = new BlockBlockBreaker(IDs.blockBreakerID, Material.iron);
+		blockPlacer = new BlockBlockPlacer(IDs.blockPlacerID, Material.iron);
+		fullStoneSlab = new BlockFullStoneSlab(IDs.blockFullStoneSlabID, Material.rock);
+		jumpPad = new BlockJumpPad(IDs.blockJumpPad, Material.iron);
+
+		miner = new BlockMiner(IDs.blockMiner, Material.iron);
+		cable = new BlockCable(IDs.cable, Material.iron);
+		battery = new BlockBattery(IDs.battery, Material.iron);
+		creativeGenerator = new BlockCreativeGenerator(IDs.creativeGenerator, Material.iron);
+		coalGen = new BlockCoalGen(IDs.coalGen, Material.iron);
+		electricFurnace = new BlockElectricFurnace(IDs.elctricFurnace);
+		solar = new BlockSolar(IDs.solar, Material.iron);
+
+		clearGlass = new BlockClearGlass(IDs.clearGlass, Material.glass);
+
+		MinecraftForge.setBlockHarvestLevel(turidiumOre, "pickaxe", 2);
+
+		gameRegisters();
+		languageRegisters();
 	}
 
 	public static void languageRegisters() {

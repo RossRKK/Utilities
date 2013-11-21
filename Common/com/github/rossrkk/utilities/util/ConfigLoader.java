@@ -39,7 +39,7 @@ public class ConfigLoader {
 		IDs.omniToolWoodID = config.getItem(Strings.OMNI_TOOL_WOOD_KEY, IDs.OMNI_TOOL_WOOD_DEFAULT_ID).getInt() - 256;
 		IDs.omniToolTuridiumID = config.getItem(Strings.OMNI_TOOL_TURIDIUM_KEY, IDs.OMNI_TOOL_TURIDIUM_DEFAULT_ID).getInt() - 256;
 
-		IDs.turidiumSwordID = config.getItem("turidiumSword", IDs.TURIDIUM_SWORD_DEFAULT_ID).getInt() - 256;		
+		IDs.turidiumSwordID = config.getItem("turidiumSword", IDs.TURIDIUM_SWORD_DEFAULT_ID).getInt() - 256;
 		IDs.turidiumPickID = config.getItem("turidiumPick", IDs.TURIDIUM_PICK_DEFAULT_ID).getInt() - 256;
 		IDs.turidiumAxeID = config.getItem("turidiumAxe", IDs.TURIDIUM_AXE_DEFAULT_ID).getInt() - 256;
 		IDs.turidiumShovelID = config.getItem("turidiumShovel", IDs.TURIDIUM_SHOVEL_DEFAULT_ID).getInt() - 256;

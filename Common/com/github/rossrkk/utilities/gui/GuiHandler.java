@@ -20,6 +20,35 @@ public class GuiHandler implements IGuiHandler {
 	}
 
 	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
+			int x, int y, int z) {
+		switch (ID) {
+		case 0:
+			TileEntity te1 = world.getBlockTileEntity(x, y, z);
+			if (te1 != null && te1 instanceof TEBlockPlacer) {
+				return new GuiPlacer(player.inventory, (TEBlockPlacer)te1);
+			}
+		case 1:
+			TileEntity te2 = world.getBlockTileEntity(x, y, z);
+			if (te2 != null && te2 instanceof TEMiner) {
+				return new GuiMiner(player.inventory, (TEMiner)te2);
+			}
+		case 2:
+			TileEntity te3 = world.getBlockTileEntity(x, y, z);
+			if (te3 != null && te3 instanceof TECoalGen) {
+				return new GuiCoalGen(player.inventory, (TECoalGen)te3);
+			}
+		case 3:
+			TileEntity te4 = world.getBlockTileEntity(x, y, z);
+			if (te4 != null && te4 instanceof TEElectricFurnace) {
+				return new GuiElectircFurnace(player.inventory, (TEElectricFurnace)te4);
+			}
+		}
+
+		return null;
+	}
+
+	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
 		switch (ID) {
@@ -49,35 +78,6 @@ public class GuiHandler implements IGuiHandler {
 			break;
 		}
 
-
-		return null;
-	}
-
-	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z) {
-		switch (ID) {
-		case 0:
-			TileEntity te1 = world.getBlockTileEntity(x, y, z);
-			if (te1 != null && te1 instanceof TEBlockPlacer) {
-				return new GuiPlacer(player.inventory, (TEBlockPlacer)te1);
-			}
-		case 1:
-			TileEntity te2 = world.getBlockTileEntity(x, y, z);
-			if (te2 != null && te2 instanceof TEMiner) {
-				return new GuiMiner(player.inventory, (TEMiner)te2);
-			}
-		case 2:
-			TileEntity te3 = world.getBlockTileEntity(x, y, z);
-			if (te3 != null && te3 instanceof TECoalGen) {
-				return new GuiCoalGen(player.inventory, (TECoalGen)te3);
-			}
-		case 3:
-			TileEntity te4 = world.getBlockTileEntity(x, y, z);
-			if (te4 != null && te4 instanceof TEElectricFurnace) {
-				return new GuiElectircFurnace(player.inventory, (TEElectricFurnace)te4);
-			}
-		}
 
 		return null;
 	}

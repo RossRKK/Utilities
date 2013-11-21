@@ -24,6 +24,11 @@ public class GenerationHandeler implements IWorldGenerator {
 		turidiumGen = new WorldGenMinable(IDs.blockOreTuridiumID, 8);
 	}
 
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		generateStandardOre(random, chunkX, chunkZ, world, 10, turidiumGen, 0, 20);
+	}
+
 	//thanks vswe http://courses.vswe.se/?course=3&lecture=28&full=1
 	private void generateStandardOre(Random rand, int chunkX, int chunkZ, World world, int iterations, WorldGenerator gen, int lowestY, int highestY){
 		for (int i = 0; i < iterations; i++) {
@@ -33,11 +38,6 @@ public class GenerationHandeler implements IWorldGenerator {
 
 			gen.generate(world, rand, x, y, z);
 		}
-	}
-
-	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		generateStandardOre(random, chunkX, chunkZ, world, 10, turidiumGen, 0, 20);
 	}
 
 }

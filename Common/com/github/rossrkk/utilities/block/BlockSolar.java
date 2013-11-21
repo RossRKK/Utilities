@@ -18,15 +18,15 @@ public class BlockSolar extends BlockContainer{
 		setUnlocalizedName(Strings.SOLAR_NAME);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3F, 1.0F);
 	}
-	
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TESolar();
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
 	}
 
 }

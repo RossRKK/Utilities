@@ -23,26 +23,50 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class Items {
 	// create item instances
 
-	//turidium tools
-	public static Item turidiumPick;
-	public static Item turidiumSword;
-	public static Item turidiumShovel;
-	public static Item turidiumAxe;
-	public static Item turidiumHoe;
-
-	public static Item ingotTuridium;
-	public static Item enderPouch;
-
 	//holders
 	public static Item cobbleHolder;
-
+	public static Item enderPouch;
+	public static Item ingotTuridium;
 	// omni tools
 	public static Item omnitoolDiamond;
 	public static Item omnitoolGold;
+
 	public static Item omnitoolIron;
 	public static Item omnitoolStone;
-	public static Item omnitoolWood;
+
 	public static Item omnitoolTuridium;
+
+	public static Item omnitoolWood;
+	public static Item turidiumAxe;
+	public static Item turidiumHoe;
+	//turidium tools
+	public static Item turidiumPick;
+	public static Item turidiumShovel;
+	public static Item turidiumSword;
+
+	// register items in game
+	public static void gameRegisters() {
+		GameRegistry.registerItem(cobbleHolder, Strings.COBBLE_HOLDER_NAME,
+				Reference.MOD_ID);
+
+		GameRegistry.registerItem(enderPouch, Strings.ENDER_POUCH_NAME, Reference.MOD_ID);
+
+		GameRegistry.registerItem(ingotTuridium, Strings.INGOT_TURIDIUM_NAME, Reference.MOD_ID);
+
+		// Omnitools
+		GameRegistry.registerItem(omnitoolDiamond, Strings.OMNI_TOOL_DIAMOND_NAME,
+				Reference.MOD_ID);
+		GameRegistry.registerItem(omnitoolGold, Strings.OMNI_TOOL_GOLD_NAME,
+				Reference.MOD_ID);
+		GameRegistry.registerItem(omnitoolIron, Strings.OMNI_TOOL_IRON_NAME,
+				Reference.MOD_ID);
+		GameRegistry.registerItem(omnitoolStone, Strings.OMNI_TOOL_STONE_NAME,
+				Reference.MOD_ID);
+		GameRegistry.registerItem(omnitoolWood, Strings.OMNI_TOOL_WOOD_NAME,
+				Reference.MOD_ID);
+		GameRegistry.registerItem(omnitoolTuridium, Strings.OMNI_TOOL_TURIDIUM_NAME,
+				Reference.MOD_ID);
+	}
 
 	public static void init() {
 		EnumToolMaterial turidium = EnumHelper.addToolMaterial("TURIDIUM", 2, 900, 9.0F, 3.5F, 12);
@@ -85,30 +109,6 @@ public class Items {
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
 		//ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(cobbleHolder, 1), 1, 1, 1));
-	}
-
-	// register items in game
-	public static void gameRegisters() {
-		GameRegistry.registerItem(cobbleHolder, Strings.COBBLE_HOLDER_NAME,
-				Reference.MOD_ID);
-
-		GameRegistry.registerItem(enderPouch, Strings.ENDER_POUCH_NAME, Reference.MOD_ID);
-
-		GameRegistry.registerItem(ingotTuridium, Strings.INGOT_TURIDIUM_NAME, Reference.MOD_ID);
-
-		// Omnitools
-		GameRegistry.registerItem(omnitoolDiamond, Strings.OMNI_TOOL_DIAMOND_NAME,
-				Reference.MOD_ID);
-		GameRegistry.registerItem(omnitoolGold, Strings.OMNI_TOOL_GOLD_NAME,
-				Reference.MOD_ID);
-		GameRegistry.registerItem(omnitoolIron, Strings.OMNI_TOOL_IRON_NAME,
-				Reference.MOD_ID);
-		GameRegistry.registerItem(omnitoolStone, Strings.OMNI_TOOL_STONE_NAME,
-				Reference.MOD_ID);
-		GameRegistry.registerItem(omnitoolWood, Strings.OMNI_TOOL_WOOD_NAME,
-				Reference.MOD_ID);
-		GameRegistry.registerItem(omnitoolTuridium, Strings.OMNI_TOOL_TURIDIUM_NAME,
-				Reference.MOD_ID);
 	}
 
 	public static void languageRegisters() {

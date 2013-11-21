@@ -22,34 +22,6 @@ public class BlockClearGlass extends Block {
 	}
 
 	@Override
-	public boolean isOpaqueCube ()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock ()
-	{
-		return false;
-	}
-
-	//All of this is mDiyo's https://github.com/mDiyo/TinkersConstruct
-
-	/**
-	 * This is checked to see if the texture should connect to this block
-	 * @param par2 x
-	 * @param par3 y
-	 * @param par4 z
-	 * @param par5 ID this block is asking to connect to (may be 0 if there is no block)
-	 * @param par6 Metadata of the block this block is trying to connect to
-	 * @return true if should connect
-	 */
-	public boolean shouldConnectToBlock (IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5, int par6)
-	{
-		return par5 == blockID;
-	}
-
-	@Override
 	public Icon getBlockTexture (IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
 		return getConnectedBlockTexture(par1IBlockAccess, par2, par3, par4, par5, icons);
@@ -559,17 +531,18 @@ public class BlockClearGlass extends Block {
 		return icons[0];
 	}
 
-	@Override
-	public boolean shouldSideBeRendered (IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-	{
-		int i1 = par1IBlockAccess.getBlockId(par2, par3, par4);
-		return i1 == blockID ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
-	}
+	//All of this is mDiyo's https://github.com/mDiyo/TinkersConstruct
 
 	@Override
 	public Icon getIcon (int par1, int par2)
 	{
 		return icons[0];
+	}
+
+	@Override
+	public boolean isOpaqueCube ()
+	{
+		return false;
 	}
 
 	@Override
@@ -591,5 +564,32 @@ public class BlockClearGlass extends Block {
 		icons[13] = par1IconRegister.registerIcon("utilities:glass/glass_3_l");
 		icons[14] = par1IconRegister.registerIcon("utilities:glass/glass_3_r");
 		icons[15] = par1IconRegister.registerIcon("utilities:glass/glass_4");
+	}
+
+	@Override
+	public boolean renderAsNormalBlock ()
+	{
+		return false;
+	}
+
+	/**
+	 * This is checked to see if the texture should connect to this block
+	 * @param par2 x
+	 * @param par3 y
+	 * @param par4 z
+	 * @param par5 ID this block is asking to connect to (may be 0 if there is no block)
+	 * @param par6 Metadata of the block this block is trying to connect to
+	 * @return true if should connect
+	 */
+	public boolean shouldConnectToBlock (IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5, int par6)
+	{
+		return par5 == blockID;
+	}
+
+	@Override
+	public boolean shouldSideBeRendered (IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	{
+		int i1 = par1IBlockAccess.getBlockId(par2, par3, par4);
+		return i1 == blockID ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
 	}
 }

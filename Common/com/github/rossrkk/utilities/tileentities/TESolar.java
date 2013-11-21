@@ -7,20 +7,45 @@ import com.github.rossrkk.utilities.power.IPower;
 import com.github.rossrkk.utilities.util.WorldHelper;
 
 public class TESolar extends TileEntity implements IPower {
-	
-	public int power = 0;
+
 	public int maxPower = 1024;
+	public int power = 0;
 	public int totalOut = 16;
 	public int toTransfer = 16;
-	
+
 	@Override
-	public void updateEntity() {
-		if (!worldObj.isRemote) {
-			if(worldObj.isDaytime() && WorldHelper.canSeeSky(worldObj, xCoord, yCoord, zCoord)) {
-				power += totalOut;
-			}
-			
-			transferPower();
+	public int getPower() {
+		return power;
+	}
+
+	@Override
+	public int incrementPower(int count) {
+		int totalPower = count + power;
+		if (totalPower > maxPower) {
+			power = maxPower;
+			return totalPower - maxPower;
+		} else {
+			power = totalPower;
+			return 0;
+		}
+	}
+
+	@Override
+	public boolean isGenerator() {
+		return true;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		power = compound.getInteger("power");
+	}
+
+	public void transfer(int x, int y, int z) {
+		if (worldObj.getBlockTileEntity(x, y, z) instanceof IPower
+				&& !((IPower)worldObj.getBlockTileEntity(x, y, z)).isGenerator()
+				&& power >= toTransfer) {
+			power = power + ((IPower)worldObj.getBlockTileEntity(x, y, z)).incrementPower(toTransfer) - toTransfer;
 		}
 	}
 
@@ -44,46 +69,19 @@ public class TESolar extends TileEntity implements IPower {
 			}
 		}
 	}
-	
-	public void transfer(int x, int y, int z) {
-		if (worldObj.getBlockTileEntity(x, y, z) instanceof IPower 
-				&& !((IPower)worldObj.getBlockTileEntity(x, y, z)).isGenerator() 
-				&& power >= toTransfer) {
-			power = power + ((IPower)worldObj.getBlockTileEntity(x, y, z)).incrementPower(toTransfer) - toTransfer;
+
+	@Override
+	public void updateEntity() {
+		if(worldObj.isDaytime() && WorldHelper.canSeeSky(worldObj, xCoord, yCoord, zCoord)) {
+			power += totalOut;
 		}
+
+		transferPower();
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound.setInteger("power", power);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		super.readFromNBT(compound);
-		power = compound.getInteger("power");
-	}
-
-	@Override
-	public int getPower() {
-		return power;
-	}
-
-	@Override
-	public int incrementPower(int count) {
-		int totalPower = count + power;
-		if (totalPower > maxPower) {
-			power = maxPower;
-			return totalPower - maxPower;
-		} else {
-			power = totalPower;
-			return 0;
-		}
-	}
-
-	@Override
-	public boolean isGenerator() {
-		return true;
 	}
 }

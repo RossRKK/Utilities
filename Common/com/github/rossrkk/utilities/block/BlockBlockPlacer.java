@@ -22,27 +22,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBlockPlacer extends BlockContainer {
 
+	@SideOnly(Side.CLIENT)
+	private Icon placeIcon;
+
 	protected BlockBlockPlacer(int id, Material material) {
 		super(id, material);
 		setHardness(3.0F);
 		setUnlocalizedName(Strings.BLOCK_PLACER_NAME);
 		setCreativeTab(Utilities.utilTab);
-	}
-
-	@Override
-	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
-		return world.getBlockMetadata(x, y, z) != side;
-	}
-
-	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float par6, float par7, float par8, int par9) {
-		world.setBlockMetadataWithNotify(x, y, z, side, 0);
-		return side;
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TEBlockPlacer();
 	}
 
 	@Override
@@ -75,14 +62,14 @@ public class BlockBlockPlacer extends BlockContainer {
 		super.breakBlock(world, x, y, z, id, meta);
 	}
 
-	@SideOnly(Side.CLIENT)
-	private Icon placeIcon;
+	@Override
+	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
+		return world.getBlockMetadata(x, y, z) != side;
+	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister register) {
-		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME);
-		placeIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME + "Placer");
+	public TileEntity createNewTileEntity(World world) {
+		return new TEBlockPlacer();
 	}
 
 	@Override
@@ -101,5 +88,18 @@ public class BlockBlockPlacer extends BlockContainer {
 			FMLNetworkHandler.openGui(player, Utilities.instance, 0, world, x, y, z);
 		}
 		return true;
+	}
+
+	@Override
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float par6, float par7, float par8, int par9) {
+		world.setBlockMetadataWithNotify(x, y, z, side, 0);
+		return side;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister register) {
+		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME);
+		placeIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BLOCK_PLACER_NAME + "Placer");
 	}
 }

@@ -39,11 +39,6 @@ public class BlockCable extends BlockContainer {
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
 		if (!world.isRemote && world.getBlockTileEntity(x, y, z) instanceof IPower) {
 			IPower te = (IPower)world.getBlockTileEntity(x, y, z);
@@ -60,14 +55,8 @@ public class BlockCable extends BlockContainer {
 	}
 
 	@Override
-	public void setBlockBoundsForItemRender() {
-		minX = 0F;
-		minY = 0.3;
-		minZ = 0.3;
-
-		maxX = 1F;
-		maxY = 0.7;
-		maxZ = 0.7;
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 
 	@Override
@@ -98,5 +87,16 @@ public class BlockCable extends BlockContainer {
 		if (blockAccess.getBlockTileEntity(x, y, z - 1) instanceof IPower) {
 			setBlockBounds((float)minX, (float)minY, (float)minZ - 0.3F, (float)maxX, (float)maxY, (float)maxZ);
 		}
+	}
+
+	@Override
+	public void setBlockBoundsForItemRender() {
+		minX = 0F;
+		minY = 0.3;
+		minZ = 0.3;
+
+		maxX = 1F;
+		maxY = 0.7;
+		maxZ = 0.7;
 	}
 }

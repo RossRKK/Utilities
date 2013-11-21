@@ -25,24 +25,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCoalGen extends BlockContainer {
 
+	@SideOnly(Side.CLIENT)
+	Icon front;
+
+	@SideOnly(Side.CLIENT)
+	Icon side;
+
 	protected BlockCoalGen(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setUnlocalizedName(Strings.COAL_GEN_NAME);
 		setCreativeTab(Utilities.utilTab);
 		setHardness(4.0F);
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TECoalGen();
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			FMLNetworkHandler.openGui(player, Utilities.instance, 2, world, x, y, z);
-		}
-		return true;
 	}
 
 	@Override
@@ -76,94 +69,9 @@ public class BlockCoalGen extends BlockContainer {
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
+	public TileEntity createNewTileEntity(World world) {
+		return new TECoalGen();
 	}
-	
-	/**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
-    {
-        super.onBlockAdded(par1World, par2, par3, par4);
-        this.setDefaultDirection(par1World, par2, par3, par4);
-    }
-	
-	/**
-     * set a blocks direction
-     */
-    private void setDefaultDirection(World par1World, int par2, int par3, int par4)
-    {
-        if (!par1World.isRemote)
-        {
-            int l = par1World.getBlockId(par2, par3, par4 - 1);
-            int i1 = par1World.getBlockId(par2, par3, par4 + 1);
-            int j1 = par1World.getBlockId(par2 - 1, par3, par4);
-            int k1 = par1World.getBlockId(par2 + 1, par3, par4);
-            byte b0 = 3;
-
-            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
-            {
-                b0 = 3;
-            }
-
-            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
-            {
-                b0 = 2;
-            }
-
-            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
-            {
-                b0 = 5;
-            }
-
-            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
-            {
-                b0 = 4;
-            }
-
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
-        }
-    }
-    
-    /**
-     * Called when the block is placed in the world.
-     */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-    {
-        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-        if (l == 0)
-        {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
-        }
-
-        if (l == 1)
-        {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
-        }
-
-        if (l == 2)
-        {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
-        }
-
-        if (l == 3)
-        {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
-        }
-
-        if (par6ItemStack.hasDisplayName())
-        {
-            ((TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
-        }
-    }
-
-	@SideOnly(Side.CLIENT)
-	Icon side;
-
-	@SideOnly(Side.CLIENT)
-	Icon front;
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -182,6 +90,63 @@ public class BlockCoalGen extends BlockContainer {
 	}
 
 	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote) {
+			FMLNetworkHandler.openGui(player, Utilities.instance, 2, world, x, y, z);
+		}
+		return true;
+	}
+
+	/**
+	 * Called whenever the block is added into the world. Args: world, x, y, z
+	 */
+	@Override
+	public void onBlockAdded(World par1World, int par2, int par3, int par4)
+	{
+		super.onBlockAdded(par1World, par2, par3, par4);
+		setDefaultDirection(par1World, par2, par3, par4);
+	}
+
+	/**
+	 * Called when the block is placed in the world.
+	 */
+	@Override
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+	{
+		int l = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+
+		if (l == 0)
+		{
+			par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
+		}
+
+		if (l == 1)
+		{
+			par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
+		}
+
+		if (l == 2)
+		{
+			par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
+		}
+
+		if (l == 3)
+		{
+			par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
+		}
+
+		if (par6ItemStack.hasDisplayName())
+		{
+			((TileEntityFurnace)par1World.getBlockTileEntity(par2, par3, par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
+		}
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**
@@ -192,5 +157,42 @@ public class BlockCoalGen extends BlockContainer {
 		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.COAL_GEN_NAME);
 		side = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.COAL_GEN_NAME + "Side");
 		front = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.COAL_GEN_NAME + "Front");
+	}
+
+	/**
+	 * set a blocks direction
+	 */
+	private void setDefaultDirection(World par1World, int par2, int par3, int par4)
+	{
+		if (!par1World.isRemote)
+		{
+			int l = par1World.getBlockId(par2, par3, par4 - 1);
+			int i1 = par1World.getBlockId(par2, par3, par4 + 1);
+			int j1 = par1World.getBlockId(par2 - 1, par3, par4);
+			int k1 = par1World.getBlockId(par2 + 1, par3, par4);
+			byte b0 = 3;
+
+			if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+			{
+				b0 = 3;
+			}
+
+			if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+			{
+				b0 = 2;
+			}
+
+			if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+			{
+				b0 = 5;
+			}
+
+			if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+			{
+				b0 = 4;
+			}
+
+			par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
+		}
 	}
 }

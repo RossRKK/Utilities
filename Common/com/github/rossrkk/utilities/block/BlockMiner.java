@@ -21,41 +21,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockMiner extends BlockContainer{
 
+	@SideOnly(Side.CLIENT)
+	public Icon bottom;
+
+	@SideOnly(Side.CLIENT)
+	public Icon top;
+
 	protected BlockMiner(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setUnlocalizedName(Strings.MINER_NAME);
 		setCreativeTab(Utilities.utilTab);
 		setHardness(4.0F);
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TEMiner();
-	}
-
-	@SideOnly(Side.CLIENT)
-	public Icon top;
-	@SideOnly(Side.CLIENT)
-	public Icon bottom;
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister register) {
-		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Side");
-		top = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Top");
-		bottom = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Bottom");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		switch (side) {
-		case 0: return bottom;
-		case 1: return top;
-		default:return blockIcon;
-		}
-	}
-
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
@@ -86,6 +63,20 @@ public class BlockMiner extends BlockContainer{
 		super.breakBlock(world, x, y, z, id, meta);
 	}
 
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TEMiner();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getIcon(int side, int meta) {
+		switch (side) {
+		case 0: return bottom;
+		case 1: return top;
+		default:return blockIcon;
+		}
+	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
@@ -93,5 +84,14 @@ public class BlockMiner extends BlockContainer{
 			FMLNetworkHandler.openGui(player, Utilities.instance, 1, world, x, y, z);
 		}
 		return true;
+	}
+
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister register) {
+		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Side");
+		top = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Top");
+		bottom = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.MINER_NAME+ "Bottom");
 	}
 }

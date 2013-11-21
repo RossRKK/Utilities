@@ -6,8 +6,19 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TEBlockBreaker extends TileEntity {
 
-	public static int side;
 	public static ItemStack inventory;
+	public static int side;
+
+	public void breakBlock(int x, int y, int z) {
+		worldObj.destroyBlock(x, y, z, true);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+
+		side = compound.getShort("side");
+	}
 
 	@Override
 	public void updateEntity() {
@@ -31,21 +42,10 @@ public class TEBlockBreaker extends TileEntity {
 		}
 	}
 
-	public void breakBlock(int x, int y, int z) {
-		worldObj.destroyBlock(x, y, z, true);
-	}
-
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 
 		compound.setShort("side", (short) side);
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		super.readFromNBT(compound);
-
-		side = compound.getShort("side");
 	}
 }

@@ -18,11 +18,28 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBattery extends BlockContainer {
 
+	@SideOnly(Side.CLIENT)
+	public Icon out;
+
 	public BlockBattery(int id, Material material) {
 		super(id, material);
 		setUnlocalizedName(Strings.BATTERY_NAME);
 		setHardness(4.0F);
 		setCreativeTab(Utilities.utilTab);
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TEBattery();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getIcon(int side, int meta) {
+		if (meta == 0) {
+			return blockIcon;
+		}
+		return out;
 	}
 
 	@Override
@@ -43,26 +60,9 @@ public class BlockBattery extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TEBattery();
-	}
-
-	@SideOnly(Side.CLIENT)
-	public Icon out;
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BATTERY_NAME + "In");
 		out = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.BATTERY_NAME + "Out");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		if (meta == 0) {
-			return blockIcon;
-		}
-		return out;
 	}
 }

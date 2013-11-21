@@ -16,9 +16,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemOmniTool extends ItemTool {
-	public EnumToolMaterial material;
-	public static String location;
-
 	/** an array of the blocks this omnitool is effective against */
 	public static Block[] blocksEffectiveAgainst = new Block[] {
 		Block.cobblestone, Block.stoneDoubleSlab, Block.stoneSingleSlab,
@@ -33,6 +30,9 @@ public class ItemOmniTool extends ItemTool {
 		Block.planks, Block.bookShelf, Block.wood, Block.chest,
 		Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin,
 		Block.pumpkinLantern };
+	public static String location;
+
+	public EnumToolMaterial material;
 
 	public ItemOmniTool(int par1, EnumToolMaterial par2EnumToolMaterial) {
 		super(par1, 2, par2EnumToolMaterial, blocksEffectiveAgainst);
@@ -66,6 +66,16 @@ public class ItemOmniTool extends ItemTool {
 	}
 
 	/**
+	 * Return whether this item is repairable in an anvil.
+	 */
+	@Override
+	public boolean getIsRepairable(ItemStack par1ItemStack,
+			ItemStack par2ItemStack) {
+		return toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID ? true
+				: super.getIsRepairable(par1ItemStack, par2ItemStack);
+	}
+
+	/**
 	 * Returns the strength of the stack against a given block. 1.0F base,
 	 * (Quality+1)*2 if correct blocktype, 1.5F if sword
 	 */
@@ -83,16 +93,6 @@ public class ItemOmniTool extends ItemTool {
 	@Override
 	public boolean isFull3D() {
 		return true;
-	}
-
-	/**
-	 * Return whether this item is repairable in an anvil.
-	 */
-	@Override
-	public boolean getIsRepairable(ItemStack par1ItemStack,
-			ItemStack par2ItemStack) {
-		return toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID ? true
-				: super.getIsRepairable(par1ItemStack, par2ItemStack);
 	}
 
 	// hoing script

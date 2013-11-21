@@ -39,57 +39,57 @@ public class CraftingManager {
 		GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumPick, 1), new Object[]{
 			"III",
 			" S ",
-			" S ", 
+			" S ",
 			'S', Item.stick, 'I', Items.ingotTuridium});
 
 		GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumAxe, 1), new Object[]{
 			" II",
 			" SI",
-			" S ", 
+			" S ",
 			'S', Item.stick, 'I', Items.ingotTuridium});
 
 		GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumAxe, 1), new Object[]{
 			"II ",
 			"IS ",
-			" S ", 
+			" S ",
 			'S', Item.stick, 'I', Items.ingotTuridium});
 
 		GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumHoe, 1), new Object[]{
 			"II ",
 			" S ",
-			" S ", 
+			" S ",
 			'S', Item.stick, 'I', Items.ingotTuridium});
 
 		GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumHoe, 1), new Object[]{
 			" II",
 			" S ",
-			" S ", 
+			" S ",
 			'S', Item.stick, 'I', Items.ingotTuridium});
 
 		GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumShovel, 1), new Object[]{
 			" I ",
 			" S ",
-			" S ", 
+			" S ",
 			'S', Item.stick, 'I', Items.ingotTuridium});
 
 		GameRegistry.addShapedRecipe(new ItemStack(Items.turidiumSword, 1), new Object[]{
 			" I ",
 			" I ",
-			" S ", 
+			" S ",
 			'S', Item.stick, 'I', Items.ingotTuridium});
 
 		//Cobble Holder Recipe
 		GameRegistry.addShapedRecipe(new ItemStack(Items.cobbleHolder, 1), new Object[]{
 			"SES",
 			"LPL",
-			"BLB", 
+			"BLB",
 			'S', Item.silk, 'E', Item.emerald,'L', Item.leather, 'P', Item.enderPearl, 'B', Item.blazeRod});
 
 		//Ender pouch recipe
 		GameRegistry.addShapedRecipe(new ItemStack(Items.enderPouch, 1), new Object[]{
 			" E ",
 			"LCL",
-			" L ", 
+			" L ",
 			'E', Items.ingotTuridium,'L', Item.leather, 'C', Block.enderChest});
 
 		//Block Placer
@@ -141,7 +141,7 @@ public class CraftingManager {
 			"T T",
 			'I', Item.ingotIron, 'E', Item.emerald, 'C', Block.chest, 'T', Items.ingotTuridium
 		});
-		
+
 		//electric furnace
 		GameRegistry.addShapedRecipe(new ItemStack(Blocks.electricFurnace, 1), new Object[] {
 			"III",
@@ -149,7 +149,7 @@ public class CraftingManager {
 			"III",
 			'I', Item.ingotIron, 'T', Items.ingotTuridium, 'F', Block.furnaceIdle
 		});
-		
+
 		//coal generator
 		GameRegistry.addShapedRecipe(new ItemStack(Blocks.coalGen, 1), new Object[] {
 			"III",

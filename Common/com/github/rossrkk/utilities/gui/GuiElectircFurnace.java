@@ -11,6 +11,8 @@ import com.github.rossrkk.utilities.tileentities.TEElectricFurnace;
 
 public class GuiElectircFurnace extends GuiContainer {
 
+	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/furnace.png");
+
 	TEElectricFurnace machine;
 
 	public GuiElectircFurnace(InventoryPlayer inventory, TEElectricFurnace machine) {
@@ -21,8 +23,6 @@ public class GuiElectircFurnace extends GuiContainer {
 		xSize = 176;
 		ySize = 166;
 	}
-
-	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/furnace.png");
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {

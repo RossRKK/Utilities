@@ -21,7 +21,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
-@NetworkMod(channels = {Reference.CHANNEL}, clientSideRequired = true, serverSideRequired = false) 
+@NetworkMod(channels = {Reference.CHANNEL}, clientSideRequired = true, serverSideRequired = false)
 public class Utilities {
 
 	@Instance(Reference.MOD_ID)
@@ -29,20 +29,8 @@ public class Utilities {
 
 	public static CreativeTabs utilTab;
 
-	@EventHandler
-	public void ModsToLoad(FMLPreInitializationEvent event) {
-
-		ConfigLoader.init(event.getSuggestedConfigurationFile());
-
-		//Thanks SciGuy1121 http://www.youtube.com/watch?v=8C_ptdFOIiE
-		utilTab = new CreativeTabs("util_utilities"){
-			@Override
-			public ItemStack getIconItemStack(){ return new ItemStack(Items.cobbleHolder); }
-		};
-
-
-		Items.init();
-		Blocks.init();
+	public static void languageRegisters() {
+		LanguageRegistry.instance().addStringLocalization("itemGroup.util_utilities", "Utilities");
 	}
 
 	@EventHandler
@@ -58,7 +46,19 @@ public class Utilities {
 	public void modsLoaded(FMLPostInitializationEvent event) {
 	}
 
-	public static void languageRegisters() {
-		LanguageRegistry.instance().addStringLocalization("itemGroup.util_utilities", "Utilities");
+	@EventHandler
+	public void ModsToLoad(FMLPreInitializationEvent event) {
+
+		ConfigLoader.init(event.getSuggestedConfigurationFile());
+
+		//Thanks SciGuy1121 http://www.youtube.com/watch?v=8C_ptdFOIiE
+		utilTab = new CreativeTabs("util_utilities"){
+			@Override
+			public ItemStack getIconItemStack(){ return new ItemStack(Items.cobbleHolder); }
+		};
+
+
+		Items.init();
+		Blocks.init();
 	}
 }

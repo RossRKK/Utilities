@@ -11,6 +11,8 @@ import com.github.rossrkk.utilities.tileentities.TECoalGen;
 
 public class GuiCoalGen extends GuiContainer {
 
+	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/coalgen.png");
+
 	private TECoalGen machine;
 
 	public GuiCoalGen(InventoryPlayer invPlayer, TECoalGen machine) {
@@ -21,8 +23,6 @@ public class GuiCoalGen extends GuiContainer {
 		xSize = 176;
 		ySize = 154;
 	}
-
-	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/coalgen.png");
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {

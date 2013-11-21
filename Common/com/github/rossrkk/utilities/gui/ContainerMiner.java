@@ -44,6 +44,13 @@ public class ContainerMiner extends Container {
 	}
 
 	@Override
+	public void addCraftingToCrafters(ICrafting player) {
+		super.addCraftingToCrafters(player);
+
+		player.sendProgressBarUpdate(this, 0, machine.power);
+	}
+
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return machine.isUseableByPlayer(entityplayer);
 	}
@@ -81,13 +88,6 @@ public class ContainerMiner extends Container {
 		}
 
 		return itemstack;
-	}
-
-	@Override
-	public void addCraftingToCrafters(ICrafting player) {
-		super.addCraftingToCrafters(player);
-
-		player.sendProgressBarUpdate(this, 0, machine.power);
 	}
 
 	@Override

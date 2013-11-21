@@ -11,14 +11,14 @@ import com.github.rossrkk.utilities.tileentities.TEBlockPlacer;
 
 public class GuiPlacer extends GuiContainer {
 
+	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/placer.png");
+
 	public GuiPlacer(InventoryPlayer invPlayer, TEBlockPlacer machine) {
 		super(new ContainerPlacer(invPlayer, machine));
 
 		xSize = 176;
 		ySize = 154;
 	}
-
-	public static final ResourceLocation texture = new ResourceLocation("utilities", "textures/gui/placer.png");
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {

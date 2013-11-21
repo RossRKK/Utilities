@@ -31,11 +31,6 @@ public class BlockJumpPad extends Block {
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (!player.isSneaking()) {
@@ -66,5 +61,10 @@ public class BlockJumpPad extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		blockIcon = register.registerIcon(Strings.TEXTURE_LOCATION + ":" + Strings.JUMP_PAD_NAME);
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 }
