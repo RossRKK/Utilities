@@ -25,15 +25,17 @@ public class TECoalGen extends TileEntity implements IPower, IInventory {
 
 	@Override
 	public void updateEntity() {
-		if (currentBurnTime > 0 && power < maxPower) {
-			power += 1;
-			currentBurnTime --;
+		if (!worldObj.isRemote) {
+			if (currentBurnTime > 0 && power < maxPower) {
+				power += 1;
+				currentBurnTime --;
+			}
+	
+			if (currentBurnTime <= 0 && power < maxPower) {
+				burn();
+			}
+			transferPower();
 		}
-
-		if (currentBurnTime <= 0 && power < maxPower) {
-			burn();
-		}
-		transferPower();
 	}
 
 	public void transferPower() {

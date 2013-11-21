@@ -14,11 +14,13 @@ public class TESolar extends TileEntity implements IPower {
 	
 	@Override
 	public void updateEntity() {
-		if(worldObj.isDaytime() && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) {
-			power += totalOut;
-		}	
-		
-		transferPower();
+		if (!worldObj.isRemote) {
+			if(worldObj.isDaytime() /*&& worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)*/) {
+				power += totalOut;
+			}	
+			
+			transferPower();
+		}
 	}
 
 	public void transferPower() {

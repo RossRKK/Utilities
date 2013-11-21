@@ -1,6 +1,7 @@
 package com.github.rossrkk.utilities.power;
 
 public interface IPower {
+	
 	//return the power level
 	public int getPower();
 

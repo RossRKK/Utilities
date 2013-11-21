@@ -34,8 +34,10 @@ public class BlockBattery extends BlockContainer {
 				world.setBlockMetadataWithNotify(x, y, z, 0, 2);
 			}
 		} else {
-			IPower te = (IPower)world.getBlockTileEntity(x, y, z);
-			player.addChatMessage("Power Level is:  " + te.getPower());
+			if (!world.isRemote) {
+				IPower te = (IPower)world.getBlockTileEntity(x, y, z);
+				player.addChatMessage("Power Level is:  " + te.getPower());
+			}
 		}
 		return true;
 	}

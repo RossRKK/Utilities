@@ -14,27 +14,29 @@ public class TECable extends TileEntity implements IPower {
 
 	@Override
 	public void updateEntity() {
-		/*transfer(xCoord - 1, yCoord, zCoord);
-		transfer(xCoord + 1, yCoord, zCoord);
-		transfer(xCoord, yCoord - 1, zCoord);
-		transfer(xCoord, yCoord + 1, zCoord);
-		transfer(xCoord, yCoord, zCoord - 1);
-		transfer(xCoord, yCoord, zCoord + 1);*/
-		int randomSide = worldObj.rand.nextInt(6);
-		//System.out.println(randomSide);
-		switch (randomSide) {
-		case 0: transfer(xCoord, yCoord, zCoord + 1);
-		break;
-		case 1: transfer(xCoord - 1, yCoord, zCoord);
-		break;
-		case 2: transfer(xCoord + 1, yCoord, zCoord);
-		break;
-		case 3: transfer(xCoord, yCoord - 1, zCoord);
-		break;
-		case 4: transfer(xCoord, yCoord + 1, zCoord);
-		break;
-		case 5: transfer(xCoord, yCoord, zCoord - 1);
-		break;
+		if (!worldObj.isRemote) {
+			/*transfer(xCoord - 1, yCoord, zCoord);
+			transfer(xCoord + 1, yCoord, zCoord);
+			transfer(xCoord, yCoord - 1, zCoord);
+			transfer(xCoord, yCoord + 1, zCoord);
+			transfer(xCoord, yCoord, zCoord - 1);
+			transfer(xCoord, yCoord, zCoord + 1);*/
+			int randomSide = worldObj.rand.nextInt(6);
+			//System.out.println(randomSide);
+			switch (randomSide) {
+			case 0: transfer(xCoord, yCoord, zCoord + 1);
+			break;
+			case 1: transfer(xCoord - 1, yCoord, zCoord);
+			break;
+			case 2: transfer(xCoord + 1, yCoord, zCoord);
+			break;
+			case 3: transfer(xCoord, yCoord - 1, zCoord);
+			break;
+			case 4: transfer(xCoord, yCoord + 1, zCoord);
+			break;
+			case 5: transfer(xCoord, yCoord, zCoord - 1);
+			break;
+			}
 		}
 	}
 

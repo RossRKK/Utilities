@@ -20,24 +20,26 @@ public class TEElectricFurnace extends TileEntity implements ISidedInventory, IP
 
 	@Override
 	public void updateEntity() {
-		ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inventory[0]);
-
-		if (power > 16 && result != null) {
-			cookTime ++;
-		}
-
-		if (cookTime > 256) {
-			decrStackSize(0, 1);
-			if (getStackInSlot(1) == null) {
-				setInventorySlotContents(1, result);
-				onInventoryChanged();
-				power -= 16;
-			} else if (getStackInSlot(1).itemID == result.itemID && getStackInSlot(1).stackSize < result.getMaxStackSize()) {
-				getStackInSlot(1).stackSize ++;
-				onInventoryChanged();
-				power -= 16;
+		if (!worldObj.isRemote) {
+			ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(inventory[0]);
+	
+			if (power > 16 && result != null) {
+				cookTime ++;
 			}
-			cookTime = 0;
+	
+			if (cookTime > 256) {
+				decrStackSize(0, 1);
+				if (getStackInSlot(1) == null) {
+					setInventorySlotContents(1, result);
+					onInventoryChanged();
+					power -= 16;
+				} else if (getStackInSlot(1).itemID == result.itemID && getStackInSlot(1).stackSize < result.getMaxStackSize()) {
+					getStackInSlot(1).stackSize ++;
+					onInventoryChanged();
+					power -= 16;
+				}
+				cookTime = 0;
+			}
 		}
 	}
 

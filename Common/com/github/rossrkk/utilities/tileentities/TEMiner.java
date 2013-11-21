@@ -28,22 +28,24 @@ public class TEMiner extends TileEntity implements IInventory, IPower {
 
 	@Override
 	public void updateEntity() {
-		if (tickCount == 16) {
-
-			tickCount = 0;
-			// reset the dig height if the dig height is bellow the world
-			if (heightDug + yCoord == 0) {
-				heightDug = -1;
+		if (!worldObj.isRemote) {
+			if (tickCount == 16) {
+	
+				tickCount = 0;
+				// reset the dig height if the dig height is bellow the world
+				if (heightDug + yCoord == 0) {
+					heightDug = -1;
+				}
+				// if there is more than 16 power units run
+				if (power >= 16 && inventory[0] != null && (inventory[0].itemID == Items.turidiumPick.itemID
+						|| inventory[0].itemID == Item.pickaxeDiamond.itemID)) {
+					breakBlock(0, 0);
+				}
+				// digDown
+				heightDug--;
 			}
-			// if there is more than 16 power units run
-			if (power >= 16 && inventory[0] != null && (inventory[0].itemID == Items.turidiumPick.itemID
-					|| inventory[0].itemID == Item.pickaxeDiamond.itemID)) {
-				breakBlock(0, 0);
-			}
-			// digDown
-			heightDug--;
+			tickCount++;
 		}
-		tickCount++;
 	}
 
 	public void dropItem(ItemStack stack) {
