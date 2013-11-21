@@ -11,11 +11,17 @@ import com.github.rossrkk.utilities.tileentities.TESolar;
 
 public class BlockSolar extends BlockContainer{
 
-	protected BlockSolar(int id, Material material) {
+	public BlockSolar(int id, Material material) {
 		super(id, material);
 		setCreativeTab(Utilities.utilTab);
 		setHardness(4.0F);
 		setUnlocalizedName(Strings.SOLAR_NAME);
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3F, 1.0F);
+	}
+	
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class GuiMiner extends GuiContainer {
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-
+		
 		int barHeight = machine.getPower()/32;
 		if (barHeight > 0) {
 			int srcX = xSize;

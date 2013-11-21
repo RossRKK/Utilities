@@ -4,6 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 import com.github.rossrkk.utilities.power.IPower;
+import com.github.rossrkk.utilities.util.WorldHelper;
 
 public class TESolar extends TileEntity implements IPower {
 	
@@ -15,9 +16,9 @@ public class TESolar extends TileEntity implements IPower {
 	@Override
 	public void updateEntity() {
 		if (!worldObj.isRemote) {
-			if(worldObj.isDaytime() /*&& worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)*/) {
+			if(worldObj.isDaytime() && WorldHelper.canSeeSky(worldObj, xCoord, yCoord, zCoord)) {
 				power += totalOut;
-			}	
+			}
 			
 			transferPower();
 		}
