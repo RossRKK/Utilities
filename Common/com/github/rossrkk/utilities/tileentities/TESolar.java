@@ -8,7 +8,7 @@ import com.github.rossrkk.utilities.util.WorldHelper;
 
 public class TESolar extends TileEntity implements IPower {
 
-	public int maxPower = 1024;
+	public int maxPower = 32;
 	public int power = 0;
 	public int totalOut = 16;
 	public int toTransfer = 16;
@@ -72,7 +72,7 @@ public class TESolar extends TileEntity implements IPower {
 
 	@Override
 	public void updateEntity() {
-		if(worldObj.isDaytime() && WorldHelper.canSeeSky(worldObj, xCoord, yCoord, zCoord)) {
+		if(WorldHelper.canSeeSky(worldObj, xCoord, yCoord, zCoord)) {
 			power += totalOut;
 		}
 
