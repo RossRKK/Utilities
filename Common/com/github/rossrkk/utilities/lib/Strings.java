@@ -54,7 +54,7 @@ public class Strings {
 
 	public static final String OMNI_TOOL_WOOD_NAME = "omniWood";
 
-	public static final String SOLAR_NAME = "solar";
+	public static final String SOLAR_NAME = "solarPanel";
 
 	public static final String TEXTURE_LOCATION = "utilities";
 
